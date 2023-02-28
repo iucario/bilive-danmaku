@@ -14,8 +14,6 @@ export enum ConfigKey {
   showFanLabel = 'showFanLabel',
   showLvLabel = 'showLvLabel',
   showVip = 'showVip',
-  backgroundColor = 'backgroundColor',
-  backgroundOpacity = 'backgroundOpacity',
   fontFamily = 'fontFamily',
   fontSize = 'fontSize',
   fontLineHeight = 'fontLineHeight',
@@ -47,7 +45,7 @@ export enum ConfigKey {
   showGiftDanmakuList = 'showGiftDanmakuList',
   maxDanmakuGiftCount = 'maxDanmakuGiftCount',
   danmakuGiftListHeight = 'danmakuGiftListHeight',
-  showTransition = 'showTransition'
+  showTransition = 'showTransition',
 }
 
 export type counterStateType = {

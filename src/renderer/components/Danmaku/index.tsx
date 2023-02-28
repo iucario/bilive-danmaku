@@ -60,7 +60,9 @@ const Danmaku: FC = () => {
   const [roomID, setRoomID] = useState(config.shortid);
   const [popular, setPopular] = useState(0);
   const [lockMode, setLockMode] = useState<boolean>(!!config.setAlwaysOnTop);
-  const [ignoreMouseMode, setIgnoreMouseMode] = useState<boolean>(!!config.ignoreMouse);
+  const [ignoreMouseMode, setIgnoreMouseMode] = useState<boolean>(
+    !!config.ignoreMouse
+  );
   const danmakuRef = useRef<DanmakuListRef>(null);
   const danmakuGiftList = useRef<DanmakuGiftListRef>(null);
   const scRef = useRef<SuperChatPanelRef>(null);
@@ -82,7 +84,11 @@ const Danmaku: FC = () => {
         return;
       }
       // 广播消息
-      if (msg.cmd === CmdType.NOTICE_MSG && currentConfig.current.blockEffectItem3 === 1) return;
+      if (
+        msg.cmd === CmdType.NOTICE_MSG &&
+        currentConfig.current.blockEffectItem3 === 1
+      )
+        return;
       // 经过消息
       if (['CUT_OFF', 'WARNING'].includes(msg.cmd)) {
         onNotificationMessage(msg);
@@ -110,7 +116,10 @@ const Danmaku: FC = () => {
         }
       }
       // 进入房间消息 添加到底部
-      if (currentConfig.current.blockEffectItem2 === 0 && msg.cmd === CmdType.INTERACT_WORD) {
+      if (
+        currentConfig.current.blockEffectItem2 === 0 &&
+        msg.cmd === CmdType.INTERACT_WORD
+      ) {
         const actionElement = (
           <MsgEntity
             {...msg}
@@ -287,13 +296,6 @@ const Danmaku: FC = () => {
       { k: ConfigKey.fontFamily, v: `${config.fontFamily}` },
       { k: ConfigKey.fontLineHeight, v: `${config.fontLineHeight}px` },
       { k: ConfigKey.fontMarginTop, v: `${config.fontMarginTop}px` },
-      {
-        k: ConfigKey.backgroundColor,
-        v:
-          config.backgroundColor === 0
-            ? `rgba(255,255,255, ${config.backgroundOpacity})`
-            : `rgba(0,0,0, ${config.backgroundOpacity})`,
-      },
     ];
     cssVariables.forEach((item) => {
       setCssVariable(item.k, item.v);

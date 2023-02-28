@@ -4,10 +4,10 @@
 }
 
 :root{
-  --primary-backgroundColor: rgba(0,0,0,0.5);
+  --primary-backgroundColor: #fafafa;
   --primary-avatarSize: 22px;
   --primary-fontSize: 16px;
-  --primary-fontFamily: '';
+  --primary-fontFamily: 'Sarasa UI SC', 'Noto Sans CJK SC', sans-serif;
   --primary-fontLineHeight: 16px;
   --primary-fontMarginTop: 16px;
 }
@@ -28,22 +28,12 @@
 
 body {
   position: relative;
-  color: white;
+  color: black;
   height: 100vh;
-  //font-family: Arial,Microsoft YaHei,Microsoft Sans Serif,Microsoft SanSerf,\\5FAE\8F6F\96C5\9ED1!important;
   font-family: var(--primary-fontFamily);
   overflow-y: scroll;
-  &:hover, &:focus {
-    #danmakuControlOuter {
-      opacity: 1;
-      transition: opacity .3s;
-    }
-  }
 }
 
-body::-webkit-scrollbar {
-  display: none;
-}
 .flex {
   display: flex;
 }
@@ -60,7 +50,6 @@ body::-webkit-scrollbar {
     height: 24px;
   }
   color: #ffffff;
-  text-shadow: 1px 1px 4px #333;
   user-select: none;
   -webkit-app-region: drag;
 }
@@ -110,8 +99,8 @@ a:hover {
   text-align: center;
 }
 
-.scrollbar::-webkit-scrollbar {
-  width: 5px
+::-webkit-scrollbar {
+  display: none;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
@@ -250,7 +239,7 @@ a:hover {
 }
 
 .chat-item.superChat-card-detail .card-item-middle-bottom .input-trans-contain .text {
-  font-size: 12px;
+  font-size: 14px;
   color: #fff;
   text-align: left;
   line-height: 20px;
@@ -268,14 +257,13 @@ a:hover {
 }
 
 .fans-medal-item {
-  display: inline-block;
+  display: block;
   height: 15px;
   line-height: 15px;
   color: #fff;
-  border: 0.5px solid #61decb;
+  outline: 1px solid;
   border-left: 0;
   white-space: nowrap;
-  border-radius: 2px;
   font-size: 12px;
   position: relative;
   text-shadow: none;
@@ -305,6 +293,8 @@ a:hover {
 }
 
 .liveConfig {
+  background-color: darkslateblue;
+  opacity: 0.9;
   color: #666;
   position: fixed;
   left: 0;
@@ -323,7 +313,7 @@ a:hover {
 }
 
 .fans-medal-item .level {
-  width: 16px;
+  width: 18px;
   background-color: #fff;
   text-align: center;
   color: #61decb;
@@ -342,7 +332,7 @@ a:hover {
   vertical-align: middle;
 }
 .user-name {
-  color: #cfcfcf;
+  color: darkgray;
   margin-right: 4px;
 }
 .user-name.guard {
@@ -367,7 +357,8 @@ a:hover {
 }
 
 .level-1 {
-  border-color: #61decb
+  outline-color: #61decb
+  
 }
 
 .level-1 .label {
@@ -379,7 +370,7 @@ a:hover {
 }
 
 .level-2 {
-  border-color: #61decb
+  outline-color: #61decb
 }
 
 .level-2 .label {
@@ -391,7 +382,7 @@ a:hover {
 }
 
 .level-3 {
-  border-color: #61decb
+  outline-color: #61decb
 }
 
 .level-3 .label {
@@ -403,7 +394,7 @@ a:hover {
 }
 
 .level-4 {
-  border-color: #61decb
+  outline-color: #61decb
 }
 
 .level-4 .label {
@@ -415,7 +406,7 @@ a:hover {
 }
 
 .level-5 {
-  border-color: #5896de
+  outline-color: #5896de
 }
 
 .level-5 .label {
@@ -427,7 +418,7 @@ a:hover {
 }
 
 .level-6 {
-  border-color: #5896de
+  outline-color: #5896de
 }
 
 .level-6 .label {
@@ -439,7 +430,7 @@ a:hover {
 }
 
 .level-7 {
-  border-color: #5896de
+  outline-color: #5896de
 }
 
 .level-7 .label {
@@ -451,7 +442,7 @@ a:hover {
 }
 
 .level-8 {
-  border-color: #5896de
+  outline-color: #5896de
 }
 
 .level-8 .label {
@@ -463,7 +454,7 @@ a:hover {
 }
 
 .level-9 {
-  border-color: #a068f1
+  outline-color: #a068f1
 }
 
 .level-9 .label {
@@ -475,7 +466,7 @@ a:hover {
 }
 
 .level-10 {
-  border-color: #a068f1
+  outline-color: #a068f1
 }
 
 .level-10 .label {
@@ -487,7 +478,7 @@ a:hover {
 }
 
 .level-11 {
-  border-color: #a068f1
+  outline-color: #a068f1
 }
 
 .level-11 .label {
@@ -499,7 +490,7 @@ a:hover {
 }
 
 .level-12 {
-  border-color: #a068f1
+  outline-color: #a068f1
 }
 
 .level-12 .label {
@@ -511,7 +502,7 @@ a:hover {
 }
 
 .level-13 {
-  border-color: #ff86b2
+  outline-color: #ff86b2
 }
 
 .level-13 .label {
@@ -523,7 +514,7 @@ a:hover {
 }
 
 .level-14 {
-  border-color: #ff86b2
+  outline-color: #ff86b2
 }
 
 .level-14 .label {
@@ -535,7 +526,7 @@ a:hover {
 }
 
 .level-15 {
-  border-color: #ff86b2
+  outline-color: #ff86b2
 }
 
 .level-15 .label {
@@ -547,7 +538,7 @@ a:hover {
 }
 
 .level-16 {
-  border-color: #ff86b2
+  outline-color: #ff86b2
 }
 
 .level-16 .label {
@@ -559,7 +550,7 @@ a:hover {
 }
 
 .level-17 {
-  border-color: #f6be18
+  outline-color: #f6be18
 }
 
 .level-17 .label {
@@ -571,7 +562,7 @@ a:hover {
 }
 
 .level-18 {
-  border-color: #f6be18
+  outline-color: #f6be18
 }
 
 .level-18 .label {
@@ -583,7 +574,7 @@ a:hover {
 }
 
 .level-19 {
-  border-color: #f6be18
+  outline-color: #f6be18
 }
 
 .level-19 .label {
@@ -595,7 +586,7 @@ a:hover {
 }
 
 .level-20 {
-  border-color: #f6be18
+  outline-color: #f6be18
 }
 
 .level-20 .label {
@@ -786,6 +777,8 @@ a:hover {
   border-radius: 2px;
   line-height: 16px;
   margin-right: 2px;
+  font-size: 12px;
+  padding: 0 4px;
 }
 .admin-icon:before {
   content: "\623F\7BA1";
@@ -804,10 +797,6 @@ a:hover {
   font-size: var(--primary-fontSize);
   line-height: var(--primary-fontLineHeight);
   margin-top: var(--primary-fontMarginTop);
-}
-
-span.danmaku-content {
-  text-shadow: 0 1px 3px #333;
 }
 
 .guard-level-1:before,.guard-level-2:before {
@@ -872,8 +861,10 @@ span.danmaku-content {
 }
 
 #danmakuControlOuter {
+  background-color: darkslateblue;
+  color: white;
   display: flex;
-  opacity: 0;
+  opacity: 0.9;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -882,8 +873,7 @@ span.danmaku-content {
   left: 0;
   right: 0;
   padding: 0 5px;
-  transition: opacity .3s;
-  transition-delay: .5s;
+  overflow: scroll;
 }
 
 #danmakuControlOuter .popular {
@@ -1629,7 +1619,7 @@ li.item {
 
 .card-item .totle {
   right: 0;
-  opacity: .5
+  opacity: 1;
 }
 
 .card-item .progress,.card-item .totle {
@@ -1923,7 +1913,7 @@ li.item {
       color: #333;
       width: 100%;
       .name {
-        opacity: .78;
+        opacity: 1;
         font-size: 12px;
       }
       .name.isVip {
