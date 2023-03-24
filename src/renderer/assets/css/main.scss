@@ -8,7 +8,7 @@
   --primary-avatarSize: 22px;
   --primary-fontSize: 16px;
   --primary-fontFamily: 'Sarasa UI SC', 'Noto Sans CJK SC', sans-serif;
-  --primary-fontLineHeight: 16px;
+  --primary-fontLineHeight: 1.2rem;
   --primary-fontMarginTop: 16px;
 }
 
@@ -751,7 +751,7 @@ a:hover {
 
 .chat-item {
   position: relative;
-  line-height: 18px;
+  line-height: 1.3rem;
   word-wrap: break-word;
   white-space: normal;
   -webkit-transform: translateZ(0);
