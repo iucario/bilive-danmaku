@@ -27,13 +27,14 @@ export enum CmdType {
   SUPER_CHAT_MESSAGE = 'SUPER_CHAT_MESSAGE',
   WARNING = 'WARNING',
   CUT_OFF = 'CUT_OFF',
+  WATCHED_CHANGE = 'WATCHED_CHANGE',
   UNKNOWN = 'UNKNOWN',
 }
 
 function assertUnknownCmdType(cmd: any): UnknownMsg {
   return {
     cmd,
-    content: `Unknown cmd: ${cmd}`
+    content: `Unknown cmd: ${cmd}`,
   };
 }
 
@@ -60,7 +61,7 @@ export async function parseData(
         liveUp: data.info['3']['2'],
         liveRoomID: data.info['3']['3'],
         userLevel: data.info['4']['0'] || 0,
-        repeat: 0
+        repeat: 0,
       };
       if (config.showAvatar) {
         // 先查询Dao,如果有就直接添加
@@ -92,7 +93,7 @@ export async function parseData(
         totalCoin: data.data.total_coin,
         price: data.data.num * data.data.price,
         giftAction: data.data.action,
-        giftId: data.data.giftId
+        giftId: data.data.giftId,
       };
 
       if (data.data.batch_combo_id) {
@@ -112,7 +113,7 @@ export async function parseData(
         isAdmin: !!data.data.is_admin,
         isVip: !!data.data.vip,
         isVipM: data.data.vip === 1,
-        isVipY: data.data.svip === 1
+        isVipY: data.data.svip === 1,
       };
       return welcomeMsg;
     case CmdType.WELCOME_GUARD:
@@ -136,13 +137,13 @@ export async function parseData(
         userID: data.data.uid,
         guardLevel: data.data.guard_level,
         giftName: ['', '总督', '提督', '舰长'][data.data.guard_level],
-        giftCount: data.data.num
+        giftCount: data.data.num,
       };
       return guardBuyMsg;
     case CmdType.SUPER_CHAT_MESSAGE:
       const superChatMsg: SUPER_CHAT_MESSAGE = {
         cmd: CmdType.SUPER_CHAT_MESSAGE,
-        data: data.data
+        data: data.data,
       };
       return superChatMsg;
     case CmdType.COMBO_SEND:
@@ -155,13 +156,13 @@ export async function parseData(
         comboId: data.data.combo_id,
         comboNum: data.data.combo_num,
         batchComboId: data.data.batch_combo_id,
-        action: data.data.action
+        action: data.data.action,
       };
       return comboSendMsg;
     case CmdType.POPULAR:
       const popularMsg: POPULAR = {
         cmd: CmdType.POPULAR,
-        popular: data.popular
+        popular: data.popular,
       };
       return popularMsg;
     // case CmdType.COMBO_END:
@@ -186,6 +187,14 @@ export async function parseData(
         msg: data.msg,
       };
       return cutOffMsg;
+    case CmdType.WATCHED_CHANGE:
+      const watchedChangeMsg: WatchedChangeMsg = {
+        cmd: CmdType.WATCHED_CHANGE,
+        num: data.data.num,
+        text_small: data.data.text_small,
+        text_large: data.data.text_large,
+      };
+      return watchedChangeMsg;
     default:
       return assertUnknownCmdType(data.cmd);
   }

@@ -22,7 +22,8 @@ enum CmdType {
   WELCOME_GUARD = 'WELCOME_GUARD',
   GUARD_BUY = 'GUARD_BUY',
   SUPER_CHAT_MESSAGE = 'SUPER_CHAT_MESSAGE',
-  UNKNOWN = 'UNKNOWN'
+  WATCHED_CHANGE = 'WATCHED_CHANGE',
+  UNKNOWN = 'UNKNOWN',
 }
 
 /**
@@ -2603,6 +2604,13 @@ interface DISCONNECTED {
   cmd: CmdType.DISCONNECTED;
 }
 
+interface WATCHED_CHANGE {
+  cmd: CmdType.WATCHED_CHANGE;
+  num: number;
+  text_small: string;
+  text_large: string;
+}
+
 type DanmakuData =
   | LIVE
   | POPULAR
@@ -2618,6 +2626,7 @@ type DanmakuData =
   | CONNECT_SUCCESS
   | SUPER_CHAT_MESSAGE
   | WARNING
+  | WATCHED_CHANGE
   | CUT_OFF;
 
 // 警告、切断消息

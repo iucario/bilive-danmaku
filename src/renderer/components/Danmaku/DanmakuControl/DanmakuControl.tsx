@@ -1,9 +1,16 @@
-import { useState } from 'react';
 import { ipcRenderer } from 'electron';
-import { useTranslation } from 'react-i18next';
+import Dropdown from 'rc-dropdown';
+import Menu, { Item as MenuItem } from 'rc-menu';
 import Tooltip from 'rc-tooltip';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ConfigKey } from '../../../reducers/types';
-import voice from '../../../utils/vioce';
+import {
+  resetConfig,
+  selectConfig,
+  updateConfig,
+} from '../../../store/features/configSlice';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import {
   arrayDiff,
   hasNewVersion,
@@ -14,19 +21,11 @@ import {
   toPercentNum,
   tranNumber,
 } from '../../../utils/common';
-import Switch from '../../Base/Switch';
+import voice from '../../../utils/vioce';
 import Slider from '../../Base/Slider';
+import Switch from '../../Base/Switch';
 import { parseData } from '../MsgModel';
 import LanguagePanel from './LanguagePanel';
-import CustomStyledPanel from './CustomStyledPanel';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import {
-  resetConfig,
-  selectConfig,
-  updateConfig,
-} from '../../../store/features/configSlice';
-import Dropdown from 'rc-dropdown';
-import Menu, { Item as MenuItem } from 'rc-menu';
 
 export enum ControlType {
   DANMAKUTEST = 'DANMAKUTEST',
@@ -145,7 +144,7 @@ function DanmakuControl(props: Props) {
           title={t('LiveRoomPopular')}
           className="icon-font icon-item icon-popular"
         />
-        {tranNumber(popular)}
+        {popular}
       </div>
       <div id="danmakuControl" className="icon-right-part superChat">
         <Tooltip

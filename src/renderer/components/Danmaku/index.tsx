@@ -79,8 +79,8 @@ const Danmaku: FC = () => {
     for (let i = 0; i < res.length; i++) {
       const msg = res[i];
       // 人气
-      if (msg.cmd === CmdType.POPULAR) {
-        setPopular(msg.popular);
+      if (msg.cmd === CmdType.WATCHED_CHANGE) {
+        setPopular(msg.num);
         return;
       }
       // 广播消息
