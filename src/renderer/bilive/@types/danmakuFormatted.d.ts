@@ -151,6 +151,13 @@ interface CutOffMsg {
   msg: string;
 }
 
+interface WatchedChangeMsg {
+  cmd: string;
+  num: number;
+  text_small: string;
+  text_large: string;
+}
+
 type GiftBubbleMsg = Partial<DanmakuGift & GiftSend>;
 
 interface UnknownMsg {
@@ -171,6 +178,7 @@ type DanmakuDataFormatted =
   | MsgRoomBlockMsg
   | WarningMsg
   | CutOffMsg
+  | WatchedChangeMsg
   | UnknownMsg;
 
 type GiftRaw = {

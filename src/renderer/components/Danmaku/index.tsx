@@ -34,10 +34,11 @@ import {
   updateConfig,
 } from '../../store/features/configSlice';
 import {
-  createSocket, fetchEmotionsData,
+  createSocket,
+  fetchEmotionsData,
   fetchGiftData,
-  selectDanmaku
-} from "../../store/features/danmakuSlice";
+  selectDanmaku,
+} from '../../store/features/danmakuSlice';
 
 let notificationInstance: RCNotificationInstance | null = null;
 Notification.newInstance(
@@ -47,7 +48,7 @@ Notification.newInstance(
   },
   (n) => {
     notificationInstance = n;
-  }
+  },
 );
 
 const Danmaku: FC = () => {
@@ -61,7 +62,7 @@ const Danmaku: FC = () => {
   const [popular, setPopular] = useState(0);
   const [lockMode, setLockMode] = useState<boolean>(!!config.setAlwaysOnTop);
   const [ignoreMouseMode, setIgnoreMouseMode] = useState<boolean>(
-    !!config.ignoreMouse
+    !!config.ignoreMouse,
   );
   const danmakuRef = useRef<DanmakuListRef>(null);
   const danmakuGiftList = useRef<DanmakuGiftListRef>(null);
@@ -78,9 +79,9 @@ const Danmaku: FC = () => {
     if (currentConfig.current.blockScrollBar) return;
     for (let i = 0; i < res.length; i++) {
       const msg = res[i];
-      // 观看过
+      // 人气
       if (msg.cmd === CmdType.WATCHED_CHANGE) {
-        setPopular(msg.data.num);
+        setPopular(msg.num);
         return;
       }
       // 广播消息
@@ -218,11 +219,11 @@ const Danmaku: FC = () => {
     voice.reset();
     setRoomID(roomId);
     setPopular(0);
-  }
+  };
 
   const handleSubmit = async (
     e?: FormEvent | null,
-    selectedShortId?: number
+    selectedShortId?: number,
   ) => {
     if (e) {
       e.preventDefault();
@@ -235,7 +236,7 @@ const Danmaku: FC = () => {
     }
 
     // 创建新的socket
-    handleSetRoom(roomData.roomid, roomData.shortid)
+    handleSetRoom(roomData.roomid, roomData.shortid);
     // 更新config
     handleDispatchUpDateConfig({ k: ConfigKey.shortid, v: roomData.shortid });
     handleDispatchUpDateConfig({ k: ConfigKey.roomid, v: roomData.roomid });
