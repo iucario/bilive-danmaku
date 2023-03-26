@@ -138,7 +138,9 @@ function MsgDanmu(props: DanmakuMsg) {
           : '',
       ].join(' ')}
     >
-      {config.showAvatar === 1 && MsgUserAvatar(props.userID, props.face)}
+      {config.showAvatar === 1 &&
+        props.face &&
+        MsgUserAvatar(props.userID, props.face)}
       {props.isAdmin && <div className="admin-icon dp-i-block v-middle" />}
       <i
         className={[

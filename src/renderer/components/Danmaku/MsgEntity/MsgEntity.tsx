@@ -1,20 +1,20 @@
 import { animated, useSpring } from 'react-spring'
 import { CmdType } from '../MsgModel'
-import MsgWelcome from './MsgWelcome'
+import MsgConnectSuccess from './MsgConnectSuccess'
+import MsgConnecting from './MsgConnecting'
 import MsgDanmu from './MsgDanmu'
-import MsgLive from './MsgLive'
-import MsgSendGift from './MsgSendGift'
-import MsgWelcomeGuard from './MsgWelcomeGuard'
-import MsgInterActWord from './MsgInterActWord'
+import MsgDisconnected from './MsgDisconnected'
 import MsgGuardBuy from './MsgGuardBuy'
 import MsgGuardBuySystem from './MsgGuardBuySystem'
-import MsgConnecting from './MsgConnecting'
-import MsgDisconnected from './MsgDisconnected'
-import MsgConnectSuccess from './MsgConnectSuccess'
-import MsgSuperChatCard from './MsgSuperChatCard'
+import MsgInterActWord from './MsgInterActWord'
+import MsgLive from './MsgLive'
 import MsgRoomBlock from './MsgRoomBlock'
+import MsgSendGift from './MsgSendGift'
+import MsgSuperChatCard from './MsgSuperChatCard'
+import MsgWelcome from './MsgWelcome'
+import MsgWelcomeGuard from './MsgWelcomeGuard'
 
-function FadeInUp({ children }) {
+function FadeInUp({ children }: any) {
   const props = useSpring({
     from: {
       transform: 'translate3d(0, 100%, 0)',
@@ -28,7 +28,7 @@ function FadeInUp({ children }) {
   return <animated.div style={props}>{children}</animated.div>
 }
 
-interface MsgEntityProps extends DanmakuDataFormatted {
+type MsgEntityProps = DanmakuDataFormatted & {
   cmd: string
   key: string
   showTransition: boolean
@@ -41,11 +41,11 @@ export default function MsgEntity(props: MsgEntityProps) {
   let Msg = null
   switch (cmd) {
     case CmdType.DANMU_MSG:
-      Msg = <MsgDanmu {...props} />
+      Msg = <MsgDanmu {...(props as DanmakuMsg)} />
       break
     case CmdType.SEND_GIFT:
       if (showGift) {
-        Msg = <MsgSendGift {...props} />
+        Msg = <MsgSendGift {...(props as DanmakuGift)} />
       }
       break
     case CmdType.CONNECTING:
@@ -64,21 +64,24 @@ export default function MsgEntity(props: MsgEntityProps) {
       Msg = <MsgLive />
       break
     case CmdType.WELCOME:
-      Msg = <MsgWelcome {...props} />
+      Msg = <MsgWelcome {...(props as MsgWelcome)} />
       break
     case CmdType.WELCOME_GUARD:
-      Msg = <MsgWelcomeGuard {...props} />
+      Msg = <MsgWelcomeGuard {...(props as MsgWelcomeGuard)} />
       break
     case CmdType.INTERACT_WORD:
       if (showGift) {
-        Msg = <MsgInterActWord {...props} />
+        Msg = <MsgInterActWord {...(props as MsgInterActWordMsg)} />
       }
       break
     case CmdType.GUARD_BUY:
-      Msg = [<MsgGuardBuy {...props} />, <MsgGuardBuySystem {...props} />]
+      Msg = [
+        <MsgGuardBuy {...(props as GuardBuyMsg)} key="GuardBuy-0" />,
+        <MsgGuardBuySystem {...(props as GuardBuyMsg)} key="GuardBuy-1" />,
+      ]
       break
     case CmdType.ROOM_BLOCK_MSG:
-      Msg = <MsgRoomBlock {...props} />
+      Msg = <MsgRoomBlock {...(props as MsgRoomBlockMsg)} />
       break
     default:
       return null

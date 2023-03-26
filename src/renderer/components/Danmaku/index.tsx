@@ -78,10 +78,15 @@ const Danmaku: FC = () => {
     if (currentConfig.current.blockScrollBar) return
     for (let i = 0; i < res.length; i++) {
       const msg = res[i]
+      if (msg.cmd === CmdType.DANMU_MSG) {
+        // console.log(msg)
+      }
       // 人气
       if (msg.cmd === CmdType.WATCHED_CHANGE) {
-        setPopular(msg.num)
-        return
+        if ('num' in msg) {
+          setPopular(msg.num)
+          return
+        }
       }
       // 广播消息
       if (
@@ -90,13 +95,15 @@ const Danmaku: FC = () => {
       )
         return
       // 经过消息
-      if (['CUT_OFF', 'WARNING'].includes(msg.cmd)) {
-        onNotificationMessage(msg)
+      if (msg.cmd === CmdType.CUT_OFF || msg.cmd === CmdType.WARNING) {
+        onNotificationMessage(msg as WARNING | CUT_OFF)
         return
       }
       // 是否开启弹幕朗读
       if (msg.cmd === CmdType.DANMU_MSG && currentConfig.current.showVoice) {
-        voice.push(msg.username, msg.content)
+        if ('username' in msg && 'content' in msg) {
+          voice.push(msg.username, msg.content)
+        }
       }
       // 礼物消息
       if (currentConfig.current.blockEffectItem4 === 0) {
@@ -110,7 +117,7 @@ const Danmaku: FC = () => {
             />
           )
           renderDanmakuGiftLists.push(giftElement)
-          if (msg.coinType === 'gold') {
+          if ('coinType' in msg && msg.coinType === 'gold') {
             onGiftBubbleMessage(msg)
           }
         }
