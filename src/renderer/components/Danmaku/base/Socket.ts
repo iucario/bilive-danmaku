@@ -344,6 +344,6 @@ function danmakuFilter(info: DANMU_MSG_Info): boolean {
   if (config.blockUserNotMember === 1 && info['2']['5'] !== 10000) return true
   // 绑定手机过滤
   if (config.blockUserNotBindPhone === 1 && info['2']['6'] !== 1) return true
-
+  console.log(info['2']['1'], ':', info['1'])
   return false
 }

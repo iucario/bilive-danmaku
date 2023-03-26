@@ -28,24 +28,24 @@ function FadeInUp({ children }: any) {
   return <animated.div style={props}>{children}</animated.div>
 }
 
-type MsgEntityProps = DanmakuDataFormatted & {
+type MsgEntityProps = {
+  danmaku: DanmakuDataFormatted
   cmd: string
-  key: string
   showTransition: boolean
   data?: any
   showGift?: boolean
 }
 
 export default function MsgEntity(props: MsgEntityProps) {
-  const { cmd, showTransition, showGift = false } = props
+  const { danmaku, cmd, showTransition, showGift = false } = props
   let Msg = null
   switch (cmd) {
     case CmdType.DANMU_MSG:
-      Msg = <MsgDanmu {...(props as DanmakuMsg)} />
+      Msg = <MsgDanmu {...(danmaku as DanmakuMsg)} />
       break
     case CmdType.SEND_GIFT:
       if (showGift) {
-        Msg = <MsgSendGift {...(props as DanmakuGift)} />
+        Msg = <MsgSendGift {...(danmaku as DanmakuGift)} />
       }
       break
     case CmdType.CONNECTING:
@@ -64,24 +64,21 @@ export default function MsgEntity(props: MsgEntityProps) {
       Msg = <MsgLive />
       break
     case CmdType.WELCOME:
-      Msg = <MsgWelcome {...(props as MsgWelcome)} />
+      Msg = <MsgWelcome {...(danmaku as MsgWelcome)} />
       break
     case CmdType.WELCOME_GUARD:
-      Msg = <MsgWelcomeGuard {...(props as MsgWelcomeGuard)} />
+      Msg = <MsgWelcomeGuard {...(danmaku as MsgWelcomeGuard)} />
       break
     case CmdType.INTERACT_WORD:
       if (showGift) {
-        Msg = <MsgInterActWord {...(props as MsgInterActWordMsg)} />
+        Msg = <MsgInterActWord {...(danmaku as MsgInterActWordMsg)} />
       }
       break
     case CmdType.GUARD_BUY:
-      Msg = [
-        <MsgGuardBuy {...(props as GuardBuyMsg)} key="GuardBuy-0" />,
-        <MsgGuardBuySystem {...(props as GuardBuyMsg)} key="GuardBuy-1" />,
-      ]
+      Msg = <MsgGuardBuy {...(danmaku as GuardBuyMsg)} />
       break
     case CmdType.ROOM_BLOCK_MSG:
-      Msg = <MsgRoomBlock {...(props as MsgRoomBlockMsg)} />
+      Msg = <MsgRoomBlock {...(danmaku as MsgRoomBlockMsg)} />
       break
     default:
       return null

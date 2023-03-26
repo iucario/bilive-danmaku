@@ -76,11 +76,10 @@ const Danmaku: FC = () => {
     const renderDanmakuLists: React.ReactElement[] = []
     const renderDanmakuGiftLists: React.ReactElement[] = []
     if (currentConfig.current.blockScrollBar) return
-    for (let i = 0; i < res.length; i++) {
-      const msg = res[i]
-      if (msg.cmd === CmdType.DANMU_MSG) {
-        // console.log(msg)
-      }
+
+    const numDanmu = res.filter((item) => item.cmd === CmdType.DANMU_MSG).length
+
+    for (const msg of res) {
       // 人气
       if (msg.cmd === CmdType.WATCHED_CHANGE) {
         if ('num' in msg) {
@@ -154,13 +153,23 @@ const Danmaku: FC = () => {
       // 添加到渲染列表
       const renderElement = (
         <MsgEntity
-          {...msg}
+          danmaku={msg}
+          cmd={msg.cmd}
+          data={msg?.data}
+          showGift={false}
           showTransition={currentConfig.current.showTransition === 1}
           key={String(Math.random())}
         />
       )
       renderDanmakuLists.push(renderElement)
     }
+    // FIXME: Some danmakus are not showed. Although the the messages are received. It's a render problem.
+    console.log(
+      'numDanmu',
+      numDanmu,
+      'renderDanmakuLists',
+      renderDanmakuLists.length
+    )
     onDanmakuMessage(renderDanmakuLists)
     onGiftMessage(renderDanmakuGiftLists)
   }
