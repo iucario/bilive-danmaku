@@ -1,43 +1,43 @@
-import  { useEffect, useState, useRef } from 'react';
-import Tooltip from 'rc-tooltip';
-import { useList } from './Provider';
-import MsgSuperChatCard from '../MsgEntity/MsgSuperChatCard';
+import { useEffect, useState, useRef } from 'react'
+import Tooltip from 'rc-tooltip'
+import { useList } from './Provider'
+import MsgSuperChatCard from '../MsgEntity/MsgSuperChatCard'
 
 export interface SuperChatItemProps {
-  id: number;
-  ttl: number;
-  msg: SUPER_CHAT_MESSAGE_DATA;
+  id: number
+  ttl: number
+  msg: SUPER_CHAT_MESSAGE_DATA
 }
 
 const SuperChatItem = ({ id, ttl, msg }: SuperChatItemProps) => {
   // timer = ttl(总时长) - (end_time - ts)已过期时长
-  const [timer, setTimer] = useState(ttl - (msg.ts - msg.start_time));
-  const { removeItem } = useList();
-  const [showDetail, setShowDetail] = useState(false);
-  const intervalRef = useRef();
+  const [timer, setTimer] = useState(ttl - (msg.ts - msg.start_time))
+  const { removeItem } = useList()
+  const [showDetail, setShowDetail] = useState(false)
+  const intervalRef = useRef()
 
   const active = () => {
     if (timer > 0) {
       const timerId = setInterval(() => {
-        setTimer(t => t - 1);
-      }, 1000);
-      intervalRef.current = timerId;
+        setTimer((t) => t - 1)
+      }, 1000)
+      intervalRef.current = timerId
     }
-  };
+  }
 
   const destroy = () => {
-    clearInterval(intervalRef.current);
+    clearInterval(intervalRef.current)
     if (timer === 1) {
-      removeItem(id);
+      removeItem(id)
     }
-  };
+  }
 
   useEffect(() => {
-    active();
-    return () => destroy();
-  }, [id, removeItem, ttl, timer]);
+    active()
+    return () => destroy()
+  }, [id, removeItem, ttl, timer])
 
-  const w = Math.floor((timer / ttl) * 100);
+  const w = Math.floor((timer / ttl) * 100)
 
   return (
     <Tooltip
@@ -60,12 +60,15 @@ const SuperChatItem = ({ id, ttl, msg }: SuperChatItemProps) => {
           />
           <div
             className="progress"
-            style={{ backgroundColor: msg.background_bottom_color, width: `${w}%` }}
+            style={{
+              backgroundColor: msg.background_bottom_color,
+              width: `${w}%`,
+            }}
           />
           <div
             className="face-img"
             style={{
-              backgroundImage: `url(${msg.user_info.face})`
+              backgroundImage: `url(${msg.user_info.face})`,
             }}
           />
           <div title={`￥${msg.price}`} className="price">
@@ -74,7 +77,7 @@ const SuperChatItem = ({ id, ttl, msg }: SuperChatItemProps) => {
         </div>
       </div>
     </Tooltip>
-  );
-};
+  )
+}
 
-export default SuperChatItem;
+export default SuperChatItem

@@ -1,26 +1,26 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import jaTrans from './locales/ja.json';
-import zhCnTrans from './locales/zh-cn.json';
-import config from '../config';
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
+import jaTrans from './locales/ja.json'
+import zhCnTrans from './locales/zh-cn.json'
+import config from '../config'
 
-const fallbackLng = 'zhCn';
-const defaultNS = 'translation';
-const lng = config.languageCode || fallbackLng;
+const fallbackLng = 'zhCn'
+const defaultNS = 'translation'
+const lng = config.languageCode || fallbackLng
 
 const resources = {
   zhCn: {
     common: {
-      ...zhCnTrans
-    }
+      ...zhCnTrans,
+    },
   },
   ja: {
     common: {
-      ...jaTrans
-    }
-  }
-};
+      ...jaTrans,
+    },
+  },
+}
 
 i18n
   .use(LanguageDetector)
@@ -34,12 +34,12 @@ i18n
     keySeparator: false,
     interpolation: {
       escapeValue: false,
-      formatSeparator: ','
+      formatSeparator: ',',
     },
     debug: false,
     // react: {
     //   wait: true
     // }
-  });
+  })
 
-export default i18n;
+export default i18n

@@ -1,14 +1,14 @@
-import { useTranslation } from 'react-i18next';
-import StyledDao, { StyledDaoNS } from '../../../dao/StyledDao';
+import { useTranslation } from 'react-i18next'
+import StyledDao, { StyledDaoNS } from '../../../dao/StyledDao'
 
 // user 样式
-const UserWrapperStr = StyledDao.get(StyledDaoNS.UserWrapper);
+const UserWrapperStr = StyledDao.get(StyledDaoNS.UserWrapper)
 
 // content 样式
-const ContentWrapperStr = StyledDao.get(StyledDaoNS.ContentWrapper);
+const ContentWrapperStr = StyledDao.get(StyledDaoNS.ContentWrapper)
 
 export default function CustomStyledPanel() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <>
@@ -40,5 +40,5 @@ export default function CustomStyledPanel() {
         />
       </div>
     </>
-  );
+  )
 }

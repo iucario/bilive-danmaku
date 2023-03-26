@@ -1,4 +1,6 @@
-import { ipcRenderer } from 'electron';
+import { ipcRenderer } from 'electron'
+import Notification from 'rc-notification'
+import { NotificationInstance as RCNotificationInstance } from 'rc-notification/lib/Notification'
 import React, {
   FC,
   FormEvent,
@@ -6,97 +8,95 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from 'react';
-import { useTranslation } from 'react-i18next';
-import Notification from 'rc-notification';
-import { NotificationInstance as RCNotificationInstance } from 'rc-notification/lib/Notification';
-import DanmakuList, { DanmakuListRef } from './DanmakuList/DanmakuList';
-import DanmakuGiftList, {
-  DanmakuGiftListRef,
-} from './DanmakuGiftList/DanmakuGiftList';
-import SuperChatPanel, {
-  SuperChatPanelRef,
-} from './SuperChatPanel/SuperChatPanel';
-import GiftBubble, { GiftBubbleRef } from './GiftBubble/GiftBubble';
-import { CmdType } from './MsgModel';
-import voice from '../../utils/vioce';
-import MsgEntity from './MsgEntity/MsgEntity';
-import { getLiveRoomInfo, getResentSuperChat, LiveRoom } from '../../api';
-import { ConfigKey } from '../../reducers/types';
-import { setCssVariable } from '../../utils/common';
-import LiveRoomLists from './LiveRoomLists/LiveRoomLists';
-import RankMessageLists from './RankMessageLists/RankMessageLists';
-import DanmakuControl from './DanmakuControl/DanmakuControl';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+} from 'react'
+import { useTranslation } from 'react-i18next'
+import { LiveRoom, getLiveRoomInfo, getResentSuperChat } from '../../api'
+import { ConfigKey } from '../../reducers/types'
 import {
   fetchVersionInfo,
   selectConfig,
   updateConfig,
-} from '../../store/features/configSlice';
+} from '../../store/features/configSlice'
 import {
   createSocket,
   fetchGiftData,
   selectDanmaku,
-} from '../../store/features/danmakuSlice';
+} from '../../store/features/danmakuSlice'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { setCssVariable } from '../../utils/common'
+import voice from '../../utils/vioce'
+import DanmakuControl from './DanmakuControl/DanmakuControl'
+import DanmakuGiftList, {
+  DanmakuGiftListRef,
+} from './DanmakuGiftList/DanmakuGiftList'
+import DanmakuList, { DanmakuListRef } from './DanmakuList/DanmakuList'
+import GiftBubble, { GiftBubbleRef } from './GiftBubble/GiftBubble'
+import LiveRoomLists from './LiveRoomLists/LiveRoomLists'
+import MsgEntity from './MsgEntity/MsgEntity'
+import { CmdType } from './MsgModel'
+import RankMessageLists from './RankMessageLists/RankMessageLists'
+import SuperChatPanel, {
+  SuperChatPanelRef,
+} from './SuperChatPanel/SuperChatPanel'
 
-let notificationInstance: RCNotificationInstance | null = null;
+let notificationInstance: RCNotificationInstance | null = null
 Notification.newInstance(
   {
     style: { top: 60, left: 0 },
     maxCount: 5,
   },
   (n) => {
-    notificationInstance = n;
+    notificationInstance = n
   }
-);
+)
 
 const Danmaku: FC = () => {
-  const dispatch = useAppDispatch();
-  const config = useAppSelector(selectConfig);
-  const danmaku = useAppSelector(selectDanmaku);
-  const { socket } = danmaku;
+  const dispatch = useAppDispatch()
+  const config = useAppSelector(selectConfig)
+  const danmaku = useAppSelector(selectDanmaku)
+  const { socket } = danmaku
 
   // 以shortid房间短号显示
-  const [roomID, setRoomID] = useState(config.shortid);
-  const [popular, setPopular] = useState(0);
-  const [lockMode, setLockMode] = useState<boolean>(!!config.setAlwaysOnTop);
+  const [roomID, setRoomID] = useState(config.shortid)
+  const [popular, setPopular] = useState(0)
+  const [lockMode, setLockMode] = useState<boolean>(!!config.setAlwaysOnTop)
   const [ignoreMouseMode, setIgnoreMouseMode] = useState<boolean>(
     !!config.ignoreMouse
-  );
-  const danmakuRef = useRef<DanmakuListRef>(null);
-  const danmakuGiftList = useRef<DanmakuGiftListRef>(null);
-  const scRef = useRef<SuperChatPanelRef>(null);
-  const giftRef = useRef<GiftBubbleRef>(null);
-  const currentConfig = useRef(config);
-  currentConfig.current = config;
-  const { t } = useTranslation();
+  )
+  const danmakuRef = useRef<DanmakuListRef>(null)
+  const danmakuGiftList = useRef<DanmakuGiftListRef>(null)
+  const scRef = useRef<SuperChatPanelRef>(null)
+  const giftRef = useRef<GiftBubbleRef>(null)
+  const currentConfig = useRef(config)
+  currentConfig.current = config
+  const { t } = useTranslation()
 
   // onMessage必须使用useRef.current,否则会造成更新不会实时同步
   function onMessage(res: DanmakuDataFormatted[]) {
-    const renderDanmakuLists: React.ReactElement[] = [];
-    const renderDanmakuGiftLists: React.ReactElement[] = [];
-    if (currentConfig.current.blockScrollBar) return;
+    const renderDanmakuLists: React.ReactElement[] = []
+    const renderDanmakuGiftLists: React.ReactElement[] = []
+    if (currentConfig.current.blockScrollBar) return
     for (let i = 0; i < res.length; i++) {
-      const msg = res[i];
+      const msg = res[i]
       // 人气
       if (msg.cmd === CmdType.WATCHED_CHANGE) {
-        setPopular(msg.num);
-        return;
+        setPopular(msg.num)
+        return
       }
       // 广播消息
       if (
         msg.cmd === CmdType.NOTICE_MSG &&
         currentConfig.current.blockEffectItem3 === 1
       )
-        return;
+        return
       // 经过消息
       if (['CUT_OFF', 'WARNING'].includes(msg.cmd)) {
-        onNotificationMessage(msg);
-        return;
+        onNotificationMessage(msg)
+        return
       }
       // 是否开启弹幕朗读
       if (msg.cmd === CmdType.DANMU_MSG && currentConfig.current.showVoice) {
-        voice.push(msg.username, msg.content);
+        voice.push(msg.username, msg.content)
       }
       // 礼物消息
       if (currentConfig.current.blockEffectItem4 === 0) {
@@ -108,10 +108,10 @@ const Danmaku: FC = () => {
               showTransition={currentConfig.current.showTransition === 1}
               key={String(Math.random())}
             />
-          );
-          renderDanmakuGiftLists.push(giftElement);
+          )
+          renderDanmakuGiftLists.push(giftElement)
           if (msg.coinType === 'gold') {
-            onGiftBubbleMessage(msg);
+            onGiftBubbleMessage(msg)
           }
         }
       }
@@ -127,8 +127,8 @@ const Danmaku: FC = () => {
             showTransition={currentConfig.current.showTransition === 1}
             key={String(Math.random())}
           />
-        );
-        renderDanmakuGiftLists.push(actionElement);
+        )
+        renderDanmakuGiftLists.push(actionElement)
       }
 
       // TODO: COMBO_END
@@ -142,7 +142,7 @@ const Danmaku: FC = () => {
         msg.cmd === CmdType.SUPER_CHAT_MESSAGE &&
         currentConfig.current.blockEffectItem3 === 0
       ) {
-        onScMessage(msg);
+        onScMessage(msg)
       }
       // 添加到渲染列表
       const renderElement = (
@@ -151,42 +151,42 @@ const Danmaku: FC = () => {
           showTransition={currentConfig.current.showTransition === 1}
           key={String(Math.random())}
         />
-      );
-      renderDanmakuLists.push(renderElement);
+      )
+      renderDanmakuLists.push(renderElement)
     }
-    onDanmakuMessage(renderDanmakuLists);
-    onGiftMessage(renderDanmakuGiftLists);
+    onDanmakuMessage(renderDanmakuLists)
+    onGiftMessage(renderDanmakuGiftLists)
   }
 
   async function fetchResentSuperChat(roomid: number) {
-    const scLists = await getResentSuperChat(roomid);
-    onMessage(scLists);
+    const scLists = await getResentSuperChat(roomid)
+    onMessage(scLists)
   }
 
   const onDanmakuMessage = useCallback((lists: React.ReactElement[]) => {
-    danmakuRef?.current?.onMessage && danmakuRef.current.onMessage(lists);
-  }, []);
+    danmakuRef?.current?.onMessage && danmakuRef.current.onMessage(lists)
+  }, [])
 
   const handleClearMessage = useCallback(() => {
-    danmakuRef?.current?.clearMessage && danmakuRef.current.clearMessage();
-  }, []);
+    danmakuRef?.current?.clearMessage && danmakuRef.current.clearMessage()
+  }, [])
 
   const onGiftMessage = useCallback((lists: React.ReactElement[]) => {
     danmakuGiftList?.current?.onMessage &&
-      danmakuGiftList.current.onMessage(lists);
-  }, []);
+      danmakuGiftList.current.onMessage(lists)
+  }, [])
 
   const onScMessage = useCallback((msg: SUPER_CHAT_MESSAGE) => {
-    scRef?.current?.onMessage && scRef.current.onMessage(msg.data);
-  }, []);
+    scRef?.current?.onMessage && scRef.current.onMessage(msg.data)
+  }, [])
 
   const clearSCMessage = useCallback(() => {
-    scRef?.current?.onClearMessage && scRef.current.onClearMessage();
-  }, []);
+    scRef?.current?.onClearMessage && scRef.current.onClearMessage()
+  }, [])
 
   const onGiftBubbleMessage = useCallback((msg: GiftBubbleMsg) => {
-    giftRef?.current?.onMessage && giftRef.current.onMessage(msg);
-  }, []);
+    giftRef?.current?.onMessage && giftRef.current.onMessage(msg)
+  }, [])
 
   // 警告、切断消息提示
   const onNotificationMessage = (msg: NoticeData) => {
@@ -199,93 +199,93 @@ const Danmaku: FC = () => {
         </span>
       ),
       duration: 10,
-    };
-    notificationInstance.notice(noticeOption);
-  };
+    }
+    notificationInstance.notice(noticeOption)
+  }
 
   const handleDispatchUpDateConfig = (state) => {
-    dispatch(updateConfig(state));
-  };
+    dispatch(updateConfig(state))
+  }
 
   const handleSubmit = async (
     e?: FormEvent | null,
     selectedShortId?: number
   ) => {
     if (e) {
-      e.preventDefault();
+      e.preventDefault()
     }
-    let roomData: LiveRoom;
+    let roomData: LiveRoom
     if (selectedShortId) {
-      roomData = await getLiveRoomInfo(selectedShortId);
+      roomData = await getLiveRoomInfo(selectedShortId)
     } else {
-      roomData = await getLiveRoomInfo(roomID);
+      roomData = await getLiveRoomInfo(roomID)
     }
 
     // 创建新的socket
-    dispatch(createSocket(roomData.roomid));
-    setRoomID(roomData.shortid);
+    dispatch(createSocket(roomData.roomid))
+    setRoomID(roomData.shortid)
     // 更新config
-    handleDispatchUpDateConfig({ k: ConfigKey.shortid, v: roomData.shortid });
-    handleDispatchUpDateConfig({ k: ConfigKey.roomid, v: roomData.roomid });
+    handleDispatchUpDateConfig({ k: ConfigKey.shortid, v: roomData.shortid })
+    handleDispatchUpDateConfig({ k: ConfigKey.roomid, v: roomData.roomid })
     // 清空SC
-    clearSCMessage();
+    clearSCMessage()
     // 清空旧消息
-    handleClearMessage();
-    onConnecting();
-  };
+    handleClearMessage()
+    onConnecting()
+  }
 
   const handleLock = () => {
-    setLockMode(!lockMode);
+    setLockMode(!lockMode)
     handleDispatchUpDateConfig({
       k: ConfigKey.setAlwaysOnTop,
       v: !lockMode ? 1 : 0,
-    });
-    ipcRenderer.send('setAlwaysOnTop', !lockMode);
-  };
+    })
+    ipcRenderer.send('setAlwaysOnTop', !lockMode)
+  }
 
   const handleClickSetIgnoreMouse = () => {
-    setIgnoreMouseMode(!ignoreMouseMode);
+    setIgnoreMouseMode(!ignoreMouseMode)
     handleDispatchUpDateConfig({
       k: ConfigKey.ignoreMouse,
       v: !ignoreMouseMode ? 1 : 0,
-    });
+    })
     // 窗口前置
     if (!ignoreMouseMode) {
-      setLockMode(true);
+      setLockMode(true)
       handleDispatchUpDateConfig({
         k: ConfigKey.setAlwaysOnTop,
         v: 1,
-      });
-      ipcRenderer.send('setAlwaysOnTop', true);
+      })
+      ipcRenderer.send('setAlwaysOnTop', true)
     }
-    ipcRenderer.send('setIgnoreMouse', !ignoreMouseMode);
-  };
+    ipcRenderer.send('setIgnoreMouse', !ignoreMouseMode)
+  }
 
   const mouseEnter = () => {
     if (ignoreMouseMode) {
-      ipcRenderer.send('setIgnoreMouse', false);
+      ipcRenderer.send('setIgnoreMouse', false)
     }
-  };
+  }
 
   const mouseLeave = () => {
     if (ignoreMouseMode) {
-      ipcRenderer.send('setIgnoreMouse', true);
+      ipcRenderer.send('setIgnoreMouse', true)
     }
-  };
+  }
 
   const onConnecting = () => {
     const danmakuData = {
       cmd: CmdType.CONNECTING,
-    };
-    onMessage([danmakuData]);
-  };
+    }
+    onMessage([danmakuData])
+  }
 
   function initConfigSetting() {
     if (config.setAlwaysOnTop) {
-      ipcRenderer.send('setAlwaysOnTop', true);
+      ipcRenderer.send('setAlwaysOnTop', true)
     }
     if (config.ignoreMouse) {
-      ipcRenderer.send('setIgnoreMouse', true);
+      ipcRenderer.send('setIgnoreMouse', true)
     }
   }
 
@@ -296,24 +296,24 @@ const Danmaku: FC = () => {
       { k: ConfigKey.fontFamily, v: `${config.fontFamily}` },
       { k: ConfigKey.fontLineHeight, v: `${config.fontLineHeight}px` },
       { k: ConfigKey.fontMarginTop, v: `${config.fontMarginTop}px` },
-    ];
+    ]
     cssVariables.forEach((item) => {
-      setCssVariable(item.k, item.v);
-    });
+      setCssVariable(item.k, item.v)
+    })
   }
 
   useEffect(() => {
     if (socket._methods.length === 0) {
-      socket.init();
-      socket.addMethods([onMessage]);
-      onConnecting();
-      initConfigSetting();
-      initCssVariable();
-      dispatch(fetchGiftData());
-      fetchResentSuperChat(roomID);
-      dispatch(fetchVersionInfo());
+      socket.init()
+      socket.addMethods([onMessage])
+      onConnecting()
+      initConfigSetting()
+      initCssVariable()
+      dispatch(fetchGiftData())
+      fetchResentSuperChat(roomID)
+      dispatch(fetchVersionInfo())
     }
-  });
+  })
 
   return (
     <div className="danmakuContainer">
@@ -382,7 +382,7 @@ const Danmaku: FC = () => {
         clearSCMessage={clearSCMessage}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Danmaku;
+export default Danmaku

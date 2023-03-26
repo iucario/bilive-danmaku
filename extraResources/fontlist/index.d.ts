@@ -5,9 +5,9 @@
  */
 
 interface IOptions {
-  disableQuoting: boolean;
+  disableQuoting: boolean
 }
 
 type FontList = string[]
 
-export function getFonts (options?: IOptions): Promise<FontList>;
+export function getFonts(options?: IOptions): Promise<FontList>

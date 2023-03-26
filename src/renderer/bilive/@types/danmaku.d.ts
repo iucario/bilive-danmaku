@@ -6,7 +6,7 @@
  * 反正很多类型用不上，懒得改了
  * */
 
-enum CmdType {
+declare enum CmdType {
   CONNECTING = 'CONNECTING',
   CONNECT_SUCCESS = 'CONNECT_SUCCESS',
   DISCONNECTED = 'DISCONNECTED',
@@ -33,8 +33,8 @@ enum CmdType {
  */
 interface danmuJson {
   /** 关键字 */
-  cmd: string;
-  roomid?: number;
+  cmd: string
+  roomid?: number
 }
 /**
  * ACTIVITY_BANNER_CLOSE
@@ -44,11 +44,11 @@ interface danmuJson {
  * @extends {danmuJson}
  */
 interface ACTIVITY_BANNER_CLOSE extends danmuJson {
-  data: ACTIVITY_BANNER_CLOSE_Data;
+  data: ACTIVITY_BANNER_CLOSE_Data
 }
 interface ACTIVITY_BANNER_CLOSE_Data {
-  id: number;
-  banner_type: number;
+  id: number
+  banner_type: number
 }
 /**
  * ACTIVITY_BANNER_RED_NOTICE
@@ -58,12 +58,12 @@ interface ACTIVITY_BANNER_CLOSE_Data {
  * @extends {danmuJson}
  */
 interface ACTIVITY_BANNER_RED_NOTICE extends danmuJson {
-  data: ACTIVITY_BANNER_RED_NOTICE_Data;
+  data: ACTIVITY_BANNER_RED_NOTICE_Data
 }
 interface ACTIVITY_BANNER_RED_NOTICE_Data {
-  id: number;
-  type: string;
-  icon: string;
+  id: number
+  type: string
+  icon: string
 }
 /**
  * ACTIVITY_BANNER_RED_NOTICE_CLOSE
@@ -73,11 +73,11 @@ interface ACTIVITY_BANNER_RED_NOTICE_Data {
  * @extends {danmuJson}
  */
 interface ACTIVITY_BANNER_RED_NOTICE_CLOSE extends danmuJson {
-  data: ACTIVITY_BANNER_RED_NOTICE_CLOSE_Data;
+  data: ACTIVITY_BANNER_RED_NOTICE_CLOSE_Data
 }
 interface ACTIVITY_BANNER_RED_NOTICE_CLOSE_Data {
-  id: number;
-  type: string;
+  id: number
+  type: string
 }
 /**
  * ACTIVITY_BANNER_UPDATE
@@ -87,20 +87,20 @@ interface ACTIVITY_BANNER_RED_NOTICE_CLOSE_Data {
  * @extends {danmuJson}
  */
 interface ACTIVITY_BANNER_UPDATE extends danmuJson {
-  data: ACTIVITY_BANNER_UPDATE_Data;
+  data: ACTIVITY_BANNER_UPDATE_Data
 }
 interface ACTIVITY_BANNER_UPDATE_Data {
-  id: number;
-  title: string;
-  cover: string;
-  background: string;
-  jump_url: string;
-  title_color: string;
-  closeable: number;
-  banner_type: number;
-  weight: number;
-  web_text: string;
-  web_cover: string;
+  id: number
+  title: string
+  cover: string
+  background: string
+  jump_url: string
+  title_color: string
+  closeable: number
+  banner_type: number
+  weight: number
+  web_text: string
+  web_cover: string
 }
 /**
  * ACTIVITY_MATCH_GIFT
@@ -110,28 +110,28 @@ interface ACTIVITY_BANNER_UPDATE_Data {
  * @extends {danmuJson}
  */
 interface ACTIVITY_MATCH_GIFT extends danmuJson {
-  data: ACTIVITY_MATCH_GIFT_Data;
+  data: ACTIVITY_MATCH_GIFT_Data
 }
 interface ACTIVITY_MATCH_GIFT_Data {
-  action: string;
-  status: number;
-  detail: ACTIVITY_MATCH_GIFT_Data_Detail;
+  action: string
+  status: number
+  detail: ACTIVITY_MATCH_GIFT_Data_Detail
 }
 interface ACTIVITY_MATCH_GIFT_Data_Detail {
-  match_id: number;
-  home: ACTIVITY_MATCH_GIFT_Data_Detail_Home;
-  visit: ACTIVITY_MATCH_GIFT_Data_Detail_Home;
+  match_id: number
+  home: ACTIVITY_MATCH_GIFT_Data_Detail_Home
+  visit: ACTIVITY_MATCH_GIFT_Data_Detail_Home
 }
 interface ACTIVITY_MATCH_GIFT_Data_Detail_Home {
-  team_name: string;
-  url: string;
-  ratio: string;
-  score: number;
-  gift_info: ACTIVITY_MATCH_GIFT_Data_Detail_Home_GiftInfo[];
+  team_name: string
+  url: string
+  ratio: string
+  score: number
+  gift_info: ACTIVITY_MATCH_GIFT_Data_Detail_Home_GiftInfo[]
 }
 interface ACTIVITY_MATCH_GIFT_Data_Detail_Home_GiftInfo {
-  gift_id: number;
-  gift_name: string;
+  gift_id: number
+  gift_name: string
 }
 /**
  * ANCHOR_LOT_START
@@ -141,35 +141,35 @@ interface ACTIVITY_MATCH_GIFT_Data_Detail_Home_GiftInfo {
  * @extends {danmuJson}
  */
 interface ANCHOR_LOT_START extends danmuJson {
-  data: ANCHOR_LOT_START_Data;
+  data: ANCHOR_LOT_START_Data
 }
 interface ANCHOR_LOT_START_Data {
-  asset_icon: string;
-  award_image: string;
-  award_name: string;
-  award_num: number;
-  cur_gift_num: number;
-  current_time: number;
-  danmu: string;
-  gift_id: number;
-  gift_name: string;
-  gift_num: number;
-  gift_price: number;
-  goaway_time: number;
-  id: number;
-  join_type: number;
-  lot_status: number;
-  max_time: number;
-  require_text: string;
-  require_type: number;
-  require_value: number;
-  room_id: number;
-  send_gift_ensure: number;
-  show_panel: number;
-  status: number;
-  time: number;
-  url: string;
-  web_url: string;
+  asset_icon: string
+  award_image: string
+  award_name: string
+  award_num: number
+  cur_gift_num: number
+  current_time: number
+  danmu: string
+  gift_id: number
+  gift_name: string
+  gift_num: number
+  gift_price: number
+  goaway_time: number
+  id: number
+  join_type: number
+  lot_status: number
+  max_time: number
+  require_text: string
+  require_type: number
+  require_value: number
+  room_id: number
+  send_gift_ensure: number
+  show_panel: number
+  status: number
+  time: number
+  url: string
+  web_url: string
 }
 /**
  * ANIMATION
@@ -179,13 +179,13 @@ interface ANCHOR_LOT_START_Data {
  * @extends {danmuJson}
  */
 interface ANIMATION extends danmuJson {
-  data: ANIMATION_Data;
+  data: ANIMATION_Data
 }
 interface ANIMATION_Data {
-  animation: string;
-  type: string;
-  weights: number;
-  uid: number;
+  animation: string
+  type: string
+  weights: number
+  uid: number
 }
 /**
  * BOSS_BATTLE
@@ -195,16 +195,16 @@ interface ANIMATION_Data {
  * @extends {danmuJson}
  */
 interface BOSS_BATTLE extends danmuJson {
-  data: BOSS_BATTLE_Data;
+  data: BOSS_BATTLE_Data
 }
 interface BOSS_BATTLE_Data {
-  uname: string;
-  gift_id: number;
-  number: number;
-  injury: number;
-  uid: number;
-  room_id: number;
-  integral: number;
+  uname: string
+  gift_id: number
+  number: number
+  injury: number
+  uid: number
+  room_id: number
+  integral: number
 }
 /**
  * BOSS_ENERGY
@@ -214,12 +214,12 @@ interface BOSS_BATTLE_Data {
  * @extends {danmuJson}
  */
 interface BOSS_ENERGY extends danmuJson {
-  data: BOSS_ENERGY_Data;
+  data: BOSS_ENERGY_Data
 }
 interface BOSS_ENERGY_Data {
-  level: number;
-  valve: number;
-  current: number;
+  level: number
+  valve: number
+  current: number
 }
 /**
  * BOSS_INFO
@@ -229,34 +229,34 @@ interface BOSS_ENERGY_Data {
  * @extends {danmuJson}
  */
 interface BOSS_INFO extends danmuJson {
-  data: BOSS_INFO_Data;
+  data: BOSS_INFO_Data
 }
 interface BOSS_INFO_Data {
-  boss_status: number;
-  time: number;
-  energy_level: number;
-  base_level: number;
-  boss_id: number;
-  boss_type: string;
-  uid: number;
-  play_status: number;
-  energy_charging: BOSS_INFO_Data_EnergyCharging;
-  battle: BOSS_INFO_Data_Battle;
+  boss_status: number
+  time: number
+  energy_level: number
+  base_level: number
+  boss_id: number
+  boss_type: string
+  uid: number
+  play_status: number
+  energy_charging: BOSS_INFO_Data_EnergyCharging
+  battle: BOSS_INFO_Data_Battle
 }
 interface BOSS_INFO_Data_EnergyCharging {
-  level: number;
-  valve: number;
-  current: number;
-  energy_level: number;
+  level: number
+  valve: number
+  current: number
+  energy_level: number
 }
 interface BOSS_INFO_Data_Battle {
-  total_blood_volume: number;
-  residual_blood_volume: number;
-  energy_value: number;
-  boss_id: number;
-  boss_status: number;
-  ts: number;
-  boss_name: string;
+  total_blood_volume: number
+  residual_blood_volume: number
+  energy_value: number
+  boss_id: number
+  boss_status: number
+  ts: number
+  boss_name: string
 }
 /**
  * BOSS_INJURY
@@ -266,14 +266,14 @@ interface BOSS_INFO_Data_Battle {
  * @extends {danmuJson}
  */
 interface BOSS_INJURY extends danmuJson {
-  data: BOSS_INJURY_Data;
+  data: BOSS_INJURY_Data
 }
 interface BOSS_INJURY_Data {
-  total_blood_volume: number;
-  residual_blood_volume: number;
-  energy_value: number;
-  boss_id: number;
-  is_query: number;
+  total_blood_volume: number
+  residual_blood_volume: number
+  energy_value: number
+  boss_id: number
+  is_query: number
 }
 /**
  * BOX_ACTIVITY_START
@@ -284,28 +284,28 @@ interface BOSS_INJURY_Data {
  * @extends {danmuJson}
  */
 interface BOX_ACTIVITY_START extends danmuJson {
-  aid: number;
+  aid: number
 }
 interface BOX_ACTIVITY_START extends danmuJson {
-  aid: number;
-  data: BOX_ACTIVITY_START_Data;
+  aid: number
+  data: BOX_ACTIVITY_START_Data
 }
 interface BOX_ACTIVITY_START_Data {
-  activity_id: number;
-  jump_url: string;
-  weight: number;
-  closeable: number;
-  title: string;
-  title_color: string;
-  activity_pic: string;
-  background: string;
-  current_round: number;
-  typeB: BOX_ACTIVITY_START_Data_TypeB[];
+  activity_id: number
+  jump_url: string
+  weight: number
+  closeable: number
+  title: string
+  title_color: string
+  activity_pic: string
+  background: string
+  current_round: number
+  typeB: BOX_ACTIVITY_START_Data_TypeB[]
 }
 interface BOX_ACTIVITY_START_Data_TypeB {
-  join_start_time: number;
-  join_end_time: number;
-  round_num: number;
+  join_start_time: number
+  join_end_time: number
+  round_num: number
 }
 /**
  * 房间设置变更
@@ -316,7 +316,7 @@ interface BOX_ACTIVITY_START_Data_TypeB {
  */
 interface CHANGE_ROOM_INFO extends danmuJson {
   /** 背景图片地址 */
-  background: string;
+  background: string
 }
 /**
  * 礼物连击结束
@@ -325,30 +325,30 @@ interface CHANGE_ROOM_INFO extends danmuJson {
  * @interface COMBO_END
  */
 interface COMBO_END {
-  cmd: CmdType.COMBO_END;
+  cmd: CmdType.COMBO_END
   /** 礼物连击结束 */
-  data: COMBO_END_Data;
+  data: COMBO_END_Data
 }
 interface COMBO_END_Data {
   /** 送礼人 */
-  uname: string;
+  uname: string
   /** 主播 */
-  r_uname: string;
+  r_uname: string
   /** 连击次数 */
-  combo_num: number;
+  combo_num: number
   /** 礼物价值 */
-  price: number;
+  price: number
   /** 礼物名 */
-  gift_name: string;
+  gift_name: string
   /** 礼物ID */
-  gift_id: number;
+  gift_id: number
   /** 开始时间 */
-  start_time: number;
+  start_time: number
   /** 结束时间 */
-  end_time: number;
+  end_time: number
   /** 舰队等级 */
-  guard_level?: number;
-  send_master: null;
+  guard_level?: number
+  send_master: null
 }
 /**
  * 礼物连击
@@ -357,29 +357,29 @@ interface COMBO_END_Data {
  * @interface COMBO_SEND
  */
 interface COMBO_SEND {
-  cmd: CmdType.COMBO_SEND;
-  data: COMBO_SEND_Data;
+  cmd: CmdType.COMBO_SEND
+  data: COMBO_SEND_Data
 }
 interface COMBO_SEND_Data {
   /** 送礼人UID */
-  uid: number;
+  uid: number
   /** 送礼人名称 */
-  uname: string;
+  uname: string
   /** 主播 */
-  r_uname: string;
+  r_uname: string
   /** 连击次数 */
-  combo_num: number;
+  combo_num: number
   /** 礼物名 */
-  gift_name: string;
+  gift_name: string
   /** 礼物ID */
-  gift_id: number;
+  gift_id: number
   /** 赠送, 投喂 */
-  action: '赠送' | '投喂';
+  action: '赠送' | '投喂'
   /** 连击ID, 不清楚用途 */
-  combo_id: string;
-  send_master: null;
-  batch_combo_id: string;
-  is_show: number;
+  combo_id: string
+  send_master: null
+  batch_combo_id: string
+  is_show: number
 }
 /**
  * 直播强制切断
@@ -390,7 +390,7 @@ interface COMBO_SEND_Data {
  */
 interface CUT_OFF extends danmuJson {
   /** 切断原因 */
-  msg: string;
+  msg: string
 }
 /**
  * DAILY_QUEST_NEWDAY
@@ -400,7 +400,7 @@ interface CUT_OFF extends danmuJson {
  * @extends {danmuJson}
  */
 interface DAILY_QUEST_NEWDAY extends danmuJson {
-  data: DAILY_QUEST_NEWDAY_Data;
+  data: DAILY_QUEST_NEWDAY_Data
 }
 
 interface DAILY_QUEST_NEWDAY_Data {}
@@ -412,11 +412,11 @@ interface DAILY_QUEST_NEWDAY_Data {}
  * @extends {danmuJson}
  */
 interface DAILY_QUEST_REWARD extends danmuJson {
-  data: DAILY_QUEST_REWARD_Data;
+  data: DAILY_QUEST_REWARD_Data
 }
 interface DAILY_QUEST_REWARD_Data {
-  aid: number;
-  room_id: number;
+  aid: number
+  room_id: number
 }
 /**
  * 弹幕消息
@@ -426,8 +426,8 @@ interface DAILY_QUEST_REWARD_Data {
  * @extends {danmuJson}
  */
 interface DANMU_MSG {
-  cmd: CmdType.DANMU_MSG;
-  info: DANMU_MSG_Info;
+  cmd: CmdType.DANMU_MSG
+  info: DANMU_MSG_Info
 }
 interface DANMU_MSG_Info
   extends Array<
@@ -441,96 +441,96 @@ interface DANMU_MSG_Info
     | DANMU_MSG_Info_Other
   > {
   /** 弹幕信息 */
-  0: DANMU_MSG_Info_Danmu;
+  0: DANMU_MSG_Info_Danmu
   /** 弹幕内容 */
-  1: string;
+  1: string
   /** 用户信息 */
-  2: DANMU_MSG_Info_User;
+  2: DANMU_MSG_Info_User
   /** 用户徽章 */
-  3: DANMU_MSG_Info_Medal;
+  3: DANMU_MSG_Info_Medal
   /** 用户排行 */
-  4: DANMU_MSG_Info_Rank;
+  4: DANMU_MSG_Info_Rank
   /** teamid */
-  5: number;
+  5: number
   /** 舰队等级 */
-  6: number;
-  7: number;
-  8: null;
-  9: DANMU_MSG_Info_Other;
-  10: number;
-  11: number;
-  12: null;
-  13: null;
-  14: number;
+  6: number
+  7: number
+  8: null
+  9: DANMU_MSG_Info_Other
+  10: number
+  11: number
+  12: null
+  13: null
+  14: number
 }
 interface DANMU_MSG_Info_Danmu extends Array<number | string> {
-  0: number;
+  0: number
   /** 模式 */
-  1: number;
+  1: number
   /** 字号 */
-  2: number;
+  2: number
   /** 颜色 */
-  3: number;
+  3: number
   /** 发送时间 */
-  4: number;
+  4: number
   /** rnd */
-  5: number | string;
-  6: number;
+  5: number | string
+  6: number
   /** uid crc32 */
-  7: string;
-  8: number;
+  7: string
+  8: number
   // 0=普通弹幕，2=抽奖弹幕
-  9: number;
-  10: number;
+  9: number
+  10: number
 }
 interface DANMU_MSG_Info_User extends Array<number | string> {
   /** 用户uid */
-  0: number;
+  0: number
   /** 用户名 */
-  1: string;
+  1: string
   /** 是否为管理员 */
-  2: 0 | 1;
+  2: 0 | 1
   /** 是否为月费老爷 */
-  3: 0 | 1;
+  3: 0 | 1
   /** 是否为年费老爷 */
-  4: 0 | 1;
+  4: 0 | 1
   // 5000=非正式会员用户, 10000=正式用户
-  5: 5000 | 10000;
+  5: 5000 | 10000
   // 已绑定手机？
-  6: 0 | 1;
+  6: 0 | 1
   /** 用户名颜色, #32进制颜色代码 */
-  7: string;
+  7: string
 }
 interface DANMU_MSG_Info_Medal extends Array<number | string> {
   /** 徽章等级 */
-  0: number;
+  0: number
   /** 勋章名 */
-  1: string;
+  1: string
   /** 主播名 */
-  2: string;
+  2: string
   /** 直播间, 字符串的貌似是原始房间号 */
-  3: number | string;
-  4: number;
+  3: number | string
+  4: number
   /** 特殊样式 */
-  5: 'union' | string;
+  5: 'union' | string
 }
 interface DANMU_MSG_Info_Rank extends Array<number | string> {
   /** 用户等级 */
-  0: number;
-  1: number;
-  2: number;
+  0: number
+  1: number
+  2: number
   /** 等级排名, 具体值为number */
-  3: number | string;
+  3: number | string
 }
 interface DANMU_MSG_info_title extends Array<string> {
   /** 头衔标识 */
-  0: string;
+  0: string
   /** 头衔图片 */
-  1: string;
+  1: string
 }
 interface DANMU_MSG_Info_Other {
-  ts: number;
-  ct: string;
+  ts: number
+  ct: string
 }
 /**
  * 活动入场特效
@@ -541,26 +541,26 @@ interface DANMU_MSG_Info_Other {
  * @extends {danmuJson}
  */
 interface ENTRY_EFFECT extends danmuJson {
-  data: ENTRY_EFFECT_Data;
+  data: ENTRY_EFFECT_Data
 }
 interface ENTRY_EFFECT_Data {
-  id: number;
-  uid: number;
-  target_id: number;
-  mock_effect: number;
-  face: string;
-  privilege_type: number;
-  copy_writing: string;
-  copy_color: string;
-  highlight_color: string;
-  priority: number;
-  basemap_url: string;
-  show_avatar: number;
-  effective_time: number;
-  web_basemap_url: string;
-  web_effective_time: number;
-  web_effect_close: number;
-  web_close_time: number;
+  id: number
+  uid: number
+  target_id: number
+  mock_effect: number
+  face: string
+  privilege_type: number
+  copy_writing: string
+  copy_color: string
+  highlight_color: string
+  priority: number
+  basemap_url: string
+  show_avatar: number
+  effective_time: number
+  web_basemap_url: string
+  web_effective_time: number
+  web_effect_close: number
+  web_close_time: number
 }
 /**
  * FREE_GIFT_BUBBLE
@@ -570,14 +570,14 @@ interface ENTRY_EFFECT_Data {
  * @extends {danmuJson}
  */
 interface FREE_GIFT_BUBBLE extends danmuJson {
-  data: FREE_GIFT_BUBBLE_Data;
+  data: FREE_GIFT_BUBBLE_Data
 }
 interface FREE_GIFT_BUBBLE_Data {
-  text: string;
-  color: string;
-  highlight: string;
-  url: string;
-  is_detail: number;
+  text: string
+  color: string
+  highlight: string
+  url: string
+  is_detail: number
 }
 /**
  * 舰队购买
@@ -586,23 +586,23 @@ interface FREE_GIFT_BUBBLE_Data {
  * @interface GUARD_BUY
  */
 interface GUARD_BUY {
-  cmd: CmdType.GUARD_BUY;
-  data: GUARD_BUY_Data;
+  cmd: CmdType.GUARD_BUY
+  data: GUARD_BUY_Data
 }
 interface GUARD_BUY_Data {
   /** 用户uid */
-  uid: number;
+  uid: number
   /** 用户名 */
-  username: string;
+  username: string
   /** 舰队等级 */
-  guard_level: number;
+  guard_level: number
   /** 购买数量 */
-  num: number;
-  price: number;
-  gift_id: number;
-  gift_name: string;
-  start_time: number;
-  end_time: number;
+  num: number
+  price: number
+  gift_id: number
+  gift_name: string
+  start_time: number
+  end_time: number
 }
 /**
  * 舰队抽奖
@@ -611,7 +611,7 @@ interface GUARD_BUY_Data {
  * @interface GUARD_LOTTERY_START
  * @extends {LOTTERY_START}
  */
-type GUARD_LOTTERY_START = LOTTERY_START;
+type GUARD_LOTTERY_START = LOTTERY_START
 /**
  * 舰队消息
  * {"cmd":"GUARD_MSG","msg":"用户 :?EricOuO:? 在主播 七七见奈波丶 的直播间开通了总督","buy_type":1,"_roomid":23058}
@@ -622,9 +622,9 @@ type GUARD_LOTTERY_START = LOTTERY_START;
  */
 interface GUARD_MSG extends danmuJson {
   /** 消息内容 */
-  msg: string;
+  msg: string
   /** 舰队等级 */
-  buy_type: number;
+  buy_type: number
 }
 /**
  * 小时榜
@@ -634,30 +634,30 @@ interface GUARD_MSG extends danmuJson {
  * @extends {danmuJson}
  */
 interface HOUR_RANK_AWARDS extends danmuJson {
-  action: string;
-  data: HOUR_RANK_AWARDS_Data;
+  action: string
+  data: HOUR_RANK_AWARDS_Data
 }
 interface HOUR_RANK_AWARDS_Data {
-  roomid: number;
-  ruid: number;
-  uname: string;
-  face: string;
-  rank_desc: string;
-  content: string;
-  life_cycle: number;
+  roomid: number
+  ruid: number
+  uname: string
+  face: string
+  rank_desc: string
+  content: string
+  life_cycle: number
 }
 interface HOUR_RANK_AWARDS_Data {
-  award_desc: string;
-  award_url: string;
-  award_warn: string;
-  button_content: string;
-  jump_content: string;
-  jump_url: string;
-  rank_content: string;
-  roomid: number;
-  ruid: number;
-  title: string;
-  web_jump_url: string;
+  award_desc: string
+  award_url: string
+  award_warn: string
+  button_content: string
+  jump_content: string
+  jump_url: string
+  rank_content: string
+  roomid: number
+  ruid: number
+  title: string
+  web_jump_url: string
 }
 /**
  * 勋章亲密度上限
@@ -667,10 +667,10 @@ interface HOUR_RANK_AWARDS_Data {
  * @extends {danmuJson}
  */
 interface LITTLE_TIPS extends danmuJson {
-  data: LITTLE_TIPS_Data;
+  data: LITTLE_TIPS_Data
 }
 interface LITTLE_TIPS_Data {
-  msg: string;
+  msg: string
 }
 /**
  * 开始直播
@@ -679,8 +679,8 @@ interface LITTLE_TIPS_Data {
  * @interface LIVE
  */
 interface LIVE {
-  cmd: CmdType.LIVE;
-  roomid: number;
+  cmd: CmdType.LIVE
+  roomid: number
 }
 /**
  *
@@ -690,13 +690,13 @@ interface LIVE {
  * @extends {danmuJson}
  */
 interface LOL_ACTIVITY extends danmuJson {
-  data: LOL_ACTIVITY_Data;
+  data: LOL_ACTIVITY_Data
 }
 interface LOL_ACTIVITY_Data {
-  action: string;
-  match_id: number;
-  timestamp: number;
-  guess_info: null;
+  action: string
+  match_id: number
+  timestamp: number
+  guess_info: null
 }
 /**
  * 抽奖LOTTERY
@@ -706,45 +706,45 @@ interface LOL_ACTIVITY_Data {
  * @extends {danmuJson}
  */
 interface LOTTERY_START extends danmuJson {
-  data: LOTTERY_START_Data;
+  data: LOTTERY_START_Data
 }
 interface LOTTERY_START_Data {
   /* 编号 */
-  id: number;
+  id: number
   /* 房间号 */
-  roomid: number;
+  roomid: number
   /* 消息 */
-  message: string;
+  message: string
   /* 抽奖类型 */
-  type: string;
-  privilege_type: number;
+  type: string
+  privilege_type: number
   /* 房间链接 */
-  link: string;
-  payflow_id: string;
+  link: string
+  payflow_id: string
   /* 抽奖信息 */
-  lottery: LOTTERY_START_Data_Lottery;
+  lottery: LOTTERY_START_Data_Lottery
 }
 interface LOTTERY_START_Data_Lottery {
   /* 编号 */
-  id: number;
+  id: number
   /* 抽奖发起人信息 */
-  sender: LOTTERY_START_Data_Lottery_Sender;
+  sender: LOTTERY_START_Data_Lottery_Sender
   /* 关键字, 目前和type一致 */
-  keyword: string;
-  privilege_type: number;
-  time: number;
-  status: number;
-  mobile_display_mode: number;
-  mobile_static_asset: string;
-  mobile_animation_asset: string;
+  keyword: string
+  privilege_type: number
+  time: number
+  status: number
+  mobile_display_mode: number
+  mobile_static_asset: string
+  mobile_animation_asset: string
 }
 interface LOTTERY_START_Data_Lottery_Sender {
   /* 发起人uid */
-  uid: number;
+  uid: number
   /* 发起人昵称 */
-  uname: string;
+  uname: string
   /* 头像地址 */
-  face: string;
+  face: string
 }
 /**
  * LUCK_GIFT_AWARD_MASTER
@@ -754,16 +754,16 @@ interface LOTTERY_START_Data_Lottery_Sender {
  * @extends {danmuJson}
  */
 interface LUCK_GIFT_AWARD_MASTER extends danmuJson {
-  data: LUCK_GIFT_AWARD_MASTER_Data;
+  data: LUCK_GIFT_AWARD_MASTER_Data
 }
 interface LUCK_GIFT_AWARD_MASTER_Data {
-  uid: number;
-  gift_name: string;
-  coin: string;
-  gift_icon: string;
-  start_time: string;
-  end_time: string;
-  user_uname: string;
+  uid: number
+  gift_name: string
+  coin: string
+  gift_icon: string
+  start_time: string
+  end_time: string
+  user_uname: string
 }
 /**
  * LUCK_GIFT_AWARD_USER
@@ -773,17 +773,17 @@ interface LUCK_GIFT_AWARD_MASTER_Data {
  * @extends {danmuJson}
  */
 interface LUCK_GIFT_AWARD_USER extends danmuJson {
-  data: LUCK_GIFT_AWARD_USER_Data;
+  data: LUCK_GIFT_AWARD_USER_Data
 }
 interface LUCK_GIFT_AWARD_USER_Data {
-  type: number;
-  uid: number;
-  gift_name: string;
-  coin: string;
-  gift_icon: string;
-  rate: number;
-  start_time: string;
-  end_time: string;
+  type: number
+  uid: number
+  gift_name: string
+  coin: string
+  gift_icon: string
+  rate: number
+  start_time: string
+  end_time: string
 }
 /**
  * MESSAGEBOX_USER_GAIN_MEDAL
@@ -793,24 +793,24 @@ interface LUCK_GIFT_AWARD_USER_Data {
  * @extends {danmuJson}
  */
 interface MESSAGEBOX_USER_GAIN_MEDAL extends danmuJson {
-  data: MESSAGEBOX_USER_GAIN_MEDAL_Data;
+  data: MESSAGEBOX_USER_GAIN_MEDAL_Data
 }
 interface MESSAGEBOX_USER_GAIN_MEDAL_Data {
-  type: number;
-  uid: number;
-  up_uid: number;
-  medal_id: number;
-  medal_name: string;
-  medal_level: number;
-  medal_color: number;
-  msg_title: string;
-  msg_content: string;
-  normal_color: number;
-  highlight_color: number;
-  intimacy: number;
-  next_intimacy: number;
-  today_feed: number;
-  day_limit: number;
+  type: number
+  uid: number
+  up_uid: number
+  medal_id: number
+  medal_name: string
+  medal_level: number
+  medal_color: number
+  msg_title: string
+  msg_content: string
+  normal_color: number
+  highlight_color: number
+  intimacy: number
+  next_intimacy: number
+  today_feed: number
+  day_limit: number
 }
 /**
  * new_anchor_reward
@@ -820,8 +820,8 @@ interface MESSAGEBOX_USER_GAIN_MEDAL_Data {
  * @extends {danmuJson}
  */
 interface new_anchor_reward extends danmuJson {
-  reward_id: number;
-  uid: number;
+  reward_id: number
+  uid: number
 }
 /**
  * 房间通知
@@ -831,44 +831,44 @@ interface new_anchor_reward extends danmuJson {
  * @interface NOTICE_MSG
  */
 interface NOTICE_MSG {
-  cmd: CmdType.NOTICE_MSG;
-  full: NOTICE_MSG_Full;
-  half: NOTICE_MSG_Half;
-  side: NOTICE_MSG_Side;
-  roomid: number;
-  real_roomid: number;
-  msg_common: string;
-  msg_self: string;
-  link_url: string;
-  msg_type: number;
-  shield_uid: number;
+  cmd: CmdType.NOTICE_MSG
+  full: NOTICE_MSG_Full
+  half: NOTICE_MSG_Half
+  side: NOTICE_MSG_Side
+  roomid: number
+  real_roomid: number
+  msg_common: string
+  msg_self: string
+  link_url: string
+  msg_type: number
+  shield_uid: number
 }
 interface NOTICE_MSG_Full {
-  head_icon: string;
-  tail_icon: string;
-  head_icon_fa: string;
-  tail_icon_fa: string;
-  head_icon_fan: number;
-  tail_icon_fan: number;
-  background: string;
-  color: string;
-  highlight: string;
-  time: number;
+  head_icon: string
+  tail_icon: string
+  head_icon_fa: string
+  tail_icon_fa: string
+  head_icon_fan: number
+  tail_icon_fan: number
+  background: string
+  color: string
+  highlight: string
+  time: number
 }
 interface NOTICE_MSG_Half {
-  head_icon: string;
-  tail_icon: string;
-  background: string;
-  color: string;
-  highlight: string;
-  time: number;
+  head_icon: string
+  tail_icon: string
+  background: string
+  color: string
+  highlight: string
+  time: number
 }
 interface NOTICE_MSG_Side {
-  head_icon: string;
-  background: string;
-  color: string;
-  highlight: string;
-  border: string;
+  head_icon: string
+  background: string
+  color: string
+  highlight: string
+  border: string
 }
 /**
  * 房间通知
@@ -878,14 +878,14 @@ interface NOTICE_MSG_Side {
  * @extends {danmuJson}
  */
 interface NOTICE_MSG_H5 extends danmuJson {
-  data: NOTICE_MSG_H5_Data;
+  data: NOTICE_MSG_H5_Data
 }
 interface NOTICE_MSG_H5_Data {
-  msg: string;
-  value: string[];
-  special_index: number[];
-  room_id: number;
-  ts: number;
+  msg: string
+  value: string[]
+  special_index: number[]
+  room_id: number
+  ts: number
 }
 
 /**
@@ -896,9 +896,9 @@ interface NOTICE_MSG_H5_Data {
  */
 interface PK_MIC_Base extends danmuJson {
   /** PK编号 */
-  pk_id: number | string;
+  pk_id: number | string
   /** PK状态 */
-  pk_status: number;
+  pk_status: number
 }
 /**
  * PK抽奖
@@ -908,10 +908,10 @@ interface PK_MIC_Base extends danmuJson {
  */
 interface PK_BATTLE_Base extends danmuJson {
   /** PK编号 */
-  pk_id: number | string;
+  pk_id: number | string
   /** PK状态 */
-  pk_status: number;
-  timestamp: number;
+  pk_status: number
+  timestamp: number
 }
 /**
  * 再次PK匹配
@@ -922,19 +922,19 @@ interface PK_BATTLE_Base extends danmuJson {
  * @extends {PK_MIC_Base}
  */
 interface PK_AGAIN extends PK_MIC_Base {
-  data: PK_AGAIN_Data;
+  data: PK_AGAIN_Data
 }
 interface PK_AGAIN_Data {
   /** 新PK ID */
-  new_pk_id: number;
-  init_id: number;
-  match_id: number;
-  escape_all_time: number;
-  escape_time: number;
-  is_portrait: boolean;
-  uname: string;
-  face: string;
-  uid: number;
+  new_pk_id: number
+  init_id: number
+  match_id: number
+  escape_all_time: number
+  escape_time: number
+  is_portrait: boolean
+  uname: string
+  face: string
+  uid: number
 }
 /**
  * PK_BATTLE_END
@@ -944,18 +944,18 @@ interface PK_AGAIN_Data {
  * @extends {PK_BATTLE_Base}
  */
 interface PK_BATTLE_END extends PK_BATTLE_Base {
-  data: PK_BATTLE_END_Data;
+  data: PK_BATTLE_END_Data
 }
 interface PK_BATTLE_END_Data {
-  timer: number;
-  init_info: PK_BATTLE_END_Data_Info;
-  match_info: PK_BATTLE_END_Data_Info;
+  timer: number
+  init_info: PK_BATTLE_END_Data_Info
+  match_info: PK_BATTLE_END_Data_Info
 }
 interface PK_BATTLE_END_Data_Info {
-  room_id: number;
-  votes: number;
-  winner_type: number;
-  best_uname: string;
+  room_id: number
+  votes: number
+  winner_type: number
+  best_uname: string
 }
 /**
  * PK_BATTLE_ENTRANCE
@@ -965,11 +965,11 @@ interface PK_BATTLE_END_Data_Info {
  * @extends {danmuJson}
  */
 interface PK_BATTLE_ENTRANCE extends danmuJson {
-  timestamp: number;
-  data: PK_BATTLE_ENTRANCE_Data;
+  timestamp: number
+  data: PK_BATTLE_ENTRANCE_Data
 }
 interface PK_BATTLE_ENTRANCE_Data {
-  is_open: boolean;
+  is_open: boolean
 }
 /**
  * PK_BATTLE_GIFT
@@ -979,12 +979,12 @@ interface PK_BATTLE_ENTRANCE_Data {
  * @extends {PK_BATTLE_Base}
  */
 interface PK_BATTLE_GIFT extends PK_BATTLE_Base {
-  data: PK_BATTLE_GIFT_Data;
+  data: PK_BATTLE_GIFT_Data
 }
 interface PK_BATTLE_GIFT_Data {
-  room_id: number;
-  gift_id: number;
-  gift_msg: string;
+  room_id: number
+  gift_id: number
+  gift_msg: string
 }
 /**
  * PK_BATTLE_PREP
@@ -994,15 +994,15 @@ interface PK_BATTLE_GIFT_Data {
  * @extends {PK_BATTLE_Base}
  */
 interface PK_BATTLE_PREP extends PK_BATTLE_Base {
-  data: PK_BATTLE_PRE_Data;
+  data: PK_BATTLE_PRE_Data
 }
 interface PK_BATTLE_PRE_Data {
-  uname: string;
-  face: string;
-  uid: number;
-  room_id: number;
-  pre_timer: number;
-  pk_votes_name: string;
+  uname: string
+  face: string
+  uid: number
+  room_id: number
+  pre_timer: number
+  pk_votes_name: string
 }
 /**
  * PK_BATTLE_PRO_TYPE
@@ -1012,12 +1012,12 @@ interface PK_BATTLE_PRE_Data {
  * @extends {PK_BATTLE_Base}
  */
 interface PK_BATTLE_PRO_TYPE extends PK_BATTLE_Base {
-  data: PK_BATTLE_PRO_TYPE_Data;
+  data: PK_BATTLE_PRO_TYPE_Data
 }
 interface PK_BATTLE_PRO_TYPE_Data {
-  timer: number;
-  final_hit_room_id: number;
-  be_final_hit_room_id: number;
+  timer: number
+  final_hit_room_id: number
+  be_final_hit_room_id: number
 }
 /**
  * PK_BATTLE_PROCESS
@@ -1027,16 +1027,16 @@ interface PK_BATTLE_PRO_TYPE_Data {
  * @extends {PK_BATTLE_Base}
  */
 interface PK_BATTLE_PROCESS extends PK_BATTLE_Base {
-  data: PK_BATTLE_PROCESS_Data;
+  data: PK_BATTLE_PROCESS_Data
 }
 interface PK_BATTLE_PROCESS_Data {
-  init_info: PK_BATTLE_PROCESS_Data_Info;
-  match_info: PK_BATTLE_PROCESS_Data_Info;
+  init_info: PK_BATTLE_PROCESS_Data_Info
+  match_info: PK_BATTLE_PROCESS_Data_Info
 }
 interface PK_BATTLE_PROCESS_Data_Info {
-  room_id: number;
-  votes: number;
-  best_uname: string;
+  room_id: number
+  votes: number
+  best_uname: string
 }
 /**
  * PK_BATTLE_RANK_CHANGE
@@ -1046,12 +1046,12 @@ interface PK_BATTLE_PROCESS_Data_Info {
  * @extends {danmuJson}
  */
 interface PK_BATTLE_RANK_CHANGE extends danmuJson {
-  timestamp: number;
-  data: PK_BATTLE_RANK_CHANGE_Data;
+  timestamp: number
+  data: PK_BATTLE_RANK_CHANGE_Data
 }
 interface PK_BATTLE_RANK_CHANGE_Data {
-  first_rank_img_url: string;
-  rank_name: string;
+  first_rank_img_url: string
+  rank_name: string
 }
 /**
  * PK_BATTLE_SETTLE_USER
@@ -1061,32 +1061,32 @@ interface PK_BATTLE_RANK_CHANGE_Data {
  * @extends {PK_BATTLE_Base}
  */
 interface PK_BATTLE_SETTLE_USER extends PK_BATTLE_Base {
-  settle_status: number;
-  data: PK_BATTLE_SETTLE_USER_Data;
+  settle_status: number
+  data: PK_BATTLE_SETTLE_USER_Data
 }
 interface PK_BATTLE_SETTLE_USER_Data {
-  settle_status: number;
-  result_type: number;
-  winner: PK_BATTLE_SETTLE_USER_Data_Winner;
+  settle_status: number
+  result_type: number
+  winner: PK_BATTLE_SETTLE_USER_Data_Winner
 }
 interface PK_BATTLE_SETTLE_USER_Data_Winner {
-  uid: number;
-  uname: string;
-  face: string;
-  face_frame: string;
-  exp: PK_SETTLE_Data_UserInfoEx_Exp;
-  best_user: PK_BATTLE_SETTLE_USER_Data_Winner_BestUser;
+  uid: number
+  uname: string
+  face: string
+  face_frame: string
+  exp: PK_SETTLE_Data_UserInfoEx_Exp
+  best_user: PK_BATTLE_SETTLE_USER_Data_Winner_BestUser
 }
 interface PK_BATTLE_SETTLE_USER_Data_Winner_BestUser {
-  uid: number;
-  uname: string;
-  face: string;
-  pk_votes: number;
-  pk_votes_name: string;
-  exp: PK_SETTLE_Data_UserInfoEx_Exp_MasterLevel;
-  face_frame: string;
-  badge: string;
-  award_info: null;
+  uid: number
+  uname: string
+  face: string
+  pk_votes: number
+  pk_votes_name: string
+  exp: PK_SETTLE_Data_UserInfoEx_Exp_MasterLevel
+  face_frame: string
+  badge: string
+  award_info: null
 }
 /**
  * PK_BATTLE_SETTLE
@@ -1096,11 +1096,11 @@ interface PK_BATTLE_SETTLE_USER_Data_Winner_BestUser {
  * @extends {PK_BATTLE_Base}
  */
 interface PK_BATTLE_SETTLE extends PK_BATTLE_Base {
-  settle_status: number;
-  data: PK_BATTLE_SETTLE_Data;
+  settle_status: number
+  data: PK_BATTLE_SETTLE_Data
 }
 interface PK_BATTLE_SETTLE_Data {
-  result_type: number;
+  result_type: number
 }
 /**
  * PK_BATTLE_START
@@ -1110,16 +1110,16 @@ interface PK_BATTLE_SETTLE_Data {
  * @extends {PK_BATTLE_Base}
  */
 interface PK_BATTLE_START extends PK_BATTLE_Base {
-  data: PK_BATTLE_START_Data;
+  data: PK_BATTLE_START_Data
 }
 interface PK_BATTLE_START_Data {
-  final_hit_votes: number;
-  pk_start_time: number;
-  pk_frozen_time: number;
-  pk_end_time: number;
-  pk_votes_type: number;
-  pk_votes_add: number;
-  pk_votes_name: string;
+  final_hit_votes: number
+  pk_start_time: number
+  pk_frozen_time: number
+  pk_end_time: number
+  pk_votes_type: number
+  pk_votes_add: number
+  pk_votes_name: string
 }
 /**
  * PK_BATTLE_VOTES_ADD
@@ -1129,13 +1129,13 @@ interface PK_BATTLE_START_Data {
  * @extends {danmuJson}
  */
 interface PK_BATTLE_VOTES_ADD extends danmuJson {
-  timestamp: number;
-  data: PK_BATTLE_VOTES_ADD_Data;
+  timestamp: number
+  data: PK_BATTLE_VOTES_ADD_Data
 }
 interface PK_BATTLE_VOTES_ADD_Data {
-  type: number;
-  pk_votes_add: number;
-  pk_votes_name: string;
+  type: number
+  pk_votes_add: number
+  pk_votes_name: string
 }
 /**
  * 再次PK
@@ -1144,7 +1144,7 @@ interface PK_BATTLE_VOTES_ADD_Data {
  * @interface PK_CLICK_AGAIN
  * @extends {PK_MIC_Base}
  */
-type PK_CLICK_AGAIN = PK_MIC_Base;
+type PK_CLICK_AGAIN = PK_MIC_Base
 /**
  * PK结束
  * {"cmd":"PK_END","pk_id":3291,"pk_status":400,"data":{"init_id":273022,"match_id":52320,"punish_topic":"惩罚：唱《九妹》"},"_roomid":273022}
@@ -1154,15 +1154,15 @@ type PK_CLICK_AGAIN = PK_MIC_Base;
  */
 interface PK_END extends PK_MIC_Base {
   /** PK结束 */
-  data: PK_END_Data;
+  data: PK_END_Data
 }
 interface PK_END_Data {
   /** 发起人房间号 */
-  init_id: number;
+  init_id: number
   /** 匹配人房间号 */
-  match_id: number;
+  match_id: number
   /** 惩罚 */
-  punish_topic: string;
+  punish_topic: string
 }
 /**
  * 取消PK邀请
@@ -1172,13 +1172,13 @@ interface PK_END_Data {
  * @extends {danmuJson}
  */
 interface PK_INVITE_CANCEL extends danmuJson {
-  pk_invite_status: number;
-  invite_id: number;
-  face: string;
-  uname: string;
-  area_name: string;
-  user_level: number;
-  master_level: number;
+  pk_invite_status: number
+  invite_id: number
+  face: string
+  uname: string
+  area_name: string
+  user_level: number
+  master_level: number
 }
 /**
  * PK邀请失败
@@ -1188,8 +1188,8 @@ interface PK_INVITE_CANCEL extends danmuJson {
  * @extends {danmuJson}
  */
 interface PK_INVITE_FAIL extends danmuJson {
-  pk_invite_status: number;
-  invite_id: number;
+  pk_invite_status: number
+  invite_id: number
 }
 /**
  * PK邀请
@@ -1199,13 +1199,13 @@ interface PK_INVITE_FAIL extends danmuJson {
  * @extends {danmuJson}
  */
 interface PK_INVITE_INIT extends danmuJson {
-  pk_invite_status: number;
-  invite_id: number;
-  face: string;
-  uname: string;
-  area_name: string;
-  user_level: number;
-  master_level: number;
+  pk_invite_status: number
+  invite_id: number
+  face: string
+  uname: string
+  area_name: string
+  user_level: number
+  master_level: number
 }
 /**
  * 拒绝PK邀请
@@ -1215,8 +1215,8 @@ interface PK_INVITE_INIT extends danmuJson {
  * @extends {danmuJson}
  */
 interface PK_INVITE_REFUSE extends danmuJson {
-  pk_invite_status: number;
-  invite_id: number;
+  pk_invite_status: number
+  invite_id: number
 }
 /**
  * 禁用PK邀请
@@ -1225,7 +1225,7 @@ interface PK_INVITE_REFUSE extends danmuJson {
  * @interface PK_INVITE_SWITCH_CLOSE
  * @extends {danmuJson}
  */
-type PK_INVITE_SWITCH_CLOSE = danmuJson;
+type PK_INVITE_SWITCH_CLOSE = danmuJson
 /**
  * 启用PK邀请
  * {"cmd":"PK_INVITE_SWITCH_OPEN","_roomid":10522286}
@@ -1233,7 +1233,7 @@ type PK_INVITE_SWITCH_CLOSE = danmuJson;
  * @interface PK_INVITE_SWITCH_OPEN
  * @extends {danmuJson}
  */
-type PK_INVITE_SWITCH_OPEN = danmuJson;
+type PK_INVITE_SWITCH_OPEN = danmuJson
 /**
  * PK_LOTTERY_START
  * {"cmd":"PK_LOTTERY_START","data":{"asset_animation_pic":"https://i0.hdslb.com/bfs/live/e1ab9f88b4af63fbf15197acea2dbb60bfc4434b.gif","asset_icon":"https://i0.hdslb.com/bfs/vc/44c367b09a8271afa22853785849e65797e085a1.png","id":355216,"max_time":120,"pk_id":355216,"room_id":1081018,"time":120,"title":"恭喜主播大乱斗胜利"},"_roomid":1081018}
@@ -1242,17 +1242,17 @@ type PK_INVITE_SWITCH_OPEN = danmuJson;
  * @extends {danmuJson}
  */
 interface PK_LOTTERY_START extends danmuJson {
-  data: PK_LOTTERY_START_Data;
+  data: PK_LOTTERY_START_Data
 }
 interface PK_LOTTERY_START_Data {
-  asset_animation_pic: string;
-  asset_icon: string;
-  id: number;
-  max_time: number;
-  pk_id: number;
-  room_id: number;
-  time: number;
-  title: string;
+  asset_animation_pic: string
+  asset_icon: string
+  id: number
+  max_time: number
+  pk_id: number
+  room_id: number
+  time: number
+  title: string
 }
 /**
  * PK匹配
@@ -1263,23 +1263,23 @@ interface PK_LOTTERY_START_Data {
  */
 interface PK_MATCH extends PK_MIC_Base {
   /** PK匹配 */
-  data: PK_MATCH_Data;
+  data: PK_MATCH_Data
 }
 interface PK_MATCH_Data {
   /** 发起人房间号 */
-  init_id: number;
+  init_id: number
   /** 匹配人房间号 */
-  match_id: number;
-  escape_all_time: number;
+  match_id: number
+  escape_all_time: number
   /** 逃跑时间 */
-  escape_time: number;
-  is_portrait: boolean;
+  escape_time: number
+  is_portrait: boolean
   /** 匹配人昵称 */
-  uname: string;
+  uname: string
   /** 匹配人头像 */
-  face: string;
+  face: string
   /** 匹配人UID */
-  uid: number;
+  uid: number
 }
 /**
  * 连麦PK结束
@@ -1290,12 +1290,12 @@ interface PK_MATCH_Data {
  */
 interface PK_MIC_END extends PK_MIC_Base {
   /** 连麦PK结束 */
-  data: PK_MIC_END_Data;
+  data: PK_MIC_END_Data
 }
 interface PK_MIC_END_Data {
   /** 结束类型 */
-  type: number;
-  exception_id: number;
+  type: number
+  exception_id: number
 }
 /**
  * PK准备
@@ -1306,25 +1306,25 @@ interface PK_MIC_END_Data {
  */
 interface PK_PRE extends PK_MIC_Base {
   /** PK准备 */
-  data: PK_PRE_Data;
+  data: PK_PRE_Data
 }
 interface PK_PRE_Data {
   /** 发起人房间号 */
-  init_id: number;
+  init_id: number
   /** 匹配人房间号 */
-  match_id: number;
+  match_id: number
   /** 倒计时 */
-  count_down: number;
+  count_down: number
   /** PK项目 */
-  pk_topic: string;
+  pk_topic: string
   /** PK匹配时间 */
-  pk_pre_time: number;
+  pk_pre_time: number
   /** PK开始时间 */
-  pk_start_time: number;
+  pk_start_time: number
   /** PK结束时间 */
-  pk_end_time: number;
+  pk_end_time: number
   /** 结束时间 */
-  end_time: number;
+  end_time: number
 }
 /**
  * PK进行
@@ -1335,17 +1335,17 @@ interface PK_PRE_Data {
  */
 interface PK_PROCESS extends PK_MIC_Base {
   /** PK进行 */
-  data: PK_PROCESS_Data;
+  data: PK_PROCESS_Data
 }
 interface PK_PROCESS_Data {
   /** 投票人UID */
-  uid: number;
+  uid: number
   /** 发起人票数 */
-  init_votes: number;
+  init_votes: number
   /** 匹配人票数 */
-  match_votes: number;
+  match_votes: number
   /** 投票人投票数 */
-  user_votes: number;
+  user_votes: number
 }
 /**
  * PK结束数据
@@ -1356,88 +1356,88 @@ interface PK_PROCESS_Data {
  */
 interface PK_SETTLE extends PK_MIC_Base {
   /** PK结束数据 */
-  data: PK_SETTLE_Data;
+  data: PK_SETTLE_Data
 }
 interface PK_SETTLE_Data {
   /** PK编号 */
-  pk_id: number;
+  pk_id: number
   /** 发起人信息 */
-  init_info: PK_SETTLE_Data_InitInfo;
+  init_info: PK_SETTLE_Data_InitInfo
   /** 匹配人信息 */
-  match_info: PK_SETTLE_Data_MatchInfo;
+  match_info: PK_SETTLE_Data_MatchInfo
   /** 最佳助攻 */
-  best_user: PK_SETTLE_Data_BestUser;
+  best_user: PK_SETTLE_Data_BestUser
   /** 惩罚 */
-  punish_topic: string;
+  punish_topic: string
 }
 interface PK_SETTLE_Data_UserInfoBase {
   /** 用户UID */
-  uid: number;
+  uid: number
   /** 用户昵称 */
-  uname: string;
+  uname: string
   /** 用户头像 */
-  face: string;
+  face: string
 }
 interface PK_SETTLE_Data_UserInfo extends PK_SETTLE_Data_UserInfoBase {
   /** 得票数 */
-  votes: number;
+  votes: number
   /** 是否胜利 */
-  is_winner: boolean;
+  is_winner: boolean
 }
 interface PK_SETTLE_Data_UserInfoEx {
   /** VIP类型 */
-  vip_type: number;
+  vip_type: number
   /** 用户经验 */
-  exp: PK_SETTLE_Data_UserInfoEx_Exp;
+  exp: PK_SETTLE_Data_UserInfoEx_Exp
   /** 用户VIP */
-  vip: PK_SETTLE_Data_UserInfoEx_Vip;
+  vip: PK_SETTLE_Data_UserInfoEx_Vip
   /** 头像边框地址 */
-  face_frame: string;
+  face_frame: string
   /** 徽章 */
-  badge: PK_SETTLE_Data_UserInfoEx_Badge;
+  badge: PK_SETTLE_Data_UserInfoEx_Badge
 }
 interface PK_SETTLE_Data_UserInfoEx_Vip {
   /** 普通VIP */
-  vip: number;
+  vip: number
   /** 超级VIP */
-  svip: number;
+  svip: number
 }
 interface PK_SETTLE_Data_UserInfoEx_Exp {
   /** 等级颜色 */
-  color: number;
+  color: number
   /** 用户等级 */
-  user_level: number;
+  user_level: number
   /** 直播等级 */
-  master_level: PK_SETTLE_Data_UserInfoEx_Exp_MasterLevel;
+  master_level: PK_SETTLE_Data_UserInfoEx_Exp_MasterLevel
 }
 interface PK_SETTLE_Data_UserInfoEx_Exp_MasterLevel {
   /** 直播等级 */
-  level: number;
+  level: number
   /** 直播等级颜色 */
-  color: number;
+  color: number
 }
 interface PK_SETTLE_Data_UserInfoEx_Badge {
   /** 徽章图片地址 */
-  url: string;
+  url: string
   /** 描述 */
-  desc: string;
+  desc: string
   /** 位置 */
-  position: number;
+  position: number
 }
 interface PK_SETTLE_Data_InitInfo extends PK_SETTLE_Data_UserInfo {
   /** 发起人房间号 */
-  init_id: number;
+  init_id: number
 }
 interface PK_SETTLE_Data_MatchInfo
   extends PK_SETTLE_Data_UserInfo,
     PK_SETTLE_Data_UserInfoEx {
   /** 匹配人房间号 */
-  match_id: number;
+  match_id: number
 }
 interface PK_SETTLE_Data_BestUser
   extends PK_SETTLE_Data_UserInfoBase,
     PK_SETTLE_Data_UserInfoEx {
-  privilege_type: number;
+  privilege_type: number
 }
 /**
  * PK开始
@@ -1448,15 +1448,15 @@ interface PK_SETTLE_Data_BestUser
  */
 interface PK_START extends PK_MIC_Base {
   /** PK开始 */
-  data: PK_START_Data;
+  data: PK_START_Data
 }
 interface PK_START_Data {
   /** 发起人房间号 */
-  init_id: number;
+  init_id: number
   /** 匹配人房间号 */
-  match_id: number;
+  match_id: number
   /** PK项目 */
-  pk_topic: string;
+  pk_topic: string
 }
 /**
  * 准备直播, 下播
@@ -1467,7 +1467,7 @@ interface PK_START_Data {
  * @extends {danmuJson}
  */
 interface PREPARING extends danmuJson {
-  round?: number;
+  round?: number
 }
 /**
  * 抽奖结束
@@ -1477,45 +1477,45 @@ interface PREPARING extends danmuJson {
  * @extends {danmuJson}
  */
 interface RAFFLE_END extends danmuJson {
-  data: RAFFLE_END_Data;
+  data: RAFFLE_END_Data
 }
 interface RAFFLE_END_Data {
   /** 抽奖编号 */
-  id: string;
+  id: string
   /** 获赠人 */
-  uname: string;
+  uname: string
   /** 赠送人 */
-  sname: string;
+  sname: string
   /** '10W银瓜子' | '抱枕' */
-  giftName: string;
+  giftName: string
   /** 中奖消息 */
-  mobileTips: string;
+  mobileTips: string
   /** 编号 */
-  raffleId: number;
+  raffleId: number
   /** 文案 */
-  type: string;
+  type: string
   /** 赠送人 */
-  from: string;
+  from: string
   /** 赠送人头像地址 */
-  fromFace: string;
-  fromGiftId: number;
-  win: RAFFLE_END_Data_Win;
+  fromFace: string
+  fromGiftId: number
+  win: RAFFLE_END_Data_Win
 }
 interface RAFFLE_END_Data_Win {
   /** 获赠人 */
-  uname: string;
+  uname: string
   /** 获赠人头像地址 */
-  face: string;
+  face: string
   /** 礼物名 '银瓜子' | '经验原石' */
-  giftName: string;
+  giftName: string
   /** 礼物类型 'silver' | 'stuff-1' */
-  giftId: string;
+  giftId: string
   /** 礼物数量 100000 | 10 */
-  giftNum: number;
+  giftNum: number
   /** 礼物图片 */
-  giftImage: string;
+  giftImage: string
   /** 中奖消息 */
-  msg: string;
+  msg: string
 }
 /**
  * 抽奖开始
@@ -1525,41 +1525,41 @@ interface RAFFLE_END_Data_Win {
  * @extends {danmuJson}
  */
 interface RAFFLE_START extends danmuJson {
-  data: RAFFLE_START_Data;
+  data: RAFFLE_START_Data
 }
 interface RAFFLE_START_Data {
   /** 抽奖编号 */
-  id: string;
+  id: string
   /** 持续时间 */
-  dtime: number;
+  dtime: number
   /** 系统广播 */
-  msg: SYS_MSG;
+  msg: SYS_MSG
   /** 抽奖编号 */
-  raffleId: number;
-  payflow_id: string;
+  raffleId: number
+  payflow_id: string
   /** 文案 */
-  title: string;
+  title: string
   /** 文案 */
-  type: string;
+  type: string
   /** 赠送人 */
-  from: string;
+  from: string
   /** 赠送人信息 */
-  from_user: RAFFLE_START_Data_FromUser;
+  from_user: RAFFLE_START_Data_FromUser
   /** 持续时间 */
-  time: number;
+  time: number
   /** 持续时间 */
-  max_time: number;
+  max_time: number
   /** 等待时间 */
-  time_wait: number;
+  time_wait: number
   /** 动画图片 */
-  asset_animation_pic: string;
+  asset_animation_pic: string
   /** 静态图片 */
-  asset_tips_pic: string;
-  sender_type: number;
+  asset_tips_pic: string
+  sender_type: number
 }
 interface RAFFLE_START_Data_FromUser {
-  uname: string;
-  face: string;
+  uname: string
+  face: string
 }
 /**
  * room_admin_entrance
@@ -1569,8 +1569,8 @@ interface RAFFLE_START_Data_FromUser {
  * @extends {danmuJson}
  */
 interface Room_Admin_Entrance extends danmuJson {
-  msg: string;
-  uid: number;
+  msg: string
+  uid: number
 }
 /**
  * 管理员变更
@@ -1581,7 +1581,7 @@ interface Room_Admin_Entrance extends danmuJson {
  */
 interface ROOM_ADMINS extends danmuJson {
   /** 管理员列表 */
-  uids: number[];
+  uids: number[]
 }
 /**
  * xxx被禁言消息
@@ -1592,15 +1592,15 @@ interface ROOM_ADMINS extends danmuJson {
  */
 interface ROOM_BLOCK_MSG extends danmuJson {
   /** 用户uid */
-  uid: number;
+  uid: number
   /** 用户名 */
-  uname: string;
-  data: ROOM_BLOCK_MSG_Data;
+  uname: string
+  data: ROOM_BLOCK_MSG_Data
 }
 interface ROOM_BLOCK_MSG_Data {
-  uid: string;
-  uname: string;
-  operator: number;
+  uid: string
+  uname: string
+  operator: number
 }
 /**
  * ROOM_BOX_Base
@@ -1609,20 +1609,20 @@ interface ROOM_BLOCK_MSG_Data {
  * @extends {danmuJson}
  */
 interface ROOM_BOX_Base extends danmuJson {
-  data: ROOM_BOX_Base_Data;
+  data: ROOM_BOX_Base_Data
 }
 interface ROOM_BOX_Base_Data {
-  type: number;
-  h5_url: string;
-  data: ROOM_BOX_Base_Data_Data;
+  type: number
+  h5_url: string
+  data: ROOM_BOX_Base_Data_Data
 }
 interface ROOM_BOX_Base_Data_Data {
-  uid: number;
-  gift_name: string;
-  coin: string;
-  gift_icon: string;
-  start_time: string;
-  end_time: string;
+  uid: number
+  gift_name: string
+  coin: string
+  gift_icon: string
+  start_time: string
+  end_time: string
 }
 /**
  * ROOM_BOX_BOOS_AWARD
@@ -1632,16 +1632,16 @@ interface ROOM_BOX_Base_Data_Data {
  * @extends {danmuJson}
  */
 interface ROOM_BOX_BOOS_AWARD extends danmuJson {
-  data: ROOM_BOX_BOOS_AWARD_Data;
+  data: ROOM_BOX_BOOS_AWARD_Data
 }
 interface ROOM_BOX_BOOS_AWARD_Data {
-  type: number;
-  h5_url: string;
-  web_url: string;
-  data: ROOM_BOX_BOOS_AWARD_Data_Data;
+  type: number
+  h5_url: string
+  web_url: string
+  data: ROOM_BOX_BOOS_AWARD_Data_Data
 }
 interface ROOM_BOX_BOOS_AWARD_Data_Data {
-  roomid: number;
+  roomid: number
 }
 /**
  * ROOM_BOX_MASTER
@@ -1651,14 +1651,14 @@ interface ROOM_BOX_BOOS_AWARD_Data_Data {
  * @extends {ROOM_BOX_Base}
  */
 interface ROOM_BOX_MASTER extends ROOM_BOX_Base {
-  data: ROOM_BOX_MASTER_Data;
+  data: ROOM_BOX_MASTER_Data
 }
 interface ROOM_BOX_MASTER_Data extends ROOM_BOX_Base_Data {
-  data: ROOM_BOX_MASTER_Data_Data;
+  data: ROOM_BOX_MASTER_Data_Data
 }
 interface ROOM_BOX_MASTER_Data_Data extends ROOM_BOX_Base_Data_Data {
-  pc_status: number;
-  user_uname: string;
+  pc_status: number
+  user_uname: string
 }
 /**
  * ROOM_BOX_USER
@@ -1668,14 +1668,14 @@ interface ROOM_BOX_MASTER_Data_Data extends ROOM_BOX_Base_Data_Data {
  * @extends {ROOM_BOX_Base}
  */
 interface ROOM_BOX_USER extends ROOM_BOX_Base {
-  data: ROOM_BOX_USER_Data;
+  data: ROOM_BOX_USER_Data
 }
 interface ROOM_BOX_USER_Data extends ROOM_BOX_Base_Data {
-  data: ROOM_BOX_USER_Data_Data;
+  data: ROOM_BOX_USER_Data_Data
 }
 interface ROOM_BOX_USER_Data_Data extends ROOM_BOX_Base_Data_Data {
-  type: number;
-  rate: number;
+  type: number
+  rate: number
 }
 /**
  * ROOM_CHANGE
@@ -1685,14 +1685,14 @@ interface ROOM_BOX_USER_Data_Data extends ROOM_BOX_Base_Data_Data {
  * @extends {danmuJson}
  */
 interface ROOM_CHANGE extends danmuJson {
-  data: ROOM_CHANGE_Data;
+  data: ROOM_CHANGE_Data
 }
 interface ROOM_CHANGE_Data {
-  title: string;
-  area_id: number;
-  parent_area_id: number;
-  area_name: string;
-  parent_area_name: string;
+  title: string
+  area_id: number
+  parent_area_id: number
+  area_name: string
+  parent_area_name: string
 }
 /**
  * ROOM_LIMIT
@@ -1702,8 +1702,8 @@ interface ROOM_CHANGE_Data {
  * @extends {danmuJson}
  */
 interface ROOM_LIMIT extends danmuJson {
-  type: string;
-  delay_range: number;
+  type: string
+  delay_range: number
 }
 /**
  * 直播封禁
@@ -1713,7 +1713,7 @@ interface ROOM_LIMIT extends danmuJson {
  * @extends {danmuJson}
  */
 interface ROOM_LOCK extends danmuJson {
-  expire: string; // 封禁时间 yyyy-MM-dd HH:mm:ss
+  expire: string // 封禁时间 yyyy-MM-dd HH:mm:ss
 }
 /**
  * 房间排行榜
@@ -1724,19 +1724,19 @@ interface ROOM_LOCK extends danmuJson {
  */
 interface ROOM_RANK extends danmuJson {
   /** 房间排行榜 */
-  data: ROOM_RANK_Data;
+  data: ROOM_RANK_Data
 }
 interface ROOM_RANK_Data {
   /** 房间号 */
-  roomid: number;
+  roomid: number
   /** 排行榜文案 */
-  rank_desc: string;
+  rank_desc: string
   /** 排行榜颜色 */
-  color: string;
+  color: string
   /** 排行榜页面 */
-  h5_url: string;
-  web_url: string;
-  timestamp: number;
+  h5_url: string
+  web_url: string
+  timestamp: number
 }
 /**
  * ROOM_REAL_TIME_MESSAGE_UPDATE
@@ -1746,12 +1746,12 @@ interface ROOM_RANK_Data {
  * @extends {danmuJson}
  */
 interface ROOM_REAL_TIME_MESSAGE_UPDATE extends danmuJson {
-  data: ROOM_REAL_TIME_MESSAGE_UPDATE_Data;
+  data: ROOM_REAL_TIME_MESSAGE_UPDATE_Data
 }
 interface ROOM_REAL_TIME_MESSAGE_UPDATE_Data {
-  roomid: number;
-  fans: number;
-  red_notice: number;
+  roomid: number
+  fans: number
+  red_notice: number
 }
 /**
  * 房间屏蔽
@@ -1762,9 +1762,9 @@ interface ROOM_REAL_TIME_MESSAGE_UPDATE_Data {
  * @extends {danmuJson}
  */
 interface ROOM_SHIELD extends danmuJson {
-  type: number;
-  user: string;
-  keyword: string;
+  type: number
+  user: string
+  keyword: string
 }
 /**
  * 房间禁言结束
@@ -1774,7 +1774,7 @@ interface ROOM_SHIELD extends danmuJson {
  * @extends {danmuJson}
  */
 interface ROOM_SILENT_OFF extends danmuJson {
-  data: any[];
+  data: any[]
 }
 /**
  * 房间开启禁言
@@ -1785,15 +1785,15 @@ interface ROOM_SILENT_OFF extends danmuJson {
  * @extends {danmuJson}
  */
 interface ROOM_SILENT_ON extends danmuJson {
-  data: ROOM_SILENT_ON_data;
+  data: ROOM_SILENT_ON_data
 }
 interface ROOM_SILENT_ON_data {
   /** 等级 | 勋章 | 全员 */
-  type: 'level' | 'medal' | 'member';
+  type: 'level' | 'medal' | 'member'
   /** 禁言等级 */
-  level: number;
+  level: number
   /** 禁言时间, -1为本次 */
-  second: number;
+  second: number
 }
 /**
  * ROOM_SKIN_MSG
@@ -1803,15 +1803,15 @@ interface ROOM_SILENT_ON_data {
  * @extends {danmuJson}
  */
 interface ROOM_SKIN_MSG extends danmuJson {
-  skin_id: number;
-  status: number;
-  end_time: number;
-  current_time: number;
-  scatter: ROOM_SKIN_MSG_Scatter;
+  skin_id: number
+  status: number
+  end_time: number
+  current_time: number
+  scatter: ROOM_SKIN_MSG_Scatter
 }
 interface ROOM_SKIN_MSG_Scatter {
-  min: number;
-  max: number;
+  min: number
+  max: number
 }
 /**
  * SCORE_CARD
@@ -1821,16 +1821,16 @@ interface ROOM_SKIN_MSG_Scatter {
  * @extends {danmuJson}
  */
 interface SCORE_CARD extends danmuJson {
-  data: SCORE_CARD_Data;
+  data: SCORE_CARD_Data
 }
 interface SCORE_CARD_Data {
-  start_time: number;
-  end_time: number;
-  now_time: number;
-  gift_id: number;
-  uid: number;
-  ruid: number;
-  id: number;
+  start_time: number
+  end_time: number
+  now_time: number
+  gift_id: number
+  uid: number
+  ruid: number
+  id: number
 }
 /**
  * 礼物消息
@@ -1840,79 +1840,79 @@ interface SCORE_CARD_Data {
  * @interface SEND_GIFT
  */
 interface SEND_GIFT {
-  cmd: CmdType.SEND_GIFT;
-  data: SEND_GIFT_Data;
+  cmd: CmdType.SEND_GIFT
+  data: SEND_GIFT_Data
 }
 
 interface SEND_GIFT_Data {
   /** 道具文案 */
-  giftName: string;
+  giftName: string
   /** 数量 */
-  num: number;
+  num: number
   /** 用户名 */
-  uname: string;
+  uname: string
   /** 用户头像 */
-  face: string;
+  face: string
   /** 舰队等级 */
-  guard_level: number;
+  guard_level: number
   /** 主播积分 */
-  rcost: number;
+  rcost: number
   /** 用户uid */
-  uid: number;
+  uid: number
   /** 更新排行 */
-  top_list: SEND_GIFT_Data_TopList[] | [];
+  top_list: SEND_GIFT_Data_TopList[] | []
   /** 用户提供的rnd, 正常为10位 */
-  timestamp: number;
+  timestamp: number
   /** 礼物id */
-  giftId: number;
+  giftId: number
   /** 礼物类型(普通, 弹幕, 活动) */
-  giftType: number;
-  action: '投喂' | '赠送';
+  giftType: number
+  action: '投喂' | '赠送'
   /** 高能 */
-  super: 0 | 1;
-  super_gift_num: number;
+  super: 0 | 1
+  super_gift_num: number
   /** 价值 */
-  price: number;
-  rnd: string;
+  price: number
+  rnd: string
   /** 是否获取到新徽章 */
-  newMedal: 0 | 1;
+  newMedal: 0 | 1
   /** 是否获取到新头衔 */
-  newTitle: 0 | 1;
+  newTitle: 0 | 1
   /** 新徽章 */
-  medal: SEND_GIFT_Data_Medal | [];
+  medal: SEND_GIFT_Data_Medal | []
   /** 新头衔 */
-  title: string;
+  title: string
   /** 节奏风暴内容id \d | u\d+ */
-  beatId: 0 | '' | string;
-  biz_source: 'live';
-  metadata: string;
+  beatId: 0 | '' | string
+  biz_source: 'live'
+  metadata: string
   /** 道具包裹剩余数量 */
-  remain: number;
+  remain: number
   /** 剩余金瓜子 */
-  gold: number;
+  gold: number
   /** 剩余银瓜子 */
-  silver: number;
+  silver: number
   /** 主播活动积分, 普通道具为0 */
-  eventScore: number;
-  eventNum: number;
+  eventScore: number
+  eventNum: number
   /** 小电视 */
-  smalltv_msg: SYS_MSG[] | [];
+  smalltv_msg: SYS_MSG[] | []
   /** 特殊礼物 */
-  specialGift: SPECIAL_GIFT_Data | null;
+  specialGift: SPECIAL_GIFT_Data | null
   /** SYS_GIFT */
-  notice_msg: string[] | [];
+  notice_msg: string[] | []
   /** 扭蛋 */
-  capsule: SEND_GIFT_Data_Capsule | null;
+  capsule: SEND_GIFT_Data_Capsule | null
   /** 是否新关注 */
-  addFollow: 0 | 1;
+  addFollow: 0 | 1
   /** 估计只有辣条才能是1 */
-  effect_block: 0 | 1;
-  coin_type: 'gold' | 'silver';
-  total_coin: number;
-  effect: number;
-  tag_image: string;
-  user_count: number;
-  send_master: null;
+  effect_block: 0 | 1
+  coin_type: 'gold' | 'silver'
+  total_coin: number
+  effect: number
+  tag_image: string
+  user_count: number
+  send_master: null
   //
   // animation_frame_num: number;
   // bag_coin_type: number;
@@ -1963,124 +1963,124 @@ interface SEND_GIFT_Data {
  * {"cmd":"SEND_GIFT","data":{"giftName":"双子座","num":1,"uname":"cyescyes","face":"http://i0.hdslb.com/bfs/face/120b2b8da1cc57a68532da087e594a53c433cde4.jpg","guard_level":0,"rcost":63774808,"uid":518546680,"top_list":[],"timestamp":1590050465,"giftId":30551,"giftType":0,"action":"投喂","super":0,"super_gift_num":1,"super_batch_gift_num":1,"batch_combo_id":"batch:gift:combo_id:518546680:36047134:30551:1:1590050465.698","price":100,"rnd":"2CF9D3E1-B799-40B9-A111-20C9602B3713","newMedal":0,"newTitle":0,"medal":[],"title":"","beatId":"","biz_source":"live","metadata":"","remain":0,"gold":0,"silver":0,"eventScore":0,"eventNum":0,"smalltv_msg":[],"specialGift":null,"notice_msg":[],"smallTVCountFlag":true,"capsule":null,"addFollow":0,"effect_block":0,"coin_type":"gold","total_coin":100,"effect":0,"broadcast_id":0,"draw":0,"crit_prob":0,"combo_send":{"uid":518546680,"uname":"cyescyes","gift_num":1,"combo_num":1,"gift_id":30551,"gift_name":"双子座","action":"投喂","combo_id":"gift:combo_id:518546680:36047134:30551:1590050465.6969","send_master":null},"batch_combo_send":{"uid":518546680,"uname":"cyescyes","gift_num":1,"batch_combo_num":1,"gift_id":30551,"gift_name":"双子座","action":"投喂","batch_combo_id":"batch:gift:combo_id:518546680:36047134:30551:1:1590050465.698","send_master":null},"tag_image":"","send_master":null,"is_first":true,"demarcation":1,"combo_stay_time":1,"combo_total_coin":100,"tid":"1590050465131000001"}}
  * */
 interface SEND_GIFT_Data {
-  giftName: string;
-  num: number;
-  uname: string;
-  face: string;
-  guard_level: number;
-  rcost: number;
-  uid: number;
-  top_list: SEND_GIFT_Data_TopList[] | [];
-  timestamp: number;
-  giftId: number;
-  giftType: number;
-  action: '投喂' | '赠送';
-  super: 0 | 1;
-  super_gift_num: number;
-  super_batch_gift_num: number;
+  giftName: string
+  num: number
+  uname: string
+  face: string
+  guard_level: number
+  rcost: number
+  uid: number
+  top_list: SEND_GIFT_Data_TopList[] | []
+  timestamp: number
+  giftId: number
+  giftType: number
+  action: '投喂' | '赠送'
+  super: 0 | 1
+  super_gift_num: number
+  super_batch_gift_num: number
   // [0]batch [1]gift [2]combo_id [3]:uid [4]:??? [5]:giftId [6]:num [7]:timestamp [8].4147 (随机数)
   // batch:gift:combo_id:31540862:7946235:30569:1:1589984907.4157
-  batch_combo_id: string;
-  price: number;
-  rnd: string;
-  newMedal: 0 | 1;
-  newTitle: 0 | 1;
-  medal: SEND_GIFT_Data_Medal | [];
-  title: string;
-  beatId: 0 | '' | string;
-  biz_source: 'live';
-  metadata: string;
-  remain: number;
-  gold: number;
-  silver: number;
-  eventScore: number;
-  eventNum: number;
-  smalltv_msg: SYS_MSG[] | [];
-  specialGift: SPECIAL_GIFT_Data | null;
-  notice_msg: string[] | [];
-  smallTVCountFlag: boolean;
-  capsule: SEND_GIFT_Data_Capsule | null;
-  addFollow: 0 | 1;
-  effect_block: 0 | 1;
-  coin_type: 'gold' | 'silver';
-  total_coin: number;
-  effect: number;
-  broadcast_id: number;
-  draw: number;
-  crit_prob: number;
+  batch_combo_id: string
+  price: number
+  rnd: string
+  newMedal: 0 | 1
+  newTitle: 0 | 1
+  medal: SEND_GIFT_Data_Medal | []
+  title: string
+  beatId: 0 | '' | string
+  biz_source: 'live'
+  metadata: string
+  remain: number
+  gold: number
+  silver: number
+  eventScore: number
+  eventNum: number
+  smalltv_msg: SYS_MSG[] | []
+  specialGift: SPECIAL_GIFT_Data | null
+  notice_msg: string[] | []
+  smallTVCountFlag: boolean
+  capsule: SEND_GIFT_Data_Capsule | null
+  addFollow: 0 | 1
+  effect_block: 0 | 1
+  coin_type: 'gold' | 'silver'
+  total_coin: number
+  effect: number
+  broadcast_id: number
+  draw: number
+  crit_prob: number
   combo_send: {
-    uid: number;
-    uname: string;
-    gift_num: number;
-    combo_num: number;
-    gift_id: number;
-    gift_name: string;
-    action: '投喂' | '赠送';
-    combo_id: string;
-    send_master: null;
-  };
+    uid: number
+    uname: string
+    gift_num: number
+    combo_num: number
+    gift_id: number
+    gift_name: string
+    action: '投喂' | '赠送'
+    combo_id: string
+    send_master: null
+  }
   batch_combo_send: {
-    uid: number;
-    uname: string;
-    gift_num: number;
-    batch_combo_num: number;
-    gift_id: number;
-    gift_name: string;
-    action: string;
-    batch_combo_id: string;
-    send_master: null;
-  };
-  tag_image: string;
-  send_master: null;
-  is_first: boolean;
-  demarcation: number;
-  combo_stay_time: number;
-  combo_total_coin: number;
-  tid: string;
+    uid: number
+    uname: string
+    gift_num: number
+    batch_combo_num: number
+    gift_id: number
+    gift_name: string
+    action: string
+    batch_combo_id: string
+    send_master: null
+  }
+  tag_image: string
+  send_master: null
+  is_first: boolean
+  demarcation: number
+  combo_stay_time: number
+  combo_total_coin: number
+  tid: string
 }
 
 interface SEND_GIFT_Data_TopList {
   /** 用户uid */
-  uid: number;
+  uid: number
   /** 用户名 */
-  uname: string;
+  uname: string
   /** 头像地址 */
-  face: string;
+  face: string
   /** 排行 */
-  rank: number;
+  rank: number
   /** 投喂总数 */
-  score: number;
+  score: number
   /** 舰队等级 */
-  guard_level: number;
+  guard_level: number
   /** 是否本人 */
-  isSelf: 0 | 1;
+  isSelf: 0 | 1
 }
 interface SEND_GIFT_Data_Medal {
   /** 徽章id */
-  medalId: string;
+  medalId: string
   /** 徽章名 */
-  medalName: string;
+  medalName: string
   /** 徽章等级 */
-  level: 1;
+  level: 1
 }
 interface SEND_GIFT_Data_Capsule {
   /** 普通扭蛋 */
-  normal: SEND_GIFT_Data_Capsule_Data;
+  normal: SEND_GIFT_Data_Capsule_Data
   /** 梦幻扭蛋 */
-  colorful: SEND_GIFT_Data_Capsule_Data;
+  colorful: SEND_GIFT_Data_Capsule_Data
 }
 interface SEND_GIFT_Data_Capsule_Data {
   /** 数量 */
-  coin: number;
+  coin: number
   /** 数量发生变化 */
-  change: number;
-  progress: SEND_GIFT_Data_Capsule_Data_Progress;
+  change: number
+  progress: SEND_GIFT_Data_Capsule_Data_Progress
 }
 interface SEND_GIFT_Data_Capsule_Data_Progress {
   /** 当前送出道具价值 */
-  now: number;
+  now: number
   /** 需要的道具价值 */
-  max: number;
+  max: number
 }
 /**
  * 特殊礼物消息
@@ -2090,37 +2090,37 @@ interface SEND_GIFT_Data_Capsule_Data_Progress {
  * @interface SPECIAL_GIFT
  */
 interface SPECIAL_GIFT {
-  cmd: CmdType.SPECIAL_GIFT;
-  data: SPECIAL_GIFT_Data;
+  cmd: CmdType.SPECIAL_GIFT
+  data: SPECIAL_GIFT_Data
 }
 interface SPECIAL_GIFT_Data {
   /** 节奏风暴 */
-  '39': SPECIAL_GIFT_Data_BeatStorm;
+  '39': SPECIAL_GIFT_Data_BeatStorm
 }
 type SPECIAL_GIFT_Data_BeatStorm =
   | SPECIAL_GIFT_Data_BeatStorm_Start
-  | SPECIAL_GIFT_Data_BeatStorm_End;
+  | SPECIAL_GIFT_Data_BeatStorm_End
 interface SPECIAL_GIFT_Data_BeatStorm_Start {
   /** 节奏风暴id */
-  id: number;
+  id: number
   /** 节奏持续时间 */
-  time: number;
+  time: number
   /** 是否已经参与 */
-  hadJoin: 0 | 1;
+  hadJoin: 0 | 1
   /** 节奏数量 */
-  num: number;
+  num: number
   /** 节奏内容 */
-  content: string;
+  content: string
   /** 节奏开始 */
-  action: 'start';
+  action: 'start'
   /** 节奏风暴图标地址 */
-  storm_gif: string;
+  storm_gif: string
 }
 interface SPECIAL_GIFT_Data_BeatStorm_End {
   /** 节奏风暴id */
-  id: number;
+  id: number
   /** 结束 */
-  action: 'end';
+  action: 'end'
 }
 /**
  * 系统礼物消息, 广播
@@ -2132,28 +2132,28 @@ interface SPECIAL_GIFT_Data_BeatStorm_End {
  */
 interface SYS_GIFT extends danmuJson {
   /** 消息内容 */
-  msg: string;
-  rnd: number;
+  msg: string
+  rnd: number
   /** 赠送人uid */
-  uid: number;
+  uid: number
   /** 同msg, 无标记符号 */
-  msg_text: string;
+  msg_text: string
 }
 interface SYS_GIFT extends danmuJson {
   /** 消息内容 */
-  msg: string;
+  msg: string
   /** 同msg */
-  tips: string;
+  tips: string
   /** 同msg */
-  msg_text: string;
+  msg_text: string
   /** 礼物id */
-  giftId: number;
-  msgTips: number;
+  giftId: number
+  msgTips: number
   /** 点击跳转的地址 */
-  url: string;
+  url: string
   /** 原始房间号 */
-  real_roomid?: number;
-  rnd: number;
+  real_roomid?: number
+  rnd: number
 }
 /**
  * 系统消息, 广播
@@ -2166,31 +2166,31 @@ interface SYS_GIFT extends danmuJson {
  */
 interface SYS_MSG extends danmuJson {
   /** 消息内容 */
-  msg: string;
+  msg: string
   /** 同msg */
-  msg_text: string;
+  msg_text: string
   /** 点击跳转的地址 */
-  url: string;
+  url: string
 }
 interface SYS_MSG extends danmuJson {
   /** 消息内容 */
-  msg: string;
+  msg: string
   /** 同msg */
-  msg_text: string;
+  msg_text: string
   /** 广播: 消息内容 */
-  msg_common: string;
+  msg_common: string
   /** 广播: 消息内容 */
-  msg_self: string;
-  rep: 1;
+  msg_self: string
+  rep: 1
   /** 2为小电视通知 */
-  styleType: 2;
+  styleType: 2
   /** 点击跳转的地址 */
-  url: string;
+  url: string
   /** 原始房间号 */
-  real_roomid: number;
-  rnd: number;
+  real_roomid: number
+  rnd: number
   /** 广播类型 */
-  broadcast_type: number;
+  broadcast_type: number
 }
 /**
  * 小电视抽奖结束
@@ -2201,10 +2201,10 @@ interface SYS_MSG extends danmuJson {
  * @extends {danmuJson}
  */
 interface TV_END extends danmuJson {
-  data: TV_END_Data;
+  data: TV_END_Data
 }
 interface TV_END_Data extends RAFFLE_END_Data {
-  type: 'small_tv';
+  type: 'small_tv'
 }
 /**
  * 小电视抽奖开始
@@ -2215,10 +2215,10 @@ interface TV_END_Data extends RAFFLE_END_Data {
  * @extends {danmuJson}
  */
 interface TV_START extends danmuJson {
-  data: TV_START_Data;
+  data: TV_START_Data
 }
 interface TV_START_Data extends RAFFLE_START_Data {
-  type: 'small_tv';
+  type: 'small_tv'
 }
 /**
  * USER_GAIN_MEDAL
@@ -2228,19 +2228,19 @@ interface TV_START_Data extends RAFFLE_START_Data {
  * @extends {danmuJson}
  */
 interface USER_GAIN_MEDAL extends danmuJson {
-  data: USER_GAIN_MEDAL_Data;
+  data: USER_GAIN_MEDAL_Data
 }
 interface USER_GAIN_MEDAL_Data {
-  type: number;
-  up_uid: number;
-  medal_id: number;
-  medal_name: string;
-  medal_level: number;
-  medal_color: number;
-  msg_title: string;
-  msg_content: string;
-  normal_color: number;
-  highlight_color: number;
+  type: number
+  up_uid: number
+  medal_id: number
+  medal_name: string
+  medal_level: number
+  medal_color: number
+  msg_title: string
+  msg_content: string
+  normal_color: number
+  highlight_color: number
 }
 /**
  * USER_INFO_UPDATE
@@ -2250,12 +2250,12 @@ interface USER_GAIN_MEDAL_Data {
  * @extends {danmuJson}
  */
 interface USER_INFO_UPDATE extends danmuJson {
-  data: USER_INFO_UPDATE_Data;
+  data: USER_INFO_UPDATE_Data
 }
 interface USER_INFO_UPDATE_Data {
-  type: number;
-  uid: number;
-  room_id: number;
+  type: number
+  uid: number
+  room_id: number
 }
 /**
  * USER_PANEL_RED_ALARM
@@ -2265,11 +2265,11 @@ interface USER_INFO_UPDATE_Data {
  * @extends {danmuJson}
  */
 interface USER_PANEL_RED_ALARM extends danmuJson {
-  data: USER_PANEL_RED_ALARM_Data;
+  data: USER_PANEL_RED_ALARM_Data
 }
 interface USER_PANEL_RED_ALARM_Data {
-  module: string;
-  alarm_num: number;
+  module: string
+  alarm_num: number
 }
 /**
  * 用户头衔
@@ -2281,24 +2281,24 @@ interface USER_PANEL_RED_ALARM_Data {
  * @extends {danmuJson}
  */
 interface USER_TITLE_GET extends danmuJson {
-  data: USER_TITLE_GET_Data;
-  uid: number;
+  data: USER_TITLE_GET_Data
+  uid: number
 }
 interface USER_TITLE_GET_Data {
-  title_id: string;
-  source: string;
-  name: string;
-  description: string;
-  colorful: number;
-  create_time: string;
-  expire_time: string;
-  url: string;
-  mobile_pic_url: string;
-  web_pic_url: string;
-  num: number;
-  score: number;
-  status: number;
-  level: number;
+  title_id: string
+  source: string
+  name: string
+  description: string
+  colorful: number
+  create_time: string
+  expire_time: string
+  url: string
+  mobile_pic_url: string
+  web_pic_url: string
+  num: number
+  score: number
+  status: number
+  level: number
 }
 /**
  * 入场特效
@@ -2309,14 +2309,14 @@ interface USER_TITLE_GET_Data {
  * @extends {danmuJson}
  */
 interface USER_TOAST_MSG extends danmuJson {
-  data: USER_TOAST_MSG_Data;
+  data: USER_TOAST_MSG_Data
 }
 interface USER_TOAST_MSG_Data {
-  op_type: number;
-  uid: number;
-  username: string;
-  guard_level: number;
-  is_show: number;
+  op_type: number
+  uid: number
+  username: string
+  guard_level: number
+  is_show: number
 }
 /**
  * 直播警告
@@ -2326,7 +2326,7 @@ interface USER_TOAST_MSG_Data {
  * @interface WARNING
  */
 interface WARNING {
-  msg: string;
+  msg: string
 }
 /**
  * 欢迎消息
@@ -2335,20 +2335,20 @@ interface WARNING {
  * @interface WELCOME
  */
 interface WELCOME {
-  cmd: CmdType.WELCOME;
-  data: WELCOME_Data;
+  cmd: CmdType.WELCOME
+  data: WELCOME_Data
 }
 interface WELCOME_Data {
   /** 用户uid */
-  uid: number;
+  uid: number
   /** 用户名 */
-  uname: string;
+  uname: string
   /** 是否为管理员 */
-  is_admin: 0 | 1;
+  is_admin: 0 | 1
   /** 是否为老爷 */
-  vip: 0 | 1;
+  vip: 0 | 1
   /** 年费姥爷？ */
-  svip: 0 | 1;
+  svip: 0 | 1
 }
 /**
  * 欢迎消息-舰队
@@ -2357,16 +2357,16 @@ interface WELCOME_Data {
  * @interface WELCOME_GUARD
  */
 interface WELCOME_GUARD {
-  cmd: CmdType.WELCOME_GUARD;
-  data: WELCOME_GUARD_Data;
+  cmd: CmdType.WELCOME_GUARD
+  data: WELCOME_GUARD_Data
 }
 interface WELCOME_GUARD_Data {
   /** 用户uid */
-  uid: number;
+  uid: number
   /** 用户名 */
-  username: string;
+  username: string
   /** 舰队等级 */
-  guard_level: number;
+  guard_level: number
 }
 /**
  * 实物抽奖结束
@@ -2377,12 +2377,12 @@ interface WELCOME_GUARD_Data {
  */
 interface WIN_ACTIVITY extends danmuJson {
   /** 第n轮抽奖 */
-  number: number;
-  data: WIN_ACTIVITY_Data;
+  number: number
+  data: WIN_ACTIVITY_Data
 }
 interface WIN_ACTIVITY_Data {
-  delay_time_min: number;
-  delay_time_max: number;
+  delay_time_min: number
+  delay_time_max: number
 }
 /**
  * 许愿瓶
@@ -2393,66 +2393,66 @@ interface WIN_ACTIVITY_Data {
  * @extends {danmuJson}
  */
 interface WISH_BOTTLE extends danmuJson {
-  data: WISH_BOTTLE_Data;
+  data: WISH_BOTTLE_Data
 }
 interface WISH_BOTTLE_Data {
-  action: 'update' | 'delete' | 'full' | 'create' | 'finish';
+  action: 'update' | 'delete' | 'full' | 'create' | 'finish'
   /** 许愿瓶id */
-  id: number;
-  wish: WISH_BOTTLE_Data_Wish;
+  id: number
+  wish: WISH_BOTTLE_Data_Wish
 }
 interface WISH_BOTTLE_Data_Wish {
   /** 许愿瓶id */
-  id: number;
+  id: number
   /** 主播uid */
-  uid: number;
-  type: number;
+  uid: number
+  type: number
   /** 礼物id */
-  type_id: number;
+  type_id: number
   /** 礼物上限 */
-  wish_limit: number;
+  wish_limit: number
   /** 当前礼物数量 */
-  wish_progress: number;
+  wish_progress: number
   /**
    * 'delete': -1
    * 'update' | 'create': 1
    * 'full': 2
    * 'finish': 3
    */
-  status: number;
+  status: number
   /** 礼物说明 */
-  content: string;
+  content: string
   /** 开始时间 yyyy-MM-dd HH:mm:ss 格式 */
-  ctime: string;
+  ctime: string
   /** 礼物选择数量 */
-  count_map: number[];
+  count_map: number[]
 }
 
 interface WISH_BOTTLE_Data_Wish {
   /** 许愿瓶id */
-  id: number;
+  id: number
   /** 主播uid */
-  uid: number;
-  type: number;
+  uid: number
+  type: number
   /** 礼物id */
-  type_id: number;
+  type_id: number
   /** 礼物上限 */
-  wish_limit: number;
+  wish_limit: number
   /** 当前礼物数量 */
-  wish_progress: number;
+  wish_progress: number
   /**
    * 'delete': -1
    * 'update' | 'create': 1
    * 'full': 2
    * 'finish': 3
    */
-  status: number;
+  status: number
   /** 礼物说明 */
-  content: string;
+  content: string
   /** 开始时间 yyyy-MM-dd HH:mm:ss 格式 */
-  ctime: string;
+  ctime: string
   /** 礼物选择数量 */
-  count_map: number[];
+  count_map: number[]
 }
 
 /**
@@ -2462,75 +2462,75 @@ interface WISH_BOTTLE_Data_Wish {
  * @interface SUPER_CHAT_MESSAGE
  */
 interface SUPER_CHAT_MESSAGE {
-  cmd: CmdType.SUPER_CHAT_MESSAGE;
-  data: SUPER_CHAT_MESSAGE_DATA;
+  cmd: CmdType.SUPER_CHAT_MESSAGE
+  data: SUPER_CHAT_MESSAGE_DATA
 }
 
 interface SUPER_CHAT_MESSAGE_BASE {
-  background_bottom_color: string;
-  background_color: string;
-  background_icon: string;
-  background_image: string;
-  background_price_color: string;
-  end_time: number;
-  font_color: string;
-  id: number;
-  message: string;
-  message_trans: string;
-  price: number;
-  rate: number;
-  start_time: number;
-  time: number;
-  token: string;
-  trans_mark: number;
-  ts: number;
-  uid: number;
-  user_info: SUPER_CHAT_MESSAGE_DATA_USER_INFO;
-  face: string;
-  face_frame: string;
-  guard_level: number;
-  is_main_vip: number;
-  is_svip: number;
-  is_vip: number;
-  uname: string;
-  user_level: number;
+  background_bottom_color: string
+  background_color: string
+  background_icon: string
+  background_image: string
+  background_price_color: string
+  end_time: number
+  font_color: string
+  id: number
+  message: string
+  message_trans: string
+  price: number
+  rate: number
+  start_time: number
+  time: number
+  token: string
+  trans_mark: number
+  ts: number
+  uid: number
+  user_info: SUPER_CHAT_MESSAGE_DATA_USER_INFO
+  face: string
+  face_frame: string
+  guard_level: number
+  is_main_vip: number
+  is_svip: number
+  is_vip: number
+  uname: string
+  user_level: number
 }
 
 interface SUPER_CHAT_MESSAGE_DATA extends SUPER_CHAT_MESSAGE_BASE {
-  medal_info: SUPER_CHAT_MESSAGE_DATA_MEDAL_INFO;
-  gift: SUPER_CHAT_MESSAGE_DATA_GIFT;
+  medal_info: SUPER_CHAT_MESSAGE_DATA_MEDAL_INFO
+  gift: SUPER_CHAT_MESSAGE_DATA_GIFT
 }
 
 interface SUPER_CHAT_MESSAGE_DATA_MEDAL_INFO {
-  icon_id: number;
-  target_id: number;
-  special: string;
-  anchor_uname: string;
-  anchor_roomid: number;
-  medal_level: number;
-  medal_name: string;
-  medal_color: string;
-  user_info: SUPER_CHAT_MESSAGE_DATA_USER_INFO;
+  icon_id: number
+  target_id: number
+  special: string
+  anchor_uname: string
+  anchor_roomid: number
+  medal_level: number
+  medal_name: string
+  medal_color: string
+  user_info: SUPER_CHAT_MESSAGE_DATA_USER_INFO
 }
 
 interface SUPER_CHAT_MESSAGE_DATA_USER_INFO {
-  uname: string;
-  face: string;
-  face_frame: string;
-  guard_level: number;
-  user_level: number;
-  level_color: string;
-  is_vip: number;
-  is_svip: number;
-  is_main_vip: number;
-  title: string;
-  manager: number;
+  uname: string
+  face: string
+  face_frame: string
+  guard_level: number
+  user_level: number
+  level_color: string
+  is_vip: number
+  is_svip: number
+  is_main_vip: number
+  title: string
+  manager: number
 }
 
 interface SUPER_CHAT_MESSAGE_DATA_GIFT {
-  num: number;
-  gift_id: number;
-  gift_name: string;
+  num: number
+  gift_id: number
+  gift_name: string
 }
 
 /**
@@ -2539,8 +2539,8 @@ interface SUPER_CHAT_MESSAGE_DATA_GIFT {
  * @interface POPULAR
  * */
 interface POPULAR {
-  cmd: CmdType.POPULAR;
-  popular: number;
+  cmd: CmdType.POPULAR
+  popular: number
 }
 
 /**
@@ -2548,67 +2548,67 @@ interface POPULAR {
  * { "cmd": "INTERACT_WORD", "data": { "contribution": { "grade": 0 }, "dmscore": 12, "fans_medal": { "anchor_roomid": 47377, "guard_level": 0, "icon_id": 0, "is_lighted": 0, "medal_color": 9272486, "medal_color_border": 12632256, "medal_color_end": 12632256, "medal_color_start": 12632256, "medal_level": 10, "medal_name": "鸟蛋", "score": 12320, "special": "", "target_id": 282994 }, "identities": [ 1 ], "is_spread": 0, "msg_type": 1, "roomid": 47867, "score": 1646469470302, "spread_desc": "", "spread_info": "", "tail_icon": 0, "timestamp": 1646469470, "trigger_time": 1646469469213909800, "uid": 837690, "uname": "橙子别酸了", "uname_color": "" } }
  * */
 interface INTERACT_WORD {
-  cmd: CmdType.INTERACT_WORD;
-  data: INTERACT_WORD_DATA;
+  cmd: CmdType.INTERACT_WORD
+  data: INTERACT_WORD_DATA
 }
 
 interface INTERACT_WORD_DATA {
   contribution: {
-    grade: number;
-  };
-  dmscore: number;
-  fans_medal: FANS_MEDAL;
-  identities: number[];
-  is_spread: number;
-  msg_type: number;
-  roomid: number;
-  score: number;
-  spread_desc: string;
-  spread_info: string;
-  tail_icon: number;
-  timestamp: number;
-  trigger_time: number;
-  uid: number;
-  uname: string;
-  uname_color: string;
+    grade: number
+  }
+  dmscore: number
+  fans_medal: FANS_MEDAL
+  identities: number[]
+  is_spread: number
+  msg_type: number
+  roomid: number
+  score: number
+  spread_desc: string
+  spread_info: string
+  tail_icon: number
+  timestamp: number
+  trigger_time: number
+  uid: number
+  uname: string
+  uname_color: string
 }
 
 interface FANS_MEDAL {
-  anchor_roomid: number;
-  guard_level: number;
-  icon_id: number;
-  is_lighted: number;
-  medal_color: number;
-  medal_color_border: number;
-  medal_color_end: number;
-  medal_color_start: number;
-  medal_level: number;
-  medal_name: string;
-  score: number;
-  special: string;
-  target_id: number;
+  anchor_roomid: number
+  guard_level: number
+  icon_id: number
+  is_lighted: number
+  medal_color: number
+  medal_color_border: number
+  medal_color_end: number
+  medal_color_start: number
+  medal_level: number
+  medal_name: string
+  score: number
+  special: string
+  target_id: number
 }
 
 //  连接中
 interface CONNECTING {
-  cmd: CmdType.CONNECTING;
+  cmd: CmdType.CONNECTING
 }
 
 //  连接成功
 interface CONNECT_SUCCESS {
-  cmd: CmdType.CONNECT_SUCCESS;
+  cmd: CmdType.CONNECT_SUCCESS
 }
 
 //  连接断开
 interface DISCONNECTED {
-  cmd: CmdType.DISCONNECTED;
+  cmd: CmdType.DISCONNECTED
 }
 
 interface WATCHED_CHANGE {
-  cmd: CmdType.WATCHED_CHANGE;
-  num: number;
-  text_small: string;
-  text_large: string;
+  cmd: CmdType.WATCHED_CHANGE
+  num: number
+  text_small: string
+  text_large: string
 }
 
 type DanmakuData =
@@ -2627,7 +2627,7 @@ type DanmakuData =
   | SUPER_CHAT_MESSAGE
   | WARNING
   | WATCHED_CHANGE
-  | CUT_OFF;
+  | CUT_OFF
 
 // 警告、切断消息
-type NoticeData = WARNING | CUT_OFF;
+type NoticeData = WARNING | CUT_OFF

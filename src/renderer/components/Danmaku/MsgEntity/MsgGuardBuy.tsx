@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 export default function MsgGuardBuy(props: GuardBuyMsg) {
-  const { ...msg } = props;
-  const { t } = useTranslation();
+  const { ...msg } = props
+  const { t } = useTranslation()
 
   return (
     <div className="chat-item misc-msg guard-buy">
@@ -20,5 +20,5 @@ export default function MsgGuardBuy(props: GuardBuyMsg) {
         {t('DanmakuGuardBuyTime')}
       </span>
     </div>
-  );
+  )
 }

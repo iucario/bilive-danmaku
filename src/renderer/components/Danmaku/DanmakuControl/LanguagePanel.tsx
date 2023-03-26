@@ -1,55 +1,51 @@
-import { useTranslation } from 'react-i18next';
-import Menu, { Item as MenuItem } from 'rc-menu';
-import Dropdown from 'rc-dropdown';
-import { ConfigKey } from '../../../reducers/types';
-import { HandleUpdateConfigFunc } from './DanmakuControl';
-import lang from '../../../i18n/locales/lang.json';
-import { useAppSelector } from '../../../store/hooks';
-import { selectConfig } from '../../../store/features/configSlice';
+import { useTranslation } from 'react-i18next'
+import Menu, { Item as MenuItem } from 'rc-menu'
+import Dropdown from 'rc-dropdown'
+import { ConfigKey } from '../../../reducers/types'
+import { HandleUpdateConfigFunc } from './DanmakuControl'
+import lang from '../../../i18n/locales/lang.json'
+import { useAppSelector } from '../../../store/hooks'
+import { selectConfig } from '../../../store/features/configSlice'
 
 interface Props {
-  configKey: 'languageCode' | 'translateTo' | 'voiceTranslateTo';
-  handleUpdateConfig: HandleUpdateConfigFunc;
+  configKey: 'languageCode' | 'translateTo' | 'voiceTranslateTo'
+  handleUpdateConfig: HandleUpdateConfigFunc
 }
 
 export default function LanguagePanel(props: Props) {
-  const { configKey, handleUpdateConfig } = props;
-  const config = useAppSelector(selectConfig);
-  const { i18n } = useTranslation();
+  const { configKey, handleUpdateConfig } = props
+  const config = useAppSelector(selectConfig)
+  const { i18n } = useTranslation()
 
   function onSelect({ key }) {
     switch (configKey) {
       case 'languageCode':
-        handleUpdateConfig(ConfigKey.languageCode, key);
-        i18n.changeLanguage(key);
-        break;
+        handleUpdateConfig(ConfigKey.languageCode, key)
+        i18n.changeLanguage(key)
+        break
       case 'translateTo':
-        handleUpdateConfig(ConfigKey.translateTo, key);
-        break;
+        handleUpdateConfig(ConfigKey.translateTo, key)
+        break
       case 'voiceTranslateTo':
-        handleUpdateConfig(ConfigKey.voiceTranslateTo, key);
-        break;
+        handleUpdateConfig(ConfigKey.voiceTranslateTo, key)
+        break
       default:
-        break;
+        break
     }
   }
 
   const menu = (
     <Menu onSelect={onSelect}>
-      {lang.map(l => (
+      {lang.map((l) => (
         <MenuItem key={l.code}>{l.Language}</MenuItem>
       ))}
     </Menu>
-  );
+  )
 
-  const currentLang = lang.filter(i => i.code === config[configKey])[0];
+  const currentLang = lang.filter((i) => i.code === config[configKey])[0]
 
   return (
-    <Dropdown
-      trigger={['click']}
-      overlay={menu}
-      animation="slide-up"
-    >
+    <Dropdown trigger={['click']} overlay={menu} animation="slide-up">
       <span className="action-text cursor">
         {currentLang.Language}
         <span role="img" aria-label="down" className="action action-down">
@@ -68,5 +64,5 @@ export default function LanguagePanel(props: Props) {
         </span>
       </span>
     </Dropdown>
-  );
+  )
 }

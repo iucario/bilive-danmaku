@@ -1,40 +1,40 @@
-import React, { useCallback, useContext, useState } from 'react';
-import SuperChatContainer, { GiftListsItem } from './Container';
-import { sortBy, unionSet } from '../../../utils/common';
+import React, { useCallback, useContext, useState } from 'react'
+import SuperChatContainer, { GiftListsItem } from './Container'
+import { sortBy, unionSet } from '../../../utils/common'
 
-const SuperChatContext = React.createContext(null);
+const SuperChatContext = React.createContext(null)
 
 export interface ComboData {
-  giftCount?: number;
-  superGiftNum?: number;
-  superBatchGiftNum?: number;
+  giftCount?: number
+  superGiftNum?: number
+  superBatchGiftNum?: number
 }
 
-let id = 1;
-const comboMap = new Map<string, ComboData | 0>();
+let id = 1
+const comboMap = new Map<string, ComboData | 0>()
 // 初始化为0
-comboMap.set('-1', 0);
+comboMap.set('-1', 0)
 
 const updateMap = (comboId: string, msg: DanmakuGift) => {
-  comboMap.set(comboId, msg);
+  comboMap.set(comboId, msg)
   // if (msg.superGiftNum) {
   //   comboMap.set(comboId, { superGiftNum: msg.superGiftNum });
   // } else {
   //   comboMap.set(comboId, { giftCount: msg.giftCount });
   // }
-};
+}
 
 const ListProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lists, setLists] = useState<GiftListsItem[]>([]);
+  const [lists, setLists] = useState<GiftListsItem[]>([])
 
   // FIXME: 大量添加会造成阻塞，速度过快添加不了
   const addItem = useCallback(
     (msg: DanmakuGift, ttl: number) => {
-      setLists(lists => {
-        const comboId = msg.batchComboId;
+      setLists((lists) => {
+        const comboId = msg.batchComboId
         // combo连击增加
         if (comboId) {
-          updateMap(comboId, msg);
+          updateMap(comboId, msg)
         }
         let newLists = [
           ...lists,
@@ -42,24 +42,24 @@ const ListProvider = ({ children }: { children: React.ReactNode }) => {
             id: id++,
             ttl,
             comboId,
-            msg
-          }
-        ].sort(sortBy('price', false, 'msg'));
-        newLists = unionSet(newLists, 'comboId');
+            msg,
+          },
+        ].sort(sortBy('price', false, 'msg'))
+        newLists = unionSet(newLists, 'comboId')
         // 最多只显示3个
         if (newLists.length > 3) {
-          removeItem(newLists[0].id);
+          removeItem(newLists[0].id)
           // newLists.splice(0, 1);
         }
-        return newLists;
-      });
+        return newLists
+      })
     },
     [setLists]
-  );
+  )
 
   const updateItem = useCallback(
     (msg: GiftSend, ttl: number, comboId: string) => {
-      setLists(lists => {
+      setLists((lists) => {
         //   const newLists = [
         //     ...lists,
         //     {
@@ -74,48 +74,48 @@ const ListProvider = ({ children }: { children: React.ReactNode }) => {
         //   }
         //   return newLists;
         // comboMap.set(msg.batchComboId, msg.comboNum);
-        updateMap(msg.batchComboId, msg);
+        updateMap(msg.batchComboId, msg)
 
-        lists.map(item => {
+        lists.map((item) => {
           if (item.comboId === comboId) {
-            item.msg.giftCount = msg.comboNum;
-            return item;
+            item.msg.giftCount = msg.comboNum
+            return item
           }
-        });
-        console.log('handle update update', msg, lists);
-        return lists;
-      });
+        })
+        console.log('handle update update', msg, lists)
+        return lists
+      })
     },
     [setLists]
-  );
+  )
 
   const removeItem = useCallback(
     (id: number) => {
-      setLists(lists => {
-        const newLists = lists.filter(t => t.id !== id);
-        return newLists;
-      });
+      setLists((lists) => {
+        const newLists = lists.filter((t) => t.id !== id)
+        return newLists
+      })
     },
     [setLists]
-  );
+  )
 
   return (
     <SuperChatContext.Provider
       value={{
         addItem,
         updateItem,
-        removeItem
+        removeItem,
       }}
     >
       <SuperChatContainer lists={lists} comboMap={comboMap} />
       {children}
     </SuperChatContext.Provider>
-  );
-};
+  )
+}
 
 const useList = () => {
-  return useContext(SuperChatContext);
-};
+  return useContext(SuperChatContext)
+}
 
-export { SuperChatContext, useList };
-export default ListProvider;
+export { SuperChatContext, useList }
+export default ListProvider

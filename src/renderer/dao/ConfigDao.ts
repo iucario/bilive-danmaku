@@ -1,9 +1,9 @@
-import LiveRoomDao from './LiveRoomDao';
-import pkg from '../../../package.json';
+import LiveRoomDao from './LiveRoomDao'
+import pkg from '../../../package.json'
 
-const prefixKey = 'config';
+const prefixKey = 'config'
 
-const resentLiveData = LiveRoomDao.getResent();
+const resentLiveData = LiveRoomDao.getResent()
 
 export const defaultConfig: ConfigStateType = {
   version: pkg.version,
@@ -41,6 +41,7 @@ export const defaultConfig: ConfigStateType = {
   blockEffectItem3: 0,
   blockEffectItem4: 0,
   blockEffectItem5: 0,
+  blockEffectItem6: 0,
   blockMinGoldSeed: 0,
   blockMinSilverSeed: 0,
   blockDanmakuLists: [],
@@ -52,29 +53,29 @@ export const defaultConfig: ConfigStateType = {
   showGiftDanmakuList: 0,
   maxDanmakuGiftCount: 30,
   danmakuGiftListHeight: 200,
-};
+}
 
 export default class ConfigDao {
   static get(): ConfigStateType {
-    const configStr = localStorage.getItem(prefixKey);
-    if (!configStr) return defaultConfig;
+    const configStr = localStorage.getItem(prefixKey)
+    if (!configStr) return defaultConfig
     const configData: ConfigStateType = {
       ...defaultConfig,
       ...JSON.parse(configStr),
-    };
-    configData.version = pkg.version;
+    }
+    configData.version = pkg.version
     // 与最新版config合并
-    this.save(configData);
-    return configData;
+    this.save(configData)
+    return configData
   }
 
   static save(config: ConfigStateType) {
-    localStorage.setItem(prefixKey, JSON.stringify(config));
+    localStorage.setItem(prefixKey, JSON.stringify(config))
   }
 
   static reset(): ConfigStateType {
-    localStorage.removeItem(prefixKey);
-    this.save(defaultConfig);
-    return defaultConfig;
+    localStorage.removeItem(prefixKey)
+    this.save(defaultConfig)
+    return defaultConfig
   }
 }

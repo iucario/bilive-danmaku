@@ -1,7 +1,7 @@
-import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
-import Danmaku from './components/Danmaku';
-import './i18n';
-import './app.global.scss';
+import { MemoryRouter as Router, Route, Routes } from 'react-router-dom'
+import Danmaku from './components/Danmaku'
+import './i18n'
+import './app.global.scss'
 
 export default function App() {
   return (
@@ -10,5 +10,5 @@ export default function App() {
         <Route path="/" element={<Danmaku />} />
       </Routes>
     </Router>
-  );
+  )
 }

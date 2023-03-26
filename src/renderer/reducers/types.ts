@@ -1,5 +1,5 @@
-import { Dispatch as ReduxDispatch, Store as ReduxStore, Action } from 'redux';
-import { SocketInstanceType } from '../components/Danmaku/base/Socket';
+import { Dispatch as ReduxDispatch, Store as ReduxStore, Action } from 'redux'
+import { SocketInstanceType } from '../components/Danmaku/base/Socket'
 
 export enum ConfigKey {
   version = 'version',
@@ -49,24 +49,24 @@ export enum ConfigKey {
 }
 
 export type counterStateType = {
-  count: number;
-};
+  count: number
+}
 
 export type danmakuStateType = {
-  roomid: number;
-  socket: SocketInstanceType;
-  giftMap: Map<number, GiftRaw>;
-  userAvatarMap: Map<number, string>;
-};
+  roomid: number
+  socket: SocketInstanceType
+  giftMap: Map<number, GiftRaw>
+  userAvatarMap: Map<number, string>
+}
 
 export type rootStatePropsType = {
-  counter: counterStateType;
-  danmaku: danmakuStateType;
-  config: ConfigStateType;
-};
+  counter: counterStateType
+  danmaku: danmakuStateType
+  config: ConfigStateType
+}
 
-export type GetState = () => rootStatePropsType;
+export type GetState = () => rootStatePropsType
 
-export type Dispatch = ReduxDispatch<Action<string>>;
+export type Dispatch = ReduxDispatch<Action<string>>
 
-export type Store = ReduxStore<rootStatePropsType, Action<string>>;
+export type Store = ReduxStore<rootStatePropsType, Action<string>>

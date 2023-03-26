@@ -1,10 +1,10 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable consistent-return */
 
-import UserInfoApiTask, { apiTaskConfig } from '../../api';
-import config from '../../config';
-import UserAvatarDao from '../../dao/UserAvatarDao';
-import { sleep } from '../../utils/common';
+import UserInfoApiTask, { apiTaskConfig } from '../../api'
+import config from '../../config'
+import UserAvatarDao from '../../dao/UserAvatarDao'
+import { sleep } from '../../utils/common'
 
 export enum CmdType {
   CONNECTING = 'CONNECTING',
@@ -35,7 +35,7 @@ function assertUnknownCmdType(cmd: any): UnknownMsg {
   return {
     cmd,
     content: `Unknown cmd: ${cmd}`,
-  };
+  }
 }
 
 export async function parseData(
@@ -43,9 +43,9 @@ export async function parseData(
 ): Promise<DanmakuDataFormatted> {
   switch (data.cmd) {
     case CmdType.LIVE:
-      break;
+      break
     case CmdType.DANMU_MSG:
-      const userID = data.info['2']['0'];
+      const userID = data.info['2']['0']
       const danmakuMsg: DanmakuMsg = {
         cmd: CmdType.DANMU_MSG,
         username: data.info['2']['1'],
@@ -62,24 +62,24 @@ export async function parseData(
         liveRoomID: data.info['3']['3'],
         userLevel: data.info['4']['0'] || 0,
         repeat: 0,
-      };
+      }
       if (config.showAvatar) {
         // 先查询Dao,如果有就直接添加
         if (UserAvatarDao.has(userID)) {
-          danmakuMsg.face = UserAvatarDao.get(userID).avatar;
+          danmakuMsg.face = UserAvatarDao.get(userID).avatar
         } else {
           // 如果没有添加UserInfoApiTask，
-          UserInfoApiTask.push(userID);
+          UserInfoApiTask.push(userID)
           // 频繁请求api会导致被ban，据说间隔时间为170
           if (
             UserInfoApiTask.getTaskQueueLength() <= apiTaskConfig.taskMaxLength
           ) {
-            await sleep(apiTaskConfig.sleepMs);
+            await sleep(apiTaskConfig.sleepMs)
           }
-          danmakuMsg.face = UserAvatarDao.get(userID).avatar;
+          danmakuMsg.face = UserAvatarDao.get(userID).avatar
         }
       }
-      return danmakuMsg;
+      return danmakuMsg
     case CmdType.SEND_GIFT:
       const danmakuGiftMsg: GiftBubbleMsg = {
         cmd: CmdType.SEND_GIFT,
@@ -94,17 +94,17 @@ export async function parseData(
         price: data.data.num * data.data.price,
         giftAction: data.data.action,
         giftId: data.data.giftId,
-      };
+      }
 
       if (data.data.batch_combo_id) {
-        danmakuGiftMsg.batchComboId = data.data.batch_combo_id;
+        danmakuGiftMsg.batchComboId = data.data.batch_combo_id
       }
       if (data.data.super_gift_num) {
-        danmakuGiftMsg.superGiftNum = data.data.super_gift_num;
-        danmakuGiftMsg.superBatchGiftNum = data.data.super_batch_gift_num;
-        danmakuGiftMsg.comboStayTime = data.data.combo_stay_time;
+        danmakuGiftMsg.superGiftNum = data.data.super_gift_num
+        danmakuGiftMsg.superBatchGiftNum = data.data.super_batch_gift_num
+        danmakuGiftMsg.comboStayTime = data.data.combo_stay_time
       }
-      return danmakuGiftMsg;
+      return danmakuGiftMsg
     case CmdType.WELCOME:
       const welcomeMsg: MsgWelcome = {
         cmd: CmdType.WELCOME,
@@ -114,22 +114,22 @@ export async function parseData(
         isVip: !!data.data.vip,
         isVipM: data.data.vip === 1,
         isVipY: data.data.svip === 1,
-      };
-      return welcomeMsg;
+      }
+      return welcomeMsg
     case CmdType.WELCOME_GUARD:
       const welcomeguardMsg: MsgWelcomeGuard = {
         cmd: CmdType.WELCOME_GUARD,
         username: data.data.username,
-      };
-      return welcomeguardMsg;
+      }
+      return welcomeguardMsg
     case CmdType.INTERACT_WORD:
       const interActWordMsg: MsgInterActWordMsg = {
         cmd: CmdType.INTERACT_WORD,
         msgType: data.data.msg_type,
         username: data.data.uname,
         userID: data.data.uid,
-      };
-      return interActWordMsg;
+      }
+      return interActWordMsg
     case CmdType.GUARD_BUY:
       const guardBuyMsg: GuardBuyMsg = {
         cmd: CmdType.GUARD_BUY,
@@ -138,14 +138,14 @@ export async function parseData(
         guardLevel: data.data.guard_level,
         giftName: ['', '总督', '提督', '舰长'][data.data.guard_level],
         giftCount: data.data.num,
-      };
-      return guardBuyMsg;
+      }
+      return guardBuyMsg
     case CmdType.SUPER_CHAT_MESSAGE:
       const superChatMsg: SUPER_CHAT_MESSAGE = {
         cmd: CmdType.SUPER_CHAT_MESSAGE,
         data: data.data,
-      };
-      return superChatMsg;
+      }
+      return superChatMsg
     case CmdType.COMBO_SEND:
       const comboSendMsg: GiftBubbleMsg = {
         cmd: CmdType.COMBO_SEND,
@@ -157,14 +157,14 @@ export async function parseData(
         comboNum: data.data.combo_num,
         batchComboId: data.data.batch_combo_id,
         action: data.data.action,
-      };
-      return comboSendMsg;
+      }
+      return comboSendMsg
     case CmdType.POPULAR:
       const popularMsg: POPULAR = {
         cmd: CmdType.POPULAR,
         popular: data.popular,
-      };
-      return popularMsg;
+      }
+      return popularMsg
     // case CmdType.COMBO_END:
     //   // TODO:
     //   break;
@@ -173,29 +173,29 @@ export async function parseData(
         cmd: CmdType.ROOM_BLOCK_MSG,
         username: data.data.uname,
         userID: data.data.uid,
-      };
-      return roomBlockMsg;
+      }
+      return roomBlockMsg
     case CmdType.WARNING:
       const warningMsg: WarningMsg = {
         cmd: CmdType.WARNING,
         msg: data.msg,
-      };
-      return warningMsg;
+      }
+      return warningMsg
     case CmdType.CUT_OFF:
       const cutOffMsg: CutOffMsg = {
         cmd: CmdType.CUT_OFF,
         msg: data.msg,
-      };
-      return cutOffMsg;
+      }
+      return cutOffMsg
     case CmdType.WATCHED_CHANGE:
       const watchedChangeMsg: WatchedChangeMsg = {
         cmd: CmdType.WATCHED_CHANGE,
         num: data.data.num,
         text_small: data.data.text_small,
         text_large: data.data.text_large,
-      };
-      return watchedChangeMsg;
+      }
+      return watchedChangeMsg
     default:
-      return assertUnknownCmdType(data.cmd);
+      return assertUnknownCmdType(data.cmd)
   }
 }

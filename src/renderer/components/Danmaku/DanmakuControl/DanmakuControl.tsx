@@ -1,16 +1,16 @@
-import { ipcRenderer } from 'electron';
-import Dropdown from 'rc-dropdown';
-import Menu, { Item as MenuItem } from 'rc-menu';
-import Tooltip from 'rc-tooltip';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { ConfigKey } from '../../../reducers/types';
+import { ipcRenderer } from 'electron'
+import Dropdown from 'rc-dropdown'
+import Menu, { Item as MenuItem } from 'rc-menu'
+import Tooltip from 'rc-tooltip'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { ConfigKey } from '../../../reducers/types'
 import {
   resetConfig,
   selectConfig,
   updateConfig,
-} from '../../../store/features/configSlice';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+} from '../../../store/features/configSlice'
+import { useAppDispatch, useAppSelector } from '../../../store/hooks'
 import {
   arrayDiff,
   hasNewVersion,
@@ -20,12 +20,12 @@ import {
   systemFonts,
   toPercentNum,
   tranNumber,
-} from '../../../utils/common';
-import voice from '../../../utils/vioce';
-import Slider from '../../Base/Slider';
-import Switch from '../../Base/Switch';
-import { parseData } from '../MsgModel';
-import LanguagePanel from './LanguagePanel';
+} from '../../../utils/common'
+import voice from '../../../utils/vioce'
+import Slider from '../../Base/Slider'
+import Switch from '../../Base/Switch'
+import { parseData } from '../MsgModel'
+import LanguagePanel from './LanguagePanel'
 
 export enum ControlType {
   DANMAKUTEST = 'DANMAKUTEST',
@@ -40,27 +40,27 @@ export enum ControlType {
 }
 
 type Props = {
-  popular: number;
-  clearSCMessage: () => void;
-  clearMessage: () => void;
-  onMessage: OnMessageFunc;
-};
+  popular: number
+  clearSCMessage: () => void
+  clearMessage: () => void
+  onMessage: OnMessageFunc
+}
 
 interface OnMessageFunc {
-  (msg: DanmakuData[]): void;
+  (msg: DanmakuData[]): void
 }
 
 export interface HandleUpdateConfigFunc {
-  (k: ConfigKey, v?: number | string | string[]): void;
+  (k: ConfigKey, v?: number | string | string[]): void
 }
 
 function DanmakuControl(props: Props) {
-  const dispatch = useAppDispatch();
-  const config = useAppSelector(selectConfig);
-  const [currentName, setCurrentName] = useState('');
+  const dispatch = useAppDispatch()
+  const config = useAppSelector(selectConfig)
+  const [currentName, setCurrentName] = useState('')
 
-  const { popular, clearMessage, clearSCMessage } = props;
-  const { t } = useTranslation();
+  const { popular, clearMessage, clearSCMessage } = props
+  const { t } = useTranslation()
 
   const handleUpdateConfig: HandleUpdateConfigFunc = (
     k: ConfigKey,
@@ -69,73 +69,73 @@ function DanmakuControl(props: Props) {
     switch (k) {
       case ConfigKey.showVoice:
         if (v === 0) {
-          voice.reset();
+          voice.reset()
         }
-        break;
+        break
       case ConfigKey.voiceSpeed:
-        v = v / 100;
-        voice.updatePlaybackRate(v);
-        break;
+        v = v / 100
+        voice.updatePlaybackRate(v)
+        break
       case ConfigKey.voiceVolume:
-        v = v / 100;
-        voice.updateVolume(v);
-        break;
+        v = v / 100
+        voice.updateVolume(v)
+        break
       case ConfigKey.blockScrollBar:
       case ConfigKey.blockMode:
-        v = config[k] === 0 ? 1 : 0;
-        break;
+        v = config[k] === 0 ? 1 : 0
+        break
       case ConfigKey.fontFamily:
-        setCssVariable(ConfigKey.fontFamily, v);
-        break;
+        setCssVariable(ConfigKey.fontFamily, v)
+        break
       case ConfigKey.avatarSize:
-        setCssVariable(ConfigKey.avatarSize, `${v}px`);
-        break;
+        setCssVariable(ConfigKey.avatarSize, `${v}px`)
+        break
       case ConfigKey.fontSize:
-        setCssVariable(ConfigKey.fontSize, `${v}px`);
-        break;
+        setCssVariable(ConfigKey.fontSize, `${v}px`)
+        break
       case ConfigKey.fontLineHeight:
-        setCssVariable(ConfigKey.fontLineHeight, `${v}px`);
-        break;
+        setCssVariable(ConfigKey.fontLineHeight, `${v}px`)
+        break
       case ConfigKey.fontMarginTop:
-        setCssVariable(ConfigKey.fontMarginTop, `${v}px`);
-        break;
+        setCssVariable(ConfigKey.fontMarginTop, `${v}px`)
+        break
       default:
     }
     if (/blockEffectItem/g.test(k)) {
-      v = config[k] === 0 ? 1 : 0;
+      v = config[k] === 0 ? 1 : 0
     }
-    dispatch(updateConfig({ k, v }));
-  };
+    dispatch(updateConfig({ k, v }))
+  }
 
   const handleClickControl = (controlName: ControlType) => {
     switch (controlName) {
       case ControlType.EFFECTBLOCK:
-        break;
+        break
       case ControlType.CLEAR:
-        clearMessage();
-        break;
+        clearMessage()
+        break
       case ControlType.BLOCK:
-        handleUpdateConfig(ConfigKey.blockScrollBar);
-        break;
+        handleUpdateConfig(ConfigKey.blockScrollBar)
+        break
       case ControlType.UNLOCK:
-        break;
+        break
       case ControlType.CONFIG:
-        break;
+        break
       default:
-        break;
+        break
     }
-    setCurrentName(controlName);
-  };
+    setCurrentName(controlName)
+  }
 
   const handleDispatchResetConfig = () => {
-    dispatch(resetConfig());
-  };
+    dispatch(resetConfig())
+  }
 
   const handleToggleDevTools = () => {
-    ipcRenderer.send('toggleDevTools');
-  };
+    ipcRenderer.send('toggleDevTools')
+  }
 
-  const newVersion = hasNewVersion(config.version, config.latestVersion);
+  const newVersion = hasNewVersion(config.version, config.latestVersion)
 
   return (
     <div id="danmakuControlOuter">
@@ -255,11 +255,11 @@ function DanmakuControl(props: Props) {
         </Tooltip>
       </div>
     </div>
-  );
+  )
 }
 
 function DanmakuTest(props: { onMessage: OnMessageFunc }) {
-  const { onMessage } = props;
+  const { onMessage } = props
   const lists = [
     {
       id: 'DANMU_MSG',
@@ -1017,13 +1017,13 @@ function DanmakuTest(props: { onMessage: OnMessageFunc }) {
     },
     { id: 'WARNING', cmd: 'WARNING', msg: '因版权原因，请立即更换' },
     { id: 'CUT_OFF', cmd: 'CUT_OFF', msg: '违反直播规范' },
-  ];
+  ]
 
   const getMsgItem = async (id: string) => {
-    const msg = lists.filter((i) => i.id === id);
-    const res = await parseData(msg[0]);
-    return [res];
-  };
+    const msg = lists.filter((i) => i.id === id)
+    const res = await parseData(msg[0])
+    return [res]
+  }
 
   return (
     <div className="danmakuActionMenu">
@@ -1151,19 +1151,19 @@ function DanmakuTest(props: { onMessage: OnMessageFunc }) {
         切断测试
       </span>
     </div>
-  );
+  )
 }
 
 function SettingFontFamily(props: {
-  handleUpdateConfig: HandleUpdateConfigFunc;
+  handleUpdateConfig: HandleUpdateConfigFunc
 }) {
-  const { handleUpdateConfig } = props;
-  const config = useAppSelector(selectConfig);
-  const systemFontsLists = ['lolita', ...systemFonts];
+  const { handleUpdateConfig } = props
+  const config = useAppSelector(selectConfig)
+  const systemFontsLists = ['lolita', ...systemFonts]
 
   const onSelect = ({ key }) => {
-    handleUpdateConfig(ConfigKey.fontFamily, key);
-  };
+    handleUpdateConfig(ConfigKey.fontFamily, key)
+  }
 
   const fontFamilyMenu = (
     <Menu onSelect={onSelect} className="fontFamilyMenuContainer">
@@ -1173,7 +1173,7 @@ function SettingFontFamily(props: {
         </MenuItem>
       ))}
     </Menu>
-  );
+  )
 
   return (
     <Dropdown trigger={['click']} overlay={fontFamilyMenu} animation="slide-up">
@@ -1196,16 +1196,16 @@ function SettingFontFamily(props: {
         </span>
       </span>
     </Dropdown>
-  );
+  )
 }
 
 function SettingContent(props: {
-  handleUpdateConfig: HandleUpdateConfigFunc;
-  handleDispatchResetConfig: () => void;
+  handleUpdateConfig: HandleUpdateConfigFunc
+  handleDispatchResetConfig: () => void
 }) {
-  const { handleUpdateConfig, handleDispatchResetConfig } = props;
-  const { t } = useTranslation();
-  const config = useAppSelector(selectConfig);
+  const { handleUpdateConfig, handleDispatchResetConfig } = props
+  const { t } = useTranslation()
+  const config = useAppSelector(selectConfig)
 
   return (
     <div className="container">
@@ -1381,15 +1381,15 @@ function SettingContent(props: {
         </span>
       </div>
     </div>
-  );
+  )
 }
 
 function TranslateSetting(props: {
-  handleUpdateConfig: HandleUpdateConfigFunc;
+  handleUpdateConfig: HandleUpdateConfigFunc
 }) {
-  const { handleUpdateConfig } = props;
-  const { t } = useTranslation();
-  const config = useAppSelector(selectConfig);
+  const { handleUpdateConfig } = props
+  const { t } = useTranslation()
+  const config = useAppSelector(selectConfig)
 
   return (
     <div className="container">
@@ -1480,16 +1480,16 @@ function TranslateSetting(props: {
         </span>
       </div>
     </div>
-  );
+  )
 }
 
 function EffectBlock(props: {
-  clearSCMessage: () => void;
-  handleUpdateConfig: HandleUpdateConfigFunc;
+  clearSCMessage: () => void
+  handleUpdateConfig: HandleUpdateConfigFunc
 }) {
-  const { clearSCMessage, handleUpdateConfig } = props;
-  const { t } = useTranslation();
-  const config = useAppSelector(selectConfig);
+  const { clearSCMessage, handleUpdateConfig } = props
+  const { t } = useTranslation()
+  const config = useAppSelector(selectConfig)
 
   return (
     <div className="block-effect-ctnr h-100 border-box p-relative">
@@ -1551,8 +1551,8 @@ function EffectBlock(props: {
         </li>
         <li
           onClick={() => {
-            clearSCMessage();
-            handleUpdateConfig(ConfigKey.blockEffectItem3);
+            clearSCMessage()
+            handleUpdateConfig(ConfigKey.blockEffectItem3)
           }}
           className="item"
         >
@@ -1608,73 +1608,73 @@ function EffectBlock(props: {
         </li>
       </ul>
     </div>
-  );
+  )
 }
 
 function DanmakuBlock(props: { handleUpdateConfig: HandleUpdateConfigFunc }) {
-  const { handleUpdateConfig } = props;
-  const { t } = useTranslation();
-  const config = useAppSelector(selectConfig);
-  let { blockDanmakuLists, blockUserLists } = config;
-  let [blockKeyWord, setBlockKeyWord] = useState('');
-  let [blockTab, setBlockTab] = useState(0);
-  let [selectedList, setSelectedList] = useState([]);
+  const { handleUpdateConfig } = props
+  const { t } = useTranslation()
+  const config = useAppSelector(selectConfig)
+  let { blockDanmakuLists, blockUserLists } = config
+  let [blockKeyWord, setBlockKeyWord] = useState('')
+  let [blockTab, setBlockTab] = useState(0)
+  let [selectedList, setSelectedList] = useState([])
 
-  let blockList = blockTab === 0 ? blockDanmakuLists : blockUserLists;
-  const blockUserNotMember = config.blockUserNotMember === 1;
-  const blockUserNotBindPhone = config.blockUserNotBindPhone === 1;
+  let blockList = blockTab === 0 ? blockDanmakuLists : blockUserLists
+  const blockUserNotMember = config.blockUserNotMember === 1
+  const blockUserNotBindPhone = config.blockUserNotBindPhone === 1
 
   // 屏蔽对应弹幕文字
   const addBlockDanmaku = (e: Event) => {
     if (e) {
-      e.preventDefault();
+      e.preventDefault()
     }
-    if (!blockKeyWord) return;
-    blockDanmakuLists.push(blockKeyWord);
-    blockDanmakuLists = Array.from(new Set(blockDanmakuLists));
-    handleUpdateConfig(ConfigKey.blockDanmakuLists, blockDanmakuLists);
-    setBlockKeyWord('');
-  };
+    if (!blockKeyWord) return
+    blockDanmakuLists.push(blockKeyWord)
+    blockDanmakuLists = Array.from(new Set(blockDanmakuLists))
+    handleUpdateConfig(ConfigKey.blockDanmakuLists, blockDanmakuLists)
+    setBlockKeyWord('')
+  }
 
   const changeBlockTab = (tabIndex: number) => {
-    if (blockTab === tabIndex) return;
-    setSelectedList([]);
-    setBlockTab(tabIndex);
-  };
+    if (blockTab === tabIndex) return
+    setSelectedList([])
+    setBlockTab(tabIndex)
+  }
 
   const addSelectedList = (item: string | number) => {
     if (selectedList.includes(item)) {
-      const index = selectedList.findIndex((i) => i === item);
-      if (index === -1) return;
-      selectedList.splice(index, 1);
+      const index = selectedList.findIndex((i) => i === item)
+      if (index === -1) return
+      selectedList.splice(index, 1)
     } else {
-      selectedList.push(item);
+      selectedList.push(item)
     }
-    setSelectedList([...selectedList]);
-  };
+    setSelectedList([...selectedList])
+  }
 
   const selectAll = () => {
     if (blockList.length === selectedList.length) {
-      setSelectedList([]);
+      setSelectedList([])
     } else {
-      setSelectedList(blockList);
+      setSelectedList(blockList)
     }
-  };
+  }
 
   const isSelectedAll = () => {
-    if (blockList.length === 0) return false;
-    return selectedList.length === blockList.length;
-  };
+    if (blockList.length === 0) return false
+    return selectedList.length === blockList.length
+  }
 
   const deleteBlockItem = () => {
-    const blockListDiff = arrayDiff(blockList, selectedList);
+    const blockListDiff = arrayDiff(blockList, selectedList)
     if (blockTab === 0) {
-      handleUpdateConfig(ConfigKey.blockDanmakuLists, blockListDiff);
+      handleUpdateConfig(ConfigKey.blockDanmakuLists, blockListDiff)
     } else {
-      handleUpdateConfig(ConfigKey.blockUserLists, blockListDiff);
+      handleUpdateConfig(ConfigKey.blockUserLists, blockListDiff)
     }
-    setSelectedList([]);
-  };
+    setSelectedList([])
+  }
 
   return (
     <div className="block-setting-ctnr">
@@ -1827,7 +1827,7 @@ function DanmakuBlock(props: { handleUpdateConfig: HandleUpdateConfigFunc }) {
               />
               <span className="block-content v-middle">{item}</span>
             </li>
-          );
+          )
         })}
         <div className="ps__scrollbar-x-rail" style={{ left: 0, bottom: 0 }}>
           <div className="ps__scrollbar-x" style={{ left: 0, width: 0 }} />
@@ -1858,13 +1858,13 @@ function DanmakuBlock(props: { handleUpdateConfig: HandleUpdateConfigFunc }) {
         )}
       </div>
     </div>
-  );
+  )
 }
 
 function About(props: { newVersion: boolean }) {
-  const { newVersion } = props;
-  const { t } = useTranslation();
-  const config = useAppSelector(selectConfig);
+  const { newVersion } = props
+  const { t } = useTranslation()
+  const config = useAppSelector(selectConfig)
 
   return (
     <div className="aboutContainer">
@@ -1919,7 +1919,7 @@ function About(props: { newVersion: boolean }) {
         <span>MIT</span>
       </div>
     </div>
-  );
+  )
 }
 
-export default DanmakuControl;
+export default DanmakuControl

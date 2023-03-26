@@ -4,100 +4,100 @@ import React, {
   useCallback,
   useRef,
   useImperativeHandle,
-  forwardRef
-} from 'react';
-import { updateConfig } from '../../../actions/config';
-import { ConfigKey } from '../../../reducers/types';
+  forwardRef,
+} from 'react'
+import { updateConfig } from '../../../actions/config'
+import { ConfigKey } from '../../../reducers/types'
 
-const minListHeight = 10;
-const maxListHeight = 400;
+const minListHeight = 10
+const maxListHeight = 400
 
 type Props = {
-  showGiftDanmakuList: boolean;
-  height: ConfigStateType;
-  maxGiftCount: number;
-  updateConfig: typeof updateConfig;
-};
+  showGiftDanmakuList: boolean
+  height: ConfigStateType
+  maxGiftCount: number
+  updateConfig: typeof updateConfig
+}
 
 export interface DanmakuGiftListRef {
-  onMessage: (lists: React.ReactElement[]) => void;
+  onMessage: (lists: React.ReactElement[]) => void
 }
 
 function DanmakuGiftList(props: Props, ref: React.Ref<DanmakuGiftListRef>) {
-  const { showGiftDanmakuList, height, maxGiftCount, updateConfig } = props;
-  let [direction, setDirection] = useState('down');
+  const { showGiftDanmakuList, height, maxGiftCount, updateConfig } = props
+  let [direction, setDirection] = useState('down')
   const [state, setState] = useState({
     isDragging: false,
     height,
     top: 0,
     original_height: 0,
     original_y: 0,
-    original_mouse_y: 0
-  });
-  const currentState = useRef(state);
-  currentState.current = state;
+    original_mouse_y: 0,
+  })
+  const currentState = useRef(state)
+  currentState.current = state
 
   let [renderDanmakuGiftLists, setRenderDanmakuGiftLists] = useState<
     React.ReactElement[]
-  >([]);
+  >([])
 
-  const onMessage = useCallback(lists => {
-    renderDanmakuGiftLists = [...renderDanmakuGiftLists, ...lists];
+  const onMessage = useCallback((lists) => {
+    renderDanmakuGiftLists = [...renderDanmakuGiftLists, ...lists]
     if (renderDanmakuGiftLists.length > maxGiftCount) {
       renderDanmakuGiftLists.splice(
         0,
         renderDanmakuGiftLists.length - maxGiftCount
-      );
+      )
     }
-    setRenderDanmakuGiftLists([...renderDanmakuGiftLists]);
-  }, []);
+    setRenderDanmakuGiftLists([...renderDanmakuGiftLists])
+  }, [])
 
   useImperativeHandle(
     ref,
     () => ({
-      onMessage
+      onMessage,
     }),
     [onMessage]
-  );
+  )
 
   const handleMouseMove = useCallback(
     ({ clientY }) => {
       if (state.isDragging) {
         const height =
-          state.original_height - (clientY - state.original_mouse_y);
+          state.original_height - (clientY - state.original_mouse_y)
         if (height > minListHeight && height < maxListHeight) {
-          setState(prevState => ({
+          setState((prevState) => ({
             ...prevState,
             height,
-            top: state.original_y + (clientY - state.original_mouse_y)
-          }));
+            top: state.original_y + (clientY - state.original_mouse_y),
+          }))
         }
       }
     },
     [state.isDragging]
-  );
+  )
 
   const handleMouseUp = useCallback(() => {
-    document.body.style.setProperty('user-select', 'auto');
+    document.body.style.setProperty('user-select', 'auto')
     if (state.isDragging) {
-      setState(prevState => ({
+      setState((prevState) => ({
         ...prevState,
-        isDragging: false
-      }));
+        isDragging: false,
+      }))
       updateConfig({
         k: ConfigKey.danmakuGiftListHeight,
-        v: currentState.current.height
-      });
+        v: currentState.current.height,
+      })
     }
-  }, [state.isDragging]);
+  }, [state.isDragging])
 
   const handleMouseDown = useCallback(({ clientY }) => {
     // 移动时禁止user-select，防止选中文本导致Mouse事件失效
-    document.body.style.setProperty('user-select', 'none');
+    document.body.style.setProperty('user-select', 'none')
     const danmakuGiftContainerEl = document.querySelector(
       '.danmakuGiftContainer'
-    );
-    setState(prevState => ({
+    )
+    setState((prevState) => ({
       ...prevState,
       isDragging: true,
       original_height: danmakuGiftContainerEl
@@ -110,48 +110,48 @@ function DanmakuGiftList(props: Props, ref: React.Ref<DanmakuGiftListRef>) {
       original_y: danmakuGiftContainerEl
         ? danmakuGiftContainerEl.getBoundingClientRect().top
         : 0,
-      original_mouse_y: clientY
-    }));
-  }, []);
+      original_mouse_y: clientY,
+    }))
+  }, [])
 
   const handleScroll = () => {
     const danmakuGiftContainerEl = document.querySelector(
       '.danmakuGiftContainer'
-    );
-    if (!danmakuGiftContainerEl) return;
-    danmakuGiftContainerEl.addEventListener('mousewheel', e => {
-      direction = e.deltaY > 0 ? 'down' : 'up';
-      setDirection(direction);
-    });
-  };
+    )
+    if (!danmakuGiftContainerEl) return
+    danmakuGiftContainerEl.addEventListener('mousewheel', (e) => {
+      direction = e.deltaY > 0 ? 'down' : 'up'
+      setDirection(direction)
+    })
+  }
 
   const blockScrollBar = () => {
     const danmakuGiftContainerEl = document.querySelector(
       '.danmakuGiftContainer'
-    );
-    if (!danmakuGiftContainerEl) return;
-    const { scrollHeight, scrollTop, clientHeight } = danmakuGiftContainerEl;
-    if (direction === 'up') return;
+    )
+    if (!danmakuGiftContainerEl) return
+    const { scrollHeight, scrollTop, clientHeight } = danmakuGiftContainerEl
+    if (direction === 'up') return
     // 距离底部1/2后自动定位到底部
-    if (scrollHeight - (scrollTop + clientHeight) > scrollHeight / 2) return;
-    danmakuGiftContainerEl.scrollTop = scrollHeight;
-  };
+    if (scrollHeight - (scrollTop + clientHeight) > scrollHeight / 2) return
+    danmakuGiftContainerEl.scrollTop = scrollHeight
+  }
 
   useEffect(() => {
-    handleScroll();
-  }, []);
+    handleScroll()
+  }, [])
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-    blockScrollBar();
+    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mouseup', handleMouseUp)
+    blockScrollBar()
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [handleMouseMove, handleMouseUp, renderDanmakuGiftLists]);
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [handleMouseMove, handleMouseUp, renderDanmakuGiftLists])
 
-  if (!showGiftDanmakuList) return null;
+  if (!showGiftDanmakuList) return null
 
   return (
     <div className="danmakuGiftOuter">
@@ -165,7 +165,7 @@ function DanmakuGiftList(props: Props, ref: React.Ref<DanmakuGiftListRef>) {
         {[...renderDanmakuGiftLists]}
       </div>
     </div>
-  );
+  )
 }
 
-export default forwardRef(DanmakuGiftList);
+export default forwardRef(DanmakuGiftList)

@@ -4,30 +4,30 @@
  * @returns {Array[Object]}
  */
 function parser(str: string): any[] {
-  let i = -1;
-  const len = str.length;
-  const result = [];
+  let i = -1
+  const len = str.length
+  const result = []
 
-  const store = [];
+  const store = []
   while (i++ < len - 1) {
     if (str[i] === '{') {
       store.push({
-        index: i
-      });
+        index: i,
+      })
     }
     if (str[i] === '}') {
-      const prev = store.pop();
+      const prev = store.pop()
       if (!prev) {
-        console.warn(`${str}不是正确的对象字符串`);
-        continue;
+        console.warn(`${str}不是正确的对象字符串`)
+        continue
       }
       if (store.length === 0) {
-        result.push(str.slice(prev.index, i + 1));
+        result.push(str.slice(prev.index, i + 1))
       }
     }
   }
 
-  return result;
+  return result
 }
 
-export { parser };
+export { parser }

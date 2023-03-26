@@ -3,26 +3,26 @@
  * * */
 
 // import { screen } from 'electron';
-import settings from 'electron-settings';
-import BrowserWindow = Electron.BrowserWindow;
+import settings from 'electron-settings'
+import BrowserWindow = Electron.BrowserWindow
 
 interface WindowState {
-  x: number | undefined;
-  y: number | undefined;
-  width: number;
-  height: number;
-  isMaximized?: boolean;
+  x: number | undefined
+  y: number | undefined
+  width: number
+  height: number
+  isMaximized?: boolean
 }
 
 export const windowStateKeeper = async (windowName: string) => {
-  let window: BrowserWindow;
-  let windowState: WindowState;
+  let window: BrowserWindow
+  let windowState: WindowState
 
   const setBounds = async () => {
     // Restore from appConfig
     if (await settings.has(`windowState.${windowName}`)) {
-      windowState = await settings.get(`windowState.${windowName}`);
-      return;
+      windowState = await settings.get(`windowState.${windowName}`)
+      return
     }
 
     // const size = screen.getPrimaryDisplay().workAreaSize;
@@ -35,26 +35,26 @@ export const windowStateKeeper = async (windowName: string) => {
       height: 800,
       // width: size.width / 2,
       // height: size.height / 2,
-    };
-  };
+    }
+  }
 
   const saveState = async () => {
     // bug: lots of save state events are called. they should be debounced
     if (!windowState.isMaximized) {
-      windowState = window.getBounds();
+      windowState = window.getBounds()
     }
-    windowState.isMaximized = window.isMaximized();
-    await settings.set(`windowState.${windowName}`, windowState);
-  };
+    windowState.isMaximized = window.isMaximized()
+    await settings.set(`windowState.${windowName}`, windowState)
+  }
 
   const track = async (win) => {
-    window = win;
-    ['resize', 'move', 'close'].forEach((event) => {
-      win.on(event, saveState);
-    });
-  };
+    window = win
+    ;['resize', 'move', 'close'].forEach((event) => {
+      win.on(event, saveState)
+    })
+  }
 
-  await setBounds();
+  await setBounds()
 
   return {
     x: windowState.x,
@@ -63,5 +63,5 @@ export const windowStateKeeper = async (windowName: string) => {
     height: windowState.height,
     isMaximized: windowState.isMaximized,
     track,
-  };
-};
+  }
+}
