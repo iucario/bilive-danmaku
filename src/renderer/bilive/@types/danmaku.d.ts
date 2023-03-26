@@ -463,7 +463,7 @@ interface DANMU_MSG_Info
   13: null
   14: number
 }
-interface DANMU_MSG_Info_Danmu extends Array<number | string> {
+interface DANMU_MSG_Info_Danmu extends Array<number | string | DANMU_MSG_15> {
   0: number
   /** 模式 */
   1: number
@@ -482,7 +482,50 @@ interface DANMU_MSG_Info_Danmu extends Array<number | string> {
   // 0=普通弹幕，2=抽奖弹幕
   9: number
   10: number
+  11: string
+  12: number
+  13: string // object
+  14: string
+  15: DANMU_MSG_15 // object {extra: string, mode: number, show_player_type: number}
+  16: string // object
 }
+
+interface DANMU_MSG_15 {
+  extra: string
+  mode: number
+  show_player_type: number
+}
+
+interface DANMU_MSG_15_EXTRA {
+  send_from_me: boolean
+  mode: number
+  color: number
+  dm_type: number // 0=Normal, 1=Emoji
+  font_size: number
+  player_mode: number
+  show_player_type: number
+  content: string
+  user_hash: string
+  emoticon_unique: string
+  bulge_display: number
+  recommend_score: number
+  main_state_dm_color: string
+  objective_state_dm_color: string
+  direction: number
+  pk_direction: number
+  quartet_direction: number
+  anniversary_crowd: number
+  yeah_space_type: string
+  yeah_space_url: string
+  jump_to_url: string
+  space_type: string
+  space_url: string
+  animation: {}
+  emots: null
+  is_audited: boolean
+  id_str: string
+}
+
 interface DANMU_MSG_Info_User extends Array<number | string> {
   /** 用户uid */
   0: number

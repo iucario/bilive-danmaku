@@ -1606,6 +1606,24 @@ function EffectBlock(props: {
             {t('BlockEffectItem5')}
           </label>
         </li>
+        <li
+          onClick={() => handleUpdateConfig(ConfigKey.blockEffectItem6)}
+          className="item"
+        >
+          <span
+            className={`cb-icon svg-icon v-middle p-absolute checkbox-${
+              config.blockEffectItem6 ? 'selected' : 'default'
+            }`}
+          />
+          <input
+            id="block-effect-item-4"
+            type="checkbox"
+            className="pointer v-middle"
+          />
+          <label className="pointer dp-i-block v-middle block-effect-item">
+            {t('BlockEffectItem6')}
+          </label>
+        </li>
       </ul>
     </div>
   )

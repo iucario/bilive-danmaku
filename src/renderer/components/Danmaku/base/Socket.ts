@@ -323,9 +323,16 @@ export default class Socket {
 function danmakuFilter(info: DANMU_MSG_Info): boolean {
   // 抽奖弹幕过滤
   if (config.blockEffectItem1 === 1 && info['0']['9'] === 2) return true
+  // 表情弹幕
+  if (config.blockEffectItem6 === 1) {
+    const extra = JSON.parse(info['0']['15'].extra)
+    if (extra.dm_type === 1) return true
+  }
+
   if (config.blockMode === 0) return false
   const userLv = info['4']['0'] || 0
   // 弹幕关键字，屏蔽uid名单过滤
+  // TODO: indexOf??? Use set instead
   if (
     config.blockDanmakuLists.some((b) => info['1'].indexOf(b) !== -1) ||
     config.blockUserLists.includes(info['2']['0'])
@@ -337,5 +344,6 @@ function danmakuFilter(info: DANMU_MSG_Info): boolean {
   if (config.blockUserNotMember === 1 && info['2']['5'] !== 10000) return true
   // 绑定手机过滤
   if (config.blockUserNotBindPhone === 1 && info['2']['6'] !== 1) return true
+
   return false
 }
