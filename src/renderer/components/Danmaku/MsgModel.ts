@@ -30,7 +30,6 @@ export enum CmdType {
   SUPER_CHAT_MESSAGE = 'SUPER_CHAT_MESSAGE',
   WARNING = 'WARNING',
   CUT_OFF = 'CUT_OFF',
-  WATCHED_CHANGE = 'WATCHED_CHANGE',
   UNKNOWN = 'UNKNOWN',
 }
 
@@ -50,7 +49,7 @@ export async function parseData(
       break;
     case CmdType.DANMU_MSG:
       const userID = data.info['2']['0'];
-      let danmakuMsg: DanmakuMsg  = {
+      let danmakuMsg: DanmakuMsg = {
         cmd: CmdType.DANMU_MSG,
         username: data.info['2']['1'],
         userID,
@@ -68,8 +67,8 @@ export async function parseData(
         repeat: 0,
       };
       // 从消息中获取
-      if (data.info["0"]["15"] && data.info["0"]["15"]["user"]) {
-        const face = data.info["0"]["15"]["user"].base.face
+      if (data.info['0']['15'] && data.info['0']['15']['user']) {
+        const face = data.info['0']['15']['user'].base.face;
         UserAvatarDao.save(userID, face);
         danmakuMsg.face = face;
       } else if (UserAvatarDao.has(userID)) {
@@ -78,26 +77,28 @@ export async function parseData(
       }
       // DanmakuIcon
       if (data.info['0']['12'] === 1) {
-        const danmakuIconMsg: DanmakuIcon = danmakuMsg
-        danmakuIconMsg.cmd = 'DANMU_MSG_ICON'
-        danmakuIconMsg.iconName = data.info['1']
-        danmakuIconMsg.iconUrl = data.info['0']['13'].url
-        danmakuIconMsg.width = data.info['0']['13'].width
-        danmakuIconMsg.height = data.info["0"]["13"].height;
+        const danmakuIconMsg: DanmakuIcon = danmakuMsg;
+        danmakuIconMsg.cmd = 'DANMU_MSG_ICON';
+        danmakuIconMsg.iconName = data.info['1'];
+        danmakuIconMsg.iconUrl = data.info['0']['13'].url;
+        danmakuIconMsg.width = data.info['0']['13'].width;
+        danmakuIconMsg.height = data.info['0']['13'].height;
         if (danmakuIconMsg.width === danmakuIconMsg.height) {
-          danmakuIconMsg.width = 36
-          danmakuIconMsg.height = 36
+          danmakuIconMsg.width = 36;
+          danmakuIconMsg.height = 36;
         } else {
-          const radio = danmakuIconMsg.width / danmakuIconMsg.height
-          danmakuIconMsg.width = 28 * radio
-          danmakuIconMsg.height = 28
+          const radio = danmakuIconMsg.width / danmakuIconMsg.height;
+          danmakuIconMsg.width = 28 * radio;
+          danmakuIconMsg.height = 28;
         }
         return danmakuIconMsg;
       } else if (data.info['0']['12'] === 3 && data.info['0']['15']) {
         // card
-        const danmakuCardMsg: DanmakuCard = danmakuMsg
-        danmakuCardMsg.card_content = JSON.parse(data.info['0']['15'].extra).card.card_content
-        danmakuCardMsg.cmd = 'DANMU_MSG_CARD'
+        const danmakuCardMsg: DanmakuCard = danmakuMsg;
+        danmakuCardMsg.card_content = JSON.parse(
+          data.info['0']['15'].extra
+        ).card.card_content;
+        danmakuCardMsg.cmd = 'DANMU_MSG_CARD';
         return danmakuCardMsg;
       }
       return danmakuMsg;
@@ -186,12 +187,6 @@ export async function parseData(
         popular: data.popular,
       };
       return popularMsg;
-    case CmdType.WATCHED_CHANGE:
-      const watchedChangeMsg: WATCHED_CHANGE = {
-        cmd: CmdType.WATCHED_CHANGE,
-        data: data.data
-      };
-      return watchedChangeMsg;
     // case CmdType.COMBO_END:
     //   // TODO:
     //   break;
