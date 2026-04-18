@@ -8,11 +8,7 @@
     "email": "Beats01998@gmail.com",
     "url": "https://github.com/Beats0"
   },
-  "scripts": {
-    "electron-rebuild": "node -r ts-node/register ../../.erb/scripts/electron-rebuild.js",
-    "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts",
-    "postinstall": "pnpm electron-rebuild && pnpm link-modules"
-  },
+  "scripts": {},
   "dependencies": {},
   "license": "MIT"
 }

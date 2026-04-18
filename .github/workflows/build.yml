@@ -3,79 +3,56 @@ name: Build
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
 
-# Workflow's jobs
 jobs:
-  # job's id
   release:
-    # job's name
     name: build and release electron app
-
-    # the type of machine to run the job on
     runs-on: ${{ matrix.os }}
-
-    # create a build matrix for jobs
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest]
+        os: [ windows-latest, macos-latest ]
 
-    # create steps
     steps:
-      # step1: check out repository
       - name: Checkout git repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # step2: setup python env
-      - name: Setup Python env
-        uses: actions/setup-python@v5
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          python-version: '3.12'
+          version: 10
 
-      # step2: setup python env(macOS)
-      - name: Install Python distutils (macOS/Linux)
-        if: matrix.os == 'macos-latest'
-        run: python3 -m pip install --upgrade pip && python3 -m pip install setuptools
-
-      # step3: setup node env
-      - name: Install Node and NPM
-        uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: pnpm
 
-      # step4: npm install and package
-      - name: Install and build
-        run: |
-          npm install
-          npm run postinstall
-          npm run package
+      - name: Install dependencies
+        run: pnpm install
 
-      # step5: cleanup artifacts in release
+      - name: Build and package
+        run: pnpm package
+
       - name: Cleanup artifacts for windows
         if: matrix.os == 'windows-latest'
-        run: |
-          npx rimraf "release/build/!(*.exe)"
+        run: npx rimraf "release/build/!(*.exe)"
 
       - name: Cleanup artifacts for macos
         if: matrix.os == 'macos-latest'
-        run: |
-          npx rimraf "release/build/!(*.dmg)"
+        run: npx rimraf "release/build/!(*.dmg)"
 
-      # step6: upload artifacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}
           path: release/build
 
-      # step7: create release
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: 'release/build/**'
+          files: "release/build/**"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
