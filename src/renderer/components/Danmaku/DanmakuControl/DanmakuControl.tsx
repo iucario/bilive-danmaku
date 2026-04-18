@@ -26,6 +26,7 @@ import Slider from '../../Base/Slider';
 import Switch from '../../Base/Switch';
 import { parseData } from '../MsgModel';
 import LanguagePanel from './LanguagePanel';
+import UserInfoConfigPanel from './UserInfoConfigPanel';
 
 export enum ControlType {
   USERINFOCONFIG = 'USERINFOCONFIG',
@@ -169,6 +170,19 @@ function DanmakuControl(props: Props) {
             />
           </Tooltip>
         ) : null}
+        <Tooltip
+          visible={currentName === ControlType.USERINFOCONFIG}
+          animation="zoom"
+          placement="top"
+          onVisibleChange={(v) => setCurrentName(v ? ControlType.USERINFOCONFIG : '')}
+          trigger="click"
+          overlay={<UserInfoConfigPanel refresh={props.refresh} />}
+        >
+          <span
+            title="登录"
+            className="icon-font icon-item icon-user"
+          />
+        </Tooltip>
         <Tooltip
           visible={currentName === ControlType.SETTING}
           animation="zoom"
