@@ -5,7 +5,7 @@
 
 :root {
   --primary-backgroundColor: #fafafa;
-  --primary-avatarSize: 22px;
+  --primary-avatarSize: 36px;
   --primary-fontSize: 16px;
   --primary-fontFamily: 'Sarasa Mono SC', 'Noto Sans CJK SC', sans-serif;
   --primary-fontLineHeight: 1.2rem;
@@ -378,11 +378,14 @@ a:hover {
   float: left;
 }
 .user-avatar {
+  float: left;
   width: var(--primary-avatarSize);
   height: var(--primary-avatarSize);
   border-radius: 50%;
   margin-right: 7px;
-  vertical-align: middle;
+}
+.danmaku-text-body {
+  overflow: hidden;
 }
 .user-name {
   color: darkgray;
@@ -954,6 +957,7 @@ a:hover {
 
 .danmakuItem {
   position: relative;
+  overflow: hidden;
   word-wrap: break-word;
   white-space: normal;
   font-size: var(--primary-fontSize);
@@ -2825,8 +2829,8 @@ input.custom-style {
 
 .message-item-info > .user-avatar {
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   margin-left: 9px;
 }
 

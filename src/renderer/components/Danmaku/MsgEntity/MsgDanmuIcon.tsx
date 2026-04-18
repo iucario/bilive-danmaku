@@ -62,6 +62,7 @@ function MsgDanmuIcon(props: DanmakuIcon) {
       {
         config.showAvatar === 1 && MsgUserAvatar(props.userID, props.face)
       }
+      <div className="danmaku-text-body">
       {
         props.isAdmin && <div className="admin-icon dp-i-block v-middle" />
       }
@@ -106,6 +107,7 @@ function MsgDanmuIcon(props: DanmakuIcon) {
           </ContentWrapper>
         </span>
       </Tooltip>
+      </div>
     </div>
   );
 }

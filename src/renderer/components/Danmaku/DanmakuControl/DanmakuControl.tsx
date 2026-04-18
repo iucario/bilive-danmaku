@@ -170,21 +170,6 @@ function DanmakuControl(props: Props) {
           </Tooltip>
         ) : null}
         <Tooltip
-          visible={currentName === ControlType.DANMAKUTEST}
-          animation="zoom"
-          placement="top"
-          onVisibleChange={(v) =>
-            setCurrentName(v ? ControlType.DANMAKUTEST : '')
-          }
-          trigger="click"
-          overlay={<DanmakuTest {...props} />}
-        >
-          <span
-            title="{t('UserConfig')}"
-            className="icon-font icon-item icon-user"
-          />
-        </Tooltip>
-        <Tooltip
           visible={currentName === ControlType.SETTING}
           animation="zoom"
           placement="top"
