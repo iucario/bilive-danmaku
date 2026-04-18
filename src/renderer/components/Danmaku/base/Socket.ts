@@ -41,6 +41,12 @@ export default class Socket {
 
   public _methods: Function[];
 
+  private _closed: boolean;
+
+  private _reconnectTimer: ReturnType<typeof setTimeout> | null;
+
+  private _reconnectDelay: number;
+
   private i: {
     a: {
       [key: string]: number;
@@ -52,6 +58,9 @@ export default class Socket {
     this.roomid = roomid;
     this.uid = defaultUid;
     this._methods = [];
+    this._closed = false;
+    this._reconnectTimer = null;
+    this._reconnectDelay = 3000;
     this.i = {
       a: {
         WS_OP_HEARTBEAT: 2,
@@ -99,6 +108,8 @@ export default class Socket {
       uid = defaultUid;
     }
     this.uid = uid;
+    this._closed = false;
+    this._reconnectDelay = 3000;
     console.log(`新的socket：[${this.roomid}] 正在初始化...`);
     const danmuInfoData = await getDanmuInfoData(this.roomid);
     if (!danmuInfoData) {
@@ -112,6 +123,7 @@ export default class Socket {
     this._docker = new WebSocket(wsUrl);
     this._docker.binaryType = 'arraybuffer';
     this._docker.onopen = async (event) => {
+      this._reconnectDelay = 3000;
       const msg = {
         cmd: 'CONNECT_SUCCESS',
       };
@@ -128,7 +140,18 @@ export default class Socket {
         cmd: CmdType.DISCONNECTED,
       };
       this._call([msg]);
+      if (this._timer) {
+        clearInterval(this._timer);
+        this._timer = null;
+      }
       console.log(`旧的socket已经关闭...`);
+      if (!this._closed) {
+        console.log(`${this._reconnectDelay / 1000}s 后尝试重连...`);
+        this._reconnectTimer = setTimeout(() => {
+          this._reconnectDelay = Math.min(this._reconnectDelay * 2, 60000);
+          this.init();
+        }, this._reconnectDelay);
+      }
     };
   }
 
@@ -235,6 +258,11 @@ export default class Socket {
   }
 
   public close() {
+    this._closed = true;
+    if (this._reconnectTimer) {
+      clearTimeout(this._reconnectTimer);
+      this._reconnectTimer = null;
+    }
     // 清除定时脚本
     if (this._timer) {
       clearInterval(this._timer);
